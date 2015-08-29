@@ -8,19 +8,11 @@
 
 using namespace std;
 
-// QWidget *parentWidget;
-
 SettingDialog::SettingDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SettingDialog)
 {
     ui->setupUi(this);
-
-    // ============
-    // Initializing
-    // ============
-    // parentWidget = parent;
-
 
     ui->currentFolderEdit->setText(Preferences::getFolderPath());
 }
@@ -35,10 +27,7 @@ void SettingDialog::on_changeFolderButton_clicked(){
         QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
 	if(!dir.isEmpty()){
-		// Preferences::setFolderPath(dir);
         ui->currentFolderEdit->setText(dir);
-
-        // parentWidget->test();
 	}
 }
 

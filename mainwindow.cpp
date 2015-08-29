@@ -43,11 +43,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->leftScrollArea->setWidget(leftImageView);
     ui->rightScrollArea->setWidget(rightImageView);
 
-    // Load preferences
-//    mPreferences.load();
-
-//    cout << "dsfd: " << Preferences::getFolderPath().toStdString() << endl;
-
     changeTreeView(Preferences::getFolderPath());
 
     // Initialize actions
@@ -215,11 +210,6 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index)
 {
 
 }
-
-void MainWindow::test(){
-    cout << "TESTESTT" << endl;
-}
-
 
 
 
