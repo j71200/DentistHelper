@@ -56,6 +56,9 @@ public:
 
 private:
     QString folderPath;  // static QString folderPath;
+    // static int myBir;
 };
+
+// int Preferences::myBir = 1108;
 
 #endif // PREFERENCES_CPP
