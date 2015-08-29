@@ -16,21 +16,21 @@ public:
         bool isLoadingSuccessful = load();
         if( !isLoadingSuccessful ){
             // Load fail then use the default setting
-            folderPath = "/Users/blue/";
+            folderPath = DEFAULT_FOLDER_PATH;
         }
     }
     ~Preferences(){
     }
 
-    void setFolderPath(QString newFolderPath){
+    static void setFolderPath(QString newFolderPath){
         folderPath = newFolderPath;
     }
 
-    QString getFolderPath(){
+    static QString getFolderPath(){
         return folderPath;
     }
 
-    bool load(){
+    static bool load(){
         QFile preferencesFile(PREFERENCES_FILE_PATH);
         if (!preferencesFile.open(QIODevice::ReadOnly | QIODevice::Text))
             return false;
@@ -43,8 +43,8 @@ public:
         return true;
     }
 
-    void save(){
-        ofstream fout("/Users/blue/QtWorkspace/firstQt/Output/my_preferences.txt");
+    static void save(){
+        ofstream fout(PREFERENCES_FILE_PATH);
         if(!fout)
             return;
 
@@ -54,10 +54,25 @@ public:
         fout.close();
     }
 
-    static int myBir;
+    static QString getInitFolderPath(){
+        QFile preferencesFile(PREFERENCES_FILE_PATH);
+        bool isPrefFileExist = preferencesFile.open(QIODevice::ReadOnly | QIODevice::Text);
+
+        if(isPrefFileExist == true){
+            QTextStream inStream(&preferencesFile);
+            while (!inStream.atEnd()) {
+                QString line = inStream.readLine();
+                return line;
+            }
+        }
+        else{
+            cout << "Preferences file do not exist" << endl;
+            return DEFAULT_FOLDER_PATH;
+        }
+    }
 
 private:
-    QString folderPath;
+    static QString folderPath;
 };
 
 #endif // PREFERENCES_CPP

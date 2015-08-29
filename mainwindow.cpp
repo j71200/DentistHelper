@@ -9,7 +9,8 @@
 #include <QMessageBox>
 #include "default_setting.h"
 
-int Preferences::myBir = 666;
+//bool Preferences::isLoadingSucc = Preferences::load();
+QString Preferences::folderPath = Preferences::getInitFolderPath();
 
 using namespace std;
 
@@ -44,7 +45,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->rightScrollArea->setWidget(rightImageView);
 
     // Load preferences
-    mPreferences.load();
+//    mPreferences.load();
+
+//    cout << "dsfd: " << Preferences::getFolderPath().toStdString() << endl;
 
     changeTreeView(mPreferences.getFolderPath());
 
