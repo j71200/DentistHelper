@@ -9,6 +9,8 @@
 #include <QMessageBox>
 #include "default_setting.h"
 
+int Preferences::myBir = 666;
+
 using namespace std;
 
 QLabel *leftImageView, *rightImageView;

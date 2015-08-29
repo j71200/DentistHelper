@@ -54,11 +54,10 @@ public:
         fout.close();
     }
 
-private:
-    QString folderPath;  // static QString folderPath;
-    // static int myBir;
-};
+    static int myBir;
 
-// int Preferences::myBir = 1108;
+private:
+    QString folderPath;
+};
 
 #endif // PREFERENCES_CPP
