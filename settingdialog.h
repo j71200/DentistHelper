@@ -28,8 +28,6 @@ private slots:
 
 private:
     Ui::SettingDialog *ui;
-
-    Preferences mPreferences;
 };
 
 #endif // SETTINGDIALOG_H

@@ -9,7 +9,6 @@
 #include <QMessageBox>
 #include "default_setting.h"
 
-//bool Preferences::isLoadingSucc = Preferences::load();
 QString Preferences::folderPath = Preferences::getInitFolderPath();
 
 using namespace std;
@@ -49,7 +48,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 //    cout << "dsfd: " << Preferences::getFolderPath().toStdString() << endl;
 
-    changeTreeView(mPreferences.getFolderPath());
+    changeTreeView(Preferences::getFolderPath());
 
     // Initialize actions
     initOpenFolderAction();
@@ -80,7 +79,7 @@ void MainWindow::initOpenFolderAction(){
 void MainWindow::on_openFolder_active(){
     // Open a file dialog and ask for a new directory
     QString dir = QFileDialog::getExistingDirectory(this,
-        tr("Open Folder"), mPreferences.getFolderPath(),
+        tr("Open Folder"), Preferences::getFolderPath(),
         QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
     if(!dir.isEmpty()){

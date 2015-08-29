@@ -44,7 +44,7 @@ public:
     }
 
     static void save(){
-        ofstream fout(PREFERENCES_FILE_PATH);
+        ofstream fout(PREFERENCES_FILE_PATH.toStdString().c_str());
         if(!fout)
             return;
 
@@ -66,7 +66,7 @@ public:
             }
         }
         else{
-            cout << "Preferences file do not exist" << endl;
+            cout << "Preferences file do not exist." << endl;
             return DEFAULT_FOLDER_PATH;
         }
     }

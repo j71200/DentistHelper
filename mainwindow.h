@@ -43,9 +43,6 @@ private:
     void initOpenFolderAction();
     void initSettingAction();
     void changeTreeView(QString dir);
-
-    Preferences mPreferences;
-
 };
 
 #endif // MAINWINDOW_H

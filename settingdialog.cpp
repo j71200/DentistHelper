@@ -22,7 +22,7 @@ SettingDialog::SettingDialog(QWidget *parent) :
     // parentWidget = parent;
 
 
-    ui->currentFolderEdit->setText(mPreferences.getFolderPath());
+    ui->currentFolderEdit->setText(Preferences::getFolderPath());
 }
 
 SettingDialog::~SettingDialog(){
@@ -31,11 +31,11 @@ SettingDialog::~SettingDialog(){
 
 void SettingDialog::on_changeFolderButton_clicked(){
 	QString dir = QFileDialog::getExistingDirectory(this,
-        tr("Open Folder"), mPreferences.getFolderPath(),
+        tr("Open Folder"), Preferences::getFolderPath(),
         QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
 	if(!dir.isEmpty()){
-		mPreferences.setFolderPath(dir);
+		// Preferences::setFolderPath(dir);
         ui->currentFolderEdit->setText(dir);
 
         // parentWidget->test();
@@ -61,8 +61,8 @@ void SettingDialog::closeEvent(QCloseEvent *event){
 void SettingDialog::on_saveButton_clicked(){
     QDir tempQDir(ui->currentFolderEdit->text());
     if(tempQDir.isReadable()){
-        mPreferences.setFolderPath(ui->currentFolderEdit->text());
-        mPreferences.save();
+        Preferences::setFolderPath(ui->currentFolderEdit->text());
+        Preferences::save();
         
         this->accept();
     }
