@@ -1,1 +1,1 @@
-/Users/blue/Dropbox/SendingFiles
+/Users/blue/QtWorkspace/firstQt/data

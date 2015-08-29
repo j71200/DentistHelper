@@ -31,7 +31,7 @@ SettingDialog::~SettingDialog(){
 
 void SettingDialog::on_changeFolderButton_clicked(){
 	QString dir = QFileDialog::getExistingDirectory(this,
-        tr("Open Folder"), DEFAULT_FOLDER_PATH,
+        tr("Open Folder"), mPreferences.getFolderPath(),
         QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
 	if(!dir.isEmpty()){

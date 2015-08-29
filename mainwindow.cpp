@@ -75,7 +75,7 @@ void MainWindow::initOpenFolderAction(){
 void MainWindow::on_openFolder_active(){
     // Open a file dialog and ask for a new directory
     QString dir = QFileDialog::getExistingDirectory(this,
-        tr("Open Folder"), DEFAULT_FOLDER_PATH,
+        tr("Open Folder"), mPreferences.getFolderPath(),
         QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
     if(!dir.isEmpty()){
@@ -115,7 +115,7 @@ void MainWindow::initSettingAction(){
 
 void MainWindow::on_setting_active(){
     SettingDialog mSettingDialog;
-    mSettingDialog.setFixedSize(SETTING_DIALOG_SIZE.width(), SETTING_DIALOG_SIZE.height());
+    mSettingDialog.setFixedSize(mSettingDialog.size());  // Fix the size of setting dialog
     mSettingDialog.exec();
 }
 

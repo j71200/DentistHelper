@@ -26,7 +26,7 @@
     <item>
      <widget class="QLabel" name="currentFolderLabel">
       <property name="text">
-       <string>Current Path</string>
+       <string>Home Folder</string>
       </property>
      </widget>
     </item>
@@ -42,7 +42,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>360</x>
