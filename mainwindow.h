@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "settingdialog.h"
 #include "preferences.cpp"
+#include <QFileSystemModel>
 
 namespace Ui {
 class MainWindow;
@@ -41,6 +42,9 @@ private:
     void initOpenFolderAction();
     void initSettingAction();
     void changeTreeView(QString dir);
+
+    QFileSystemModel *model;
+    QDir *mQDir;
 };
 
 #endif // MAINWINDOW_H

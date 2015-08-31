@@ -129,22 +129,27 @@
      </widget>
     </widget>
    </widget>
+   <widget class="QLabel" name="patientNameLabel">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>20</y>
+      <width>59</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <zorder>splitter</zorder>
    <zorder>changeLeftButton</zorder>
    <zorder>changeRightButton</zorder>
    <zorder>testLabel</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>pushButton_2</zorder>
-   <zorder>leftScrollArea</zorder>
-   <zorder>rightScrollArea</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>pushButton_2</zorder>
-   <zorder>leftScrollArea</zorder>
-   <zorder>rightScrollArea</zorder>
-   <zorder>changeFolderButton</zorder>
    <zorder>treeView</zorder>
    <zorder>noteTextEdit</zorder>
    <zorder>testButton</zorder>
-   <zorder>folderPathView</zorder>
+   <zorder>patientNameLabel</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

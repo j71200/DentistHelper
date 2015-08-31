@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // Initialize parameters
     isNoteDirty = false;
     isSavedFileExist = false;
+    model = new QFileSystemModel;
 
     // Initialize window
     stdImageSize.setWidth(512);
@@ -48,6 +49,8 @@ MainWindow::MainWindow(QWidget *parent) :
     // Initialize actions
     initOpenFolderAction();
     initSettingAction();
+
+    mQDir = new QDir(Preferences::getFolderPath());
 
 }
 
@@ -84,7 +87,6 @@ void MainWindow::on_openFolder_active(){
 
 void MainWindow::changeTreeView(QString dir){
     // Set file system model
-    QFileSystemModel *model = new QFileSystemModel;
     model->setRootPath(dir);
     ui->treeView->setModel(model);
     
@@ -123,23 +125,23 @@ void MainWindow::on_setting_active(){
 //          Slots
 // =========================
 void MainWindow::on_changeLeftButton_clicked(){
-    QString imageFileName;
-    imageFileName = QFileDialog::getOpenFileName(this,
+    QString imgFileName;
+    imgFileName = QFileDialog::getOpenFileName(this,
     tr("Open Image"), "/Users/blue/Pictures", tr("Image Files (*.png *.jpg *.bmp *.gif)"));
 
-    if(!imageFileName.isEmpty()){
-        QPixmap newImage = QPixmap(imageFileName).scaled(stdImageSize);
+    if(!imgFileName.isEmpty()){
+        QPixmap newImage = QPixmap(imgFileName).scaled(stdImageSize);
         leftImageView->setPixmap(newImage);
     }
 }
 
 void MainWindow::on_changeRightButton_clicked(){
-    QString imageFileName;
-    imageFileName = QFileDialog::getOpenFileName(this,
+    QString imgFileName;
+    imgFileName = QFileDialog::getOpenFileName(this,
     tr("Open Image"), "/Users/blue/Pictures", tr("Image Files (*.png *.jpg *.bmp *.gif)"));
 
-    if(!imageFileName.isEmpty()){
-        QPixmap newImage = QPixmap(imageFileName).scaled(stdImageSize);
+    if(!imgFileName.isEmpty()){
+        QPixmap newImage = QPixmap(imgFileName).scaled(stdImageSize);
         rightImageView->setPixmap(newImage);
     }
 }
@@ -206,9 +208,44 @@ void MainWindow::on_plainTextEdit_textChanged(){
 }
 
 // FORTEST
-void MainWindow::on_treeView_clicked(const QModelIndex &index)
-{
+void MainWindow::on_treeView_clicked(const QModelIndex &index){
+    ui->patientNameLabel->setText(model->fileName(index));
+    model->fileInfo(index);
 
+    mQDir->setPath(model->filePath(index));
+    QStringList imgFileList = mQDir->entryList(QDir::Files);
+
+
+    QString imgFilePath;
+    QPixmap newImage;
+    switch (imgFileList.size()) {
+    case 1:
+        imgFilePath = mQDir->path() + QDir::separator() + imgFileList.at(0);
+        newImage = QPixmap(imgFilePath).scaled(stdImageSize);
+        leftImageView->setPixmap(newImage);
+        rightImageView->clear();
+        break;
+    case 2:
+        imgFilePath = mQDir->path() + QDir::separator() + imgFileList.at(0);
+        newImage = QPixmap(imgFilePath).scaled(stdImageSize);
+        leftImageView->setPixmap(newImage);
+
+        imgFilePath = mQDir->path() + QDir::separator() + imgFileList.at(1);
+        newImage = QPixmap(imgFilePath).scaled(stdImageSize);
+        rightImageView->setPixmap(newImage);
+
+        break;
+    default:
+        // TODO
+        break;
+    }
+
+    // for(int i=0; i<imgFileList.size(); i++){
+    //     imgFilePath = mQDir->path() + QDir::separator() + imgFileList.at(i);
+
+    //     QPixmap newImage = QPixmap(imgFilePath).scaled(stdImageSize);
+    //     leftImageView->setPixmap(newImage);
+    // }
 }
 
 
