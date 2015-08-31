@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QLabel>
 #include <QScrollArea>
 #include <QFileDialog>
 #include <QFileSystemModel>
@@ -13,7 +12,8 @@ QString Preferences::folderPath = Preferences::getInitFolderPath();
 
 using namespace std;
 
-QLabel *leftImageView, *rightImageView;
+// QLabel *leftImageLabel, *rightImageLabel;
+
 // File I/O
 bool isSavedFileExist, isNoteDirty;
 
@@ -30,10 +30,10 @@ MainWindow::MainWindow(QWidget *parent) :
     model = new QFileSystemModel;
 
     // Initialize window
-    leftImageView = new QLabel;
-    rightImageView = new QLabel;
-    ui->leftScrollArea->setWidget(leftImageView);
-    ui->rightScrollArea->setWidget(rightImageView);
+    leftImageLabel = new QLabel;
+    rightImageLabel = new QLabel;
+    ui->leftScrollArea->setWidget(leftImageLabel);
+    ui->rightScrollArea->setWidget(rightImageLabel);
 
     changeTreeView(Preferences::getFolderPath());
 
@@ -47,6 +47,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow(){
     delete ui;
+    delete model;
+    delete mQDir;
+    delete leftImageLabel, rightImageLabel;
 }
 
 // ================================
@@ -115,27 +118,27 @@ void MainWindow::on_setting_active(){
 // =========================
 //          Slots
 // =========================
-void MainWindow::on_changeLeftButton_clicked(){
-    QString imgFileName;
-    imgFileName = QFileDialog::getOpenFileName(this,
-    tr("Open Image"), "/Users/blue/Pictures", tr("Image Files (*.png *.jpg *.bmp *.gif)"));
+// void MainWindow::on_changeLeftButton_clicked(){
+//     QString imgFileName;
+//     imgFileName = QFileDialog::getOpenFileName(this,
+//     tr("Open Image"), "/Users/blue/Pictures", tr("Image Files (*.png *.jpg *.bmp *.gif)"));
 
-    if(!imgFileName.isEmpty()){
-        QPixmap newImage = QPixmap(imgFileName).scaled(stdImageSize);
-        leftImageView->setPixmap(newImage);
-    }
-}
+//     if(!imgFileName.isEmpty()){
+//         QPixmap newImage = QPixmap(imgFileName).scaled(stdImageSize);
+//         leftImageLabel->setPixmap(newImage);
+//     }
+// }
 
-void MainWindow::on_changeRightButton_clicked(){
-    QString imgFileName;
-    imgFileName = QFileDialog::getOpenFileName(this,
-    tr("Open Image"), "/Users/blue/Pictures", tr("Image Files (*.png *.jpg *.bmp *.gif)"));
+// void MainWindow::on_changeRightButton_clicked(){
+//     QString imgFileName;
+//     imgFileName = QFileDialog::getOpenFileName(this,
+//     tr("Open Image"), "/Users/blue/Pictures", tr("Image Files (*.png *.jpg *.bmp *.gif)"));
 
-    if(!imgFileName.isEmpty()){
-        QPixmap newImage = QPixmap(imgFileName).scaled(stdImageSize);
-        rightImageView->setPixmap(newImage);
-    }
-}
+//     if(!imgFileName.isEmpty()){
+//         QPixmap newImage = QPixmap(imgFileName).scaled(stdImageSize);
+//         rightImageLabel->setPixmap(newImage);
+//     }
+// }
 
 void MainWindow::closeEvent(QCloseEvent *event){
     if(isNoteDirty){
@@ -206,33 +209,35 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index){
     mQDir->setPath(model->filePath(index));
     QStringList imgFileList = mQDir->entryList(QDir::Files);
 
-    QString newImgFilePath;
-    QPixmap newImage;
+    // QString newImgFilePath;
     QSize leftImageSize(ui->leftScrollArea->width(), ui->leftScrollArea->height());
     QSize rightImageSize(ui->rightScrollArea->width(), ui->rightScrollArea->height());
 
     switch (imgFileList.size()) {
     case 1:
-        newImgFilePath = mQDir->path() + QDir::separator() + imgFileList.at(0);
-        newImage = QPixmap(newImgFilePath).scaled(leftImageSize);
+        leftImgFilePath = mQDir->path() + QDir::separator() + imgFileList.at(0);
+        leftImage = QPixmap(leftImgFilePath).scaled(leftImageSize);
 
-        leftImageView->setPixmap(newImage);
-        rightImageView->clear();
+        leftImageLabel->setPixmap(leftImage);
+        rightImageLabel->clear();
         break;
     case 2:
-        newImgFilePath = mQDir->path() + QDir::separator() + imgFileList.at(0);
-        newImage = QPixmap(newImgFilePath).scaled(leftImageSize);
-        leftImageView->setPixmap(newImage);
+        leftImgFilePath = mQDir->path() + QDir::separator() + imgFileList.at(0);
+        leftImage = QPixmap(leftImgFilePath).scaled(leftImageSize);
+        leftImageLabel->setPixmap(leftImage);
 
-        newImgFilePath = mQDir->path() + QDir::separator() + imgFileList.at(1);
-        newImage = QPixmap(newImgFilePath).scaled(rightImageSize);
-        rightImageView->setPixmap(newImage);
-
+        rightImgFilePath = mQDir->path() + QDir::separator() + imgFileList.at(1);
+        rightImage = QPixmap(rightImgFilePath).scaled(rightImageSize);
+        rightImageLabel->setPixmap(rightImage);
         break;
     default:
         // TODO
         break;
     }
+}
+
+void MainWindow::on_zoomInLeftButton_clicked(){
+
 }
 
 

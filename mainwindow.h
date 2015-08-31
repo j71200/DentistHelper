@@ -5,6 +5,7 @@
 #include "settingdialog.h"
 #include "preferences.cpp"
 #include <QFileSystemModel>
+#include <QLabel>
 
 namespace Ui {
 class MainWindow;
@@ -29,12 +30,14 @@ private slots:
 	// ===========================
 	//          Listeners
 	// ===========================
-    void on_changeLeftButton_clicked();
-    void on_changeRightButton_clicked();
+    // void on_changeLeftButton_clicked();
+    // void on_changeRightButton_clicked();
     void closeEvent(QCloseEvent *event);
     void on_testButton_clicked();
     void on_plainTextEdit_textChanged();
     void on_treeView_clicked(const QModelIndex &index);
+
+    void on_zoomInLeftButton_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -45,6 +48,9 @@ private:
 
     QFileSystemModel *model;
     QDir *mQDir;
+    QLabel *leftImageLabel, *rightImageLabel;
+    QPixmap leftImage, rightImage;
+    QString leftImgFilePath, rightImgFilePath;
 };
 
 #endif // MAINWINDOW_H

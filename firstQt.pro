@@ -16,7 +16,8 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     settingdialog.cpp \
     preferences.cpp \
-    messagedialog.cpp
+    messagedialog.cpp \
+    customtreeview.cpp
 
 HEADERS  += mainwindow.h \
     default_setting.h \
