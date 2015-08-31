@@ -14,7 +14,6 @@ QString Preferences::folderPath = Preferences::getInitFolderPath();
 using namespace std;
 
 QLabel *leftImageView, *rightImageView;
-QSize stdImageSize;
 // File I/O
 bool isSavedFileExist, isNoteDirty;
 
@@ -31,16 +30,8 @@ MainWindow::MainWindow(QWidget *parent) :
     model = new QFileSystemModel;
 
     // Initialize window
-    stdImageSize.setWidth(512);
-    stdImageSize.setHeight(512);
-    QPixmap lena = QPixmap("/Users/blue/Pictures/lena.gif").scaled(stdImageSize);
-    QPixmap lenaGray = QPixmap("/Users/blue/Pictures/lena_gray.gif").scaled(stdImageSize);
-
     leftImageView = new QLabel;
     rightImageView = new QLabel;
-    leftImageView->setPixmap(lena);
-    rightImageView->setPixmap(lenaGray);
-
     ui->leftScrollArea->setWidget(leftImageView);
     ui->rightScrollArea->setWidget(rightImageView);
 
@@ -215,23 +206,26 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index){
     mQDir->setPath(model->filePath(index));
     QStringList imgFileList = mQDir->entryList(QDir::Files);
 
-
-    QString imgFilePath;
+    QString newImgFilePath;
     QPixmap newImage;
+    QSize leftImageSize(ui->leftScrollArea->width(), ui->leftScrollArea->height());
+    QSize rightImageSize(ui->rightScrollArea->width(), ui->rightScrollArea->height());
+
     switch (imgFileList.size()) {
     case 1:
-        imgFilePath = mQDir->path() + QDir::separator() + imgFileList.at(0);
-        newImage = QPixmap(imgFilePath).scaled(stdImageSize);
+        newImgFilePath = mQDir->path() + QDir::separator() + imgFileList.at(0);
+        newImage = QPixmap(newImgFilePath).scaled(leftImageSize);
+
         leftImageView->setPixmap(newImage);
         rightImageView->clear();
         break;
     case 2:
-        imgFilePath = mQDir->path() + QDir::separator() + imgFileList.at(0);
-        newImage = QPixmap(imgFilePath).scaled(stdImageSize);
+        newImgFilePath = mQDir->path() + QDir::separator() + imgFileList.at(0);
+        newImage = QPixmap(newImgFilePath).scaled(leftImageSize);
         leftImageView->setPixmap(newImage);
 
-        imgFilePath = mQDir->path() + QDir::separator() + imgFileList.at(1);
-        newImage = QPixmap(imgFilePath).scaled(stdImageSize);
+        newImgFilePath = mQDir->path() + QDir::separator() + imgFileList.at(1);
+        newImage = QPixmap(newImgFilePath).scaled(rightImageSize);
         rightImageView->setPixmap(newImage);
 
         break;
@@ -239,13 +233,6 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index){
         // TODO
         break;
     }
-
-    // for(int i=0; i<imgFileList.size(); i++){
-    //     imgFilePath = mQDir->path() + QDir::separator() + imgFileList.at(i);
-
-    //     QPixmap newImage = QPixmap(imgFilePath).scaled(stdImageSize);
-    //     leftImageView->setPixmap(newImage);
-    // }
 }
 
 
