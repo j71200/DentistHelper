@@ -36,8 +36,8 @@ private slots:
     void on_testButton_clicked();
     void on_plainTextEdit_textChanged();
     void on_treeView_clicked(const QModelIndex &index);
-
-    void on_zoomInLeftButton_clicked();
+    void on_leftImgRatioSlider_valueChanged(int value);
+    void on_rightImgRatioSlider_valueChanged(int value);
 
 private:
     Ui::MainWindow *ui;
@@ -48,9 +48,13 @@ private:
 
     QFileSystemModel *model;
     QDir *mQDir;
+
+    // The images
     QLabel *leftImageLabel, *rightImageLabel;
     QPixmap leftImage, rightImage;
     QString leftImgFilePath, rightImgFilePath;
+    QSize leftImageSize, rightImageSize;
+
 };
 
 #endif // MAINWINDOW_H

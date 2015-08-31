@@ -12,11 +12,8 @@ QString Preferences::folderPath = Preferences::getInitFolderPath();
 
 using namespace std;
 
-// QLabel *leftImageLabel, *rightImageLabel;
-
 // File I/O
 bool isSavedFileExist, isNoteDirty;
-
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -29,13 +26,28 @@ MainWindow::MainWindow(QWidget *parent) :
     isSavedFileExist = false;
     model = new QFileSystemModel;
 
-    // Initialize window
+    // ======================
+    // Initialize image block
+    // ======================
     leftImageLabel = new QLabel;
     rightImageLabel = new QLabel;
+    leftImageLabel->setAlignment(Qt::AlignCenter);
+    rightImageLabel->setAlignment(Qt::AlignCenter);
     ui->leftScrollArea->setWidget(leftImageLabel);
     ui->rightScrollArea->setWidget(rightImageLabel);
 
+    ui->leftImgRatioSlider->setMinimum(10);
+    ui->leftImgRatioSlider->setMaximum(300);
+    ui->leftImgRatioSlider->setSingleStep(10);
+    ui->rightImgRatioSlider->setMinimum(10);
+    ui->rightImgRatioSlider->setMaximum(300);
+    ui->rightImgRatioSlider->setSingleStep(10);
+
+    ui->leftImgRatioLabel->setAlignment(Qt::AlignRight);
+    ui->rightImgRatioLabel->setAlignment(Qt::AlignRight);
+
     changeTreeView(Preferences::getFolderPath());
+
 
     // Initialize actions
     initOpenFolderAction();
@@ -201,7 +213,6 @@ void MainWindow::on_plainTextEdit_textChanged(){
     isNoteDirty = true;
 }
 
-// FORTEST
 void MainWindow::on_treeView_clicked(const QModelIndex &index){
     ui->patientNameLabel->setText(model->fileName(index));
     model->fileInfo(index);
@@ -209,9 +220,8 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index){
     mQDir->setPath(model->filePath(index));
     QStringList imgFileList = mQDir->entryList(QDir::Files);
 
-    // QString newImgFilePath;
-    QSize leftImageSize(ui->leftScrollArea->width(), ui->leftScrollArea->height());
-    QSize rightImageSize(ui->rightScrollArea->width(), ui->rightScrollArea->height());
+    leftImageSize = QSize(ui->leftScrollArea->width(), ui->leftScrollArea->height());
+    rightImageSize = QSize(ui->rightScrollArea->width(), ui->rightScrollArea->height());
 
     switch (imgFileList.size()) {
     case 1:
@@ -236,9 +246,49 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index){
     }
 }
 
-void MainWindow::on_zoomInLeftButton_clicked(){
+// void MainWindow::on_zoomInLeftButton_clicked(){
+    
+//     if(imgRatioListIdx + 1 < IMAGE_RATIO_LIST.size()){
+//         imgRatioListIdx++;
+//         ui->leftImgRatioLabel->setText(IMAGE_RATIO_LIST.at(imgRatioListIdx));
 
+//         leftImageSize *= ZOOM_IN_FACTOR;
+//         leftImage = leftImage.scaled(leftImageSize);
+//         leftImageLabel->setPixmap(leftImage);
+//     }
+    
+// }
+
+// void MainWindow::on_zoomOutLeftButton_clicked(){
+    
+//     if(imgRatioListIdx - 1 >= 0){
+//         imgRatioListIdx--;
+//         ui->leftImgRatioLabel->setText(IMAGE_RATIO_LIST.at(imgRatioListIdx));
+
+//         leftImageSize *= ZOOM_OUT_FACTOR;
+//         leftImage = leftImage.scaled(leftImageSize);
+//         leftImageLabel->setPixmap(leftImage);
+//     }
+    
+// }
+
+
+void MainWindow::on_leftImgRatioSlider_valueChanged(int value){
+    QString newRatioText = QString::number(value) + "%";
+    ui->leftImgRatioLabel->setText(newRatioText);
+
+    QSize newScaledSize = leftImageSize * (value / 100.0);
+    QPixmap newScaledPixmap;
+    newScaledPixmap = leftImage.scaled(newScaledSize);
+    leftImageLabel->setPixmap(newScaledPixmap);
 }
 
+void MainWindow::on_rightImgRatioSlider_valueChanged(int value){
+    QString newRatioText = QString::number(value) + "%";
+    ui->rightImgRatioLabel->setText(newRatioText);
 
-
+    QSize newScaledSize = rightImageSize * (value / 100.0);
+    QPixmap newScaledPixmap;
+    newScaledPixmap = rightImage.scaled(newScaledSize);
+    rightImageLabel->setPixmap(newScaledPixmap);
+}

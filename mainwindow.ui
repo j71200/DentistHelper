@@ -145,7 +145,7 @@
    <widget class="QPushButton" name="zoomInLeftButton">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>270</x>
       <y>370</y>
       <width>115</width>
       <height>32</height>
@@ -158,7 +158,7 @@
    <widget class="QPushButton" name="zoomOutLeftButton">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>450</x>
       <y>370</y>
       <width>115</width>
       <height>32</height>
@@ -194,6 +194,70 @@
      <string>Zoom Out</string>
     </property>
    </widget>
+   <widget class="QLabel" name="leftImgRatioLabel">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>380</y>
+      <width>59</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>100%</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="rightImgRatioLabel">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>400</y>
+      <width>59</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>100%</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="leftImgRatioSlider">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>410</y>
+      <width>160</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+    <property name="tickPosition">
+     <enum>QSlider::TicksBelow</enum>
+    </property>
+   </widget>
+   <widget class="QSlider" name="rightImgRatioSlider">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>410</y>
+      <width>160</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+    <property name="tickPosition">
+     <enum>QSlider::TicksBelow</enum>
+    </property>
+    <property name="tickInterval">
+     <number>0</number>
+    </property>
+   </widget>
    <zorder>splitter</zorder>
    <zorder>changeLeftButton</zorder>
    <zorder>changeRightButton</zorder>
@@ -206,6 +270,10 @@
    <zorder>zoomOutLeftButton</zorder>
    <zorder>zoomInRightButton</zorder>
    <zorder>zoomOutRightButton</zorder>
+   <zorder>leftImgRatioLabel</zorder>
+   <zorder>rightImgRatioLabel</zorder>
+   <zorder>leftImgRatioSlider</zorder>
+   <zorder>rightImgRatioSlider</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
