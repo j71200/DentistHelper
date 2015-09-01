@@ -225,7 +225,6 @@ void MainWindow::on_testButton_clicked(){
     outStream << noteText;
     noteFile.close();
 
-
 }
 
 void MainWindow::on_plainTextEdit_textChanged(){

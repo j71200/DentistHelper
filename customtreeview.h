@@ -15,6 +15,7 @@ public:
 signals:
     void zKeyPressedSignal(QString);
     void xKeyPressedSignal(QString);
+    void folderChangedSignal(QString);
 
 protected:
     void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected){
@@ -33,13 +34,19 @@ private:
     void keyPressEvent(QKeyEvent *event){
         switch(event->key()){
         case Qt::Key_Z:
-            // cout << "z" << endl;
-            emit zKeyPressedSignal( model.filePath(selectedIdxList.at(0)) );
+            if(selectedIdxList.size() > 0){
+                selectedFilePath = model.filePath(selectedIdxList.at(0));
+                cout << "aa: " << selectedFilePath.toStdString() << endl;
+                emit zKeyPressedSignal( selectedFilePath );
+            }
             break;
 
         case Qt::Key_X:
-            // cout << "x" << endl;
-            emit xKeyPressedSignal( model.filePath(selectedIdxList.at(0)) );
+            if(selectedIdxList.size() > 0){
+                selectedFilePath = model.filePath(selectedIdxList.at(0));
+                cout << "bb: " << selectedFilePath.toStdString() << endl;
+                emit xKeyPressedSignal( selectedFilePath );
+            }
             break;
 
         default:
