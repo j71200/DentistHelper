@@ -22,7 +22,10 @@ protected:
         selectedIdxList = this->selectedIndexes();
         selectedFilePath = model.filePath(selectedIdxList.at(0));
 
-        // currFolderName = 
+        if(model.isDir(selectedIdxList.at(0))){
+            // User selected a directory
+            currFolderName = model.fileName(selectedIdxList.at(0));
+        }
 
         QTreeView::selectionChanged(selected, deselected);
     }
