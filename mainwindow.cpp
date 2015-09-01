@@ -244,7 +244,7 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index){
 
     switch (imgFileList.size()) {
     case 0:
-        cout << "No image in folder: " << currFolderQDir->path().toStdString() << endl;
+        // cout << "No image in folder: " << currFolderQDir->path().toStdString() << endl;
         break;
 
     case 1:
@@ -326,14 +326,20 @@ void MainWindow::on_rightImgRatioSlider_valueChanged(int value){
 }
 
 void MainWindow::on_zKeyPressed(QString newImagePath){
-    leftImage = QPixmap(newImagePath).scaled(leftImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    leftImage = QPixmap(newImagePath);
+    if(leftImage.isNull())
+        return;
+    leftImage = leftImage.scaled(leftImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     leftImageLabel->setPixmap(leftImage);
     setLeftImgToolsVisible(true);
     resetLeftImgTools();
 }
 
 void MainWindow::on_xKeyPressed(QString newImagePath){
-    rightImage = QPixmap(newImagePath).scaled(rightImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    rightImage = QPixmap(newImagePath);
+    if(rightImage.isNull())
+        return;
+    rightImage = rightImage.scaled(rightImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     rightImageLabel->setPixmap(rightImage);
     setRightImgToolsVisible(true);
     resetRightImgTools();

@@ -20,12 +20,16 @@ signals:
 
 private:
     QList<QModelIndex> selectedIdxList;
-
+    QString selectedFilePath;
     QFileSystemModel model;
 
-    void keyPressEvent(QKeyEvent *event){
 
+
+    void keyPressEvent(QKeyEvent *event){
         selectedIdxList = this->selectedIndexes();
+        if(selectedIdxList.size() > 0)
+            selectedFilePath = model.filePath(selectedIdxList.at(0));
+        // QFile mQFile(selectedFilePath);
 
         switch(event->key()){
         case Qt::Key_Left:
@@ -50,12 +54,20 @@ private:
 
         case Qt::Key_Z:
             cout << "z" << endl;
-            emit zKeyPressedSignal( model.filePath(selectedIdxList.at(0)) );
+            // if(mQFile.exists()){
+            //     cout << mQFile.fileName().toStdString() << endl;
+                emit zKeyPressedSignal( model.filePath(selectedIdxList.at(0)) );
+                // cout << "emited zKeyPressedSignal" << endl;
+            // }
             break;
 
         case Qt::Key_X:
             cout << "x" << endl;
-            emit xKeyPressedSignal( model.filePath(selectedIdxList.at(0)) );
+            // if(mQFile.exists()){
+                // cout << mQFile.fileName().toStdString() << endl;
+                emit xKeyPressedSignal( model.filePath(selectedIdxList.at(0)) );
+                // cout << "emited xKeyPressedSignal" << endl;
+            // }
             break;
 
         default:
