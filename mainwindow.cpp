@@ -268,6 +268,7 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index){
         setRightImgToolsVisible(true);
         resetRightImgTools();
         break;
+        
     default:
         
         break;
