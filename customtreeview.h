@@ -20,8 +20,9 @@ signals:
 protected:
     void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected){
         selectedIdxList = this->selectedIndexes();
-        if(selectedIdxList.size() > 0)
-            selectedFilePath = model.filePath(selectedIdxList.at(0));
+        selectedFilePath = model.filePath(selectedIdxList.at(0));
+
+        // currFolderName = 
 
         QTreeView::selectionChanged(selected, deselected);
     }
@@ -30,6 +31,8 @@ private:
     QList<QModelIndex> selectedIdxList;
     QString selectedFilePath;
     QFileSystemModel model;
+
+    QString currFolderName;
 
     void keyPressEvent(QKeyEvent *event){
         switch(event->key()){
