@@ -32,8 +32,10 @@ public:
 
     static bool load(){
         QFile preferencesFile(PREFERENCES_FILE_PATH);
-        if (!preferencesFile.open(QIODevice::ReadOnly | QIODevice::Text))
+        if (!preferencesFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+            cout << "Read preference file failed" << endl;
             return false;
+        }
 
         QTextStream inStream(&preferencesFile);
         while (!inStream.atEnd()) {
@@ -45,14 +47,14 @@ public:
     }
 
     static void save(){
-        ofstream fout(PREFERENCES_FILE_PATH.toStdString().c_str());
-        if(!fout)
+        QFile preferencesFile(PREFERENCES_FILE_PATH);
+        if (!preferencesFile.open(QIODevice::WriteOnly | QIODevice::Text)){
+            cout << "Write preference file failed" << endl;
             return;
-
-        // Write folder path
-        fout << folderPath.toStdString();
-
-        fout.close();
+        }
+        QTextStream outStream(&preferencesFile);
+        outStream << folderPath << endl;
+        preferencesFile.close();
     }
 
     static QString getInitFolderPath(){
