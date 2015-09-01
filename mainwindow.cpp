@@ -108,7 +108,10 @@ void MainWindow::on_openFolder_active(){
 void MainWindow::changeTreeView(QString dir){
     // Set file system model
     model->setRootPath(dir);
-    
+    QStringList allowedFileFilterList;
+    allowedFileFilterList << "*.jpg" << "*.bmp" << "*.png" << "*.gif";
+    model->setNameFilters(allowedFileFilterList);
+    model->setNameFilterDisables(false);
     ui->treeView->setModel(model);
     
     // Set the treeView so that it will only show particular folder
