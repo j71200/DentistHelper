@@ -18,7 +18,11 @@ signals:
 
 protected:
     void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected){
-        cout << "changed" << endl;
+        selectedIdxList = this->selectedIndexes();
+        if(selectedIdxList.size() > 0)
+            selectedFilePath = model.filePath(selectedIdxList.at(0));
+
+        QTreeView::selectionChanged(selected, deselected);
     }
 
 private:
@@ -27,43 +31,19 @@ private:
     QFileSystemModel model;
 
     void keyPressEvent(QKeyEvent *event){
-        selectedIdxList = this->selectedIndexes();
-        if(selectedIdxList.size() > 0)
-            selectedFilePath = model.filePath(selectedIdxList.at(0));
-
         switch(event->key()){
-        case Qt::Key_Left:
-            cout << "left" << endl;
-            QTreeView::keyPressEvent(event);
-            break;
-
-        case Qt::Key_Up:
-            cout << "up" << endl;
-            QTreeView::keyPressEvent(event);
-            break;
-
-        case Qt::Key_Right:
-            cout << "right" << endl;
-            QTreeView::keyPressEvent(event);
-            break;
-
-        case Qt::Key_Down:
-            cout << "down" << endl;
-            QTreeView::keyPressEvent(event);
-            break;
-
         case Qt::Key_Z:
-            cout << "z" << endl;
+            // cout << "z" << endl;
             emit zKeyPressedSignal( model.filePath(selectedIdxList.at(0)) );
             break;
 
         case Qt::Key_X:
-            cout << "x" << endl;
+            // cout << "x" << endl;
             emit xKeyPressedSignal( model.filePath(selectedIdxList.at(0)) );
             break;
 
         default:
-            cout << "pressed" << endl;
+            // cout << "pressed" << endl;
             QTreeView::keyPressEvent(event);
             break;
         }
