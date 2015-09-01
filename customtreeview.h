@@ -36,7 +36,6 @@ private:
         case Qt::Key_Z:
             if(selectedIdxList.size() > 0){
                 selectedFilePath = model.filePath(selectedIdxList.at(0));
-                cout << "aa: " << selectedFilePath.toStdString() << endl;
                 emit zKeyPressedSignal( selectedFilePath );
             }
             break;
@@ -44,13 +43,11 @@ private:
         case Qt::Key_X:
             if(selectedIdxList.size() > 0){
                 selectedFilePath = model.filePath(selectedIdxList.at(0));
-                cout << "bb: " << selectedFilePath.toStdString() << endl;
                 emit xKeyPressedSignal( selectedFilePath );
             }
             break;
 
         default:
-            // cout << "pressed" << endl;
             QTreeView::keyPressEvent(event);
             break;
         }
