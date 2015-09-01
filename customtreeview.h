@@ -15,20 +15,22 @@ public:
 signals:
     void zKeyPressedSignal(QString);
     void xKeyPressedSignal(QString);
-    void folderChangedSignal(QString);
+    void folderChangedSignal(QString, QString);
 
 protected:
     void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected){
         selectedIdxList = this->selectedIndexes();
-        selectedFilePath = model.filePath(selectedIdxList.at(0));
-        mQDir.setPath(selectedFilePath);
+        selectedFolderPath = model.filePath(selectedIdxList.at(0));
+        mQDir.setPath(selectedFolderPath);
         
-        if(model.isDir(selectedIdxList.at(0))){
-            selectedFolderName = mQDir.dirName();
-        }
-        else{
+        if( !model.isDir(selectedIdxList.at(0)) ){
             mQDir.cdUp();
+            selectedFolderPath = mQDir.path();
+        }
+
+        if(selectedFolderName != mQDir.dirName()){
             selectedFolderName = mQDir.dirName();
+            emit folderChangedSignal(selectedFolderPath, selectedFolderName);
         }
 
         QTreeView::selectionChanged(selected, deselected);
@@ -40,7 +42,7 @@ private:
     QFileSystemModel model;
     QDir mQDir;
 
-    QString selectedFolderName;
+    QString selectedFolderPath, selectedFolderName;
 
     void keyPressEvent(QKeyEvent *event){
         switch(event->key()){

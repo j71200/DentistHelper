@@ -67,6 +67,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // Connecting
     connect(ui->treeView, SIGNAL(zKeyPressedSignal(QString)), this, SLOT(on_zKeyPressed(QString)));
     connect(ui->treeView, SIGNAL(xKeyPressedSignal(QString)), this, SLOT(on_xKeyPressed(QString)));
+    connect(ui->treeView, SIGNAL(folderChangedSignal(QString, QString)), this, SLOT(on_folderChanged(QString, QString)));
 
 }
 
@@ -209,14 +210,16 @@ void MainWindow::on_testButton_clicked(){
 
 
     // ============== Save function ==============    
-    QFile noteFile(currFolderQDir->path() + QDir::separator() + currFolderQDir->dirName() + "_note.txt");
-    if(!noteFile.exists()){
-        cout << "File do not exist" << endl;
-        return;
-    }
+    // QFile noteFile(currFolderQDir->path() + QDir::separator() + currFolderQDir->dirName() + "_note.txt");
+    // if(!noteFile.exists()){
+    //     cout << "File do not exist" << endl;
+    //     return;
+    // }
+
+    QFile noteFile(currFolderPath + QDir::separator() + currFolderName + "_note.txt");
 
     if (!noteFile.open(QIODevice::WriteOnly | QIODevice::Text)){
-        cout << "Open fail" << endl;
+        cout << "Open note file for writing fail" << endl;
         return;
     }
 
@@ -344,4 +347,25 @@ void MainWindow::on_xKeyPressed(QString newImagePath){
     resetRightImgTools();
 }
 
+void MainWindow::on_folderChanged(QString newFolderPath, QString newFolderName){
+    currFolderPath = newFolderPath;
+    currFolderName = newFolderName;
+
+    QString noteFilePath = newFolderPath + QDir::separator() + newFolderName + "_note.txt";
+
+    QFile noteFile(noteFilePath);
+    if(!noteFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+        cout << "Read note file failed" << endl;
+        ui->noteTextEdit->setPlainText("How about taking some note");
+    }
+    else{
+        cout << "Read note file successfully" << endl;
+        QTextStream inStream(&noteFile);
+        ui->noteTextEdit->clear();
+        while (!inStream.atEnd()) {
+            ui->noteTextEdit->appendPlainText(inStream.readLine());
+        }
+    }
+    noteFile.close();
+}
 

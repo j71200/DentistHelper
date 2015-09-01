@@ -22,6 +22,7 @@ public:
 public slots:
     void on_zKeyPressed(QString);
     void on_xKeyPressed(QString);
+    void on_folderChanged(QString, QString);
 
 private slots:
 	// =====================
@@ -52,8 +53,10 @@ private:
     void setLeftImgToolsVisible(bool isVisible);
     void setRightImgToolsVisible(bool isVisible);
 
+    // Folder/File system
     QFileSystemModel *model;
     QDir *currFolderQDir;
+    QString currFolderPath, currFolderName;
 
     // The images
     QLabel *leftImageLabel, *rightImageLabel;
