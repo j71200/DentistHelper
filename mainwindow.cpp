@@ -320,3 +320,7 @@ void MainWindow::on_rightImgRatioSlider_valueChanged(int value){
     newScaledPixmap = rightImage.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     rightImageLabel->setPixmap(newScaledPixmap);
 }
+
+void MainWindow::test(){
+    cout << "this is a test function, good luck" << endl;
+}
