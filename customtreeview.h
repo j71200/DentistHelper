@@ -21,10 +21,14 @@ protected:
     void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected){
         selectedIdxList = this->selectedIndexes();
         selectedFilePath = model.filePath(selectedIdxList.at(0));
-
+        mQDir.setPath(selectedFilePath);
+        
         if(model.isDir(selectedIdxList.at(0))){
-            // User selected a directory
-            currFolderName = model.fileName(selectedIdxList.at(0));
+            selectedFolderName = mQDir.dirName();
+        }
+        else{
+            mQDir.cdUp();
+            selectedFolderName = mQDir.dirName();
         }
 
         QTreeView::selectionChanged(selected, deselected);
@@ -34,8 +38,9 @@ private:
     QList<QModelIndex> selectedIdxList;
     QString selectedFilePath;
     QFileSystemModel model;
+    QDir mQDir;
 
-    QString currFolderName;
+    QString selectedFolderName;
 
     void keyPressEvent(QKeyEvent *event){
         switch(event->key()){
