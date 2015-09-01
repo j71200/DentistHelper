@@ -221,17 +221,6 @@ void MainWindow::on_testButton_clicked(){
     outStream << noteText;
     noteFile.close();
 
-    // while (!outStream.atEnd()) {
-    //     QString line = outStream.readLine();
-    //     folderPath = line;
-    // }
-
-
-    // ofstream fout("/Users/blue/Pictures/temp.txt");
-    // if(!fout)
-    //     return;
-    // fout << noteText.toStdString();
-    // fout.close();
 
 }
 
@@ -241,7 +230,7 @@ void MainWindow::on_plainTextEdit_textChanged(){
 
 void MainWindow::on_treeView_clicked(const QModelIndex &index){
     ui->patientNameLabel->setText(model->fileName(index));
-    model->fileInfo(index);
+    model->fileInfo(index);  // TODO Delete it
 
     currFolderQDir->setPath(model->filePath(index));
     QStringList imgFileList = currFolderQDir->entryList(QDir::Files);
@@ -250,6 +239,10 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index){
     rightImageSize = QSize(ui->rightScrollArea->width(), ui->rightScrollArea->height());
 
     switch (imgFileList.size()) {
+    case 0:
+        cout << "No image in folder: " << currFolderQDir->path().toStdString() << endl;
+        break;
+
     case 1:
         leftImgFilePath = currFolderQDir->path() + QDir::separator() + imgFileList.at(0);
         leftImage = QPixmap(leftImgFilePath).scaled(leftImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
@@ -261,6 +254,7 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index){
         resetRightImgTools();
         rightImageLabel->clear();
         break;
+
     case 2:
         leftImgFilePath = currFolderQDir->path() + QDir::separator() + imgFileList.at(0);
         leftImage = QPixmap(leftImgFilePath).scaled(leftImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
@@ -275,7 +269,7 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index){
         resetRightImgTools();
         break;
     default:
-        // TODO
+        
         break;
     }
 }
