@@ -53,6 +53,9 @@ private:
     void setLeftImgToolsVisible(bool isVisible);
     void setRightImgToolsVisible(bool isVisible);
 
+    // Note
+    void saveNote();
+
     // Folder/File system
     QFileSystemModel *model;
     QDir *currFolderQDir;

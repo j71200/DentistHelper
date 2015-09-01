@@ -108,6 +108,7 @@ void MainWindow::on_openFolder_active(){
 void MainWindow::changeTreeView(QString dir){
     // Set file system model
     model->setRootPath(dir);
+    
     ui->treeView->setModel(model);
     
     // Set the treeView so that it will only show particular folder
@@ -139,32 +140,6 @@ void MainWindow::on_setting_active(){
     mSettingDialog.setFixedSize(mSettingDialog.size());  // Fix the size of setting dialog
     mSettingDialog.exec();
 }
-
-
-// =========================
-//          Slots
-// =========================
-// void MainWindow::on_changeLeftButton_clicked(){
-//     QString imgFileName;
-//     imgFileName = QFileDialog::getOpenFileName(this,
-//     tr("Open Image"), "/Users/blue/Pictures", tr("Image Files (*.png *.jpg *.bmp *.gif)"));
-
-//     if(!imgFileName.isEmpty()){
-//         QPixmap newImage = QPixmap(imgFileName).scaled(stdImageSize);
-//         leftImageLabel->setPixmap(newImage);
-//     }
-// }
-
-// void MainWindow::on_changeRightButton_clicked(){
-//     QString imgFileName;
-//     imgFileName = QFileDialog::getOpenFileName(this,
-//     tr("Open Image"), "/Users/blue/Pictures", tr("Image Files (*.png *.jpg *.bmp *.gif)"));
-
-//     if(!imgFileName.isEmpty()){
-//         QPixmap newImage = QPixmap(imgFileName).scaled(stdImageSize);
-//         rightImageLabel->setPixmap(newImage);
-//     }
-// }
 
 void MainWindow::closeEvent(QCloseEvent *event){
     if(isNoteDirty){
@@ -216,17 +191,17 @@ void MainWindow::on_testButton_clicked(){
     //     return;
     // }
 
-    QFile noteFile(currFolderPath + QDir::separator() + currFolderName + "_note.txt");
+    // QFile noteFile(currFolderPath + QDir::separator() + currFolderName + "_note.txt");
 
-    if (!noteFile.open(QIODevice::WriteOnly | QIODevice::Text)){
-        cout << "Open note file for writing fail" << endl;
-        return;
-    }
+    // if (!noteFile.open(QIODevice::WriteOnly | QIODevice::Text)){
+    //     cout << "Open note file for writing fail" << endl;
+    //     return;
+    // }
 
-    QString noteText = ui->noteTextEdit->toPlainText();
-    QTextStream outStream(&noteFile);
-    outStream << noteText;
-    noteFile.close();
+    // QString noteText = ui->noteTextEdit->toPlainText();
+    // QTextStream outStream(&noteFile);
+    // outStream << noteText;
+    // noteFile.close();
 
 }
 
@@ -348,6 +323,8 @@ void MainWindow::on_xKeyPressed(QString newImagePath){
 }
 
 void MainWindow::on_folderChanged(QString newFolderPath, QString newFolderName){
+    saveNote();
+
     currFolderPath = newFolderPath;
     currFolderName = newFolderName;
 
@@ -369,3 +346,16 @@ void MainWindow::on_folderChanged(QString newFolderPath, QString newFolderName){
     noteFile.close();
 }
 
+void MainWindow::saveNote(){
+    QFile noteFile(currFolderPath + QDir::separator() + currFolderName + "_note.txt");
+
+    if (!noteFile.open(QIODevice::WriteOnly | QIODevice::Text)){
+        cout << "Open note file for writing fail" << endl;
+        return;
+    }
+
+    QString noteText = ui->noteTextEdit->toPlainText();
+    QTextStream outStream(&noteFile);
+    outStream << noteText;
+    noteFile.close();
+}
