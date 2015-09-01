@@ -16,6 +16,11 @@ signals:
     void zKeyPressedSignal(QString);
     void xKeyPressedSignal(QString);
 
+protected:
+    void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected){
+        cout << "changed" << endl;
+    }
+
 private:
     QList<QModelIndex> selectedIdxList;
     QString selectedFilePath;
