@@ -9,27 +9,22 @@ class CustomTreeView : public QTreeView
 {
     Q_OBJECT
 public:
-    CustomTreeView(QWidget *_parent = 0) : QTreeView(_parent){
-    }
+    CustomTreeView(QWidget *_parent = 0) : QTreeView(_parent){}
     virtual ~CustomTreeView(){}
 
 signals:
     void zKeyPressedSignal(QString);
     void xKeyPressedSignal(QString);
 
-
 private:
     QList<QModelIndex> selectedIdxList;
     QString selectedFilePath;
     QFileSystemModel model;
 
-
-
     void keyPressEvent(QKeyEvent *event){
         selectedIdxList = this->selectedIndexes();
         if(selectedIdxList.size() > 0)
             selectedFilePath = model.filePath(selectedIdxList.at(0));
-        // QFile mQFile(selectedFilePath);
 
         switch(event->key()){
         case Qt::Key_Left:
@@ -54,20 +49,12 @@ private:
 
         case Qt::Key_Z:
             cout << "z" << endl;
-            // if(mQFile.exists()){
-            //     cout << mQFile.fileName().toStdString() << endl;
-                emit zKeyPressedSignal( model.filePath(selectedIdxList.at(0)) );
-                // cout << "emited zKeyPressedSignal" << endl;
-            // }
+            emit zKeyPressedSignal( model.filePath(selectedIdxList.at(0)) );
             break;
 
         case Qt::Key_X:
             cout << "x" << endl;
-            // if(mQFile.exists()){
-                // cout << mQFile.fileName().toStdString() << endl;
-                emit xKeyPressedSignal( model.filePath(selectedIdxList.at(0)) );
-                // cout << "emited xKeyPressedSignal" << endl;
-            // }
+            emit xKeyPressedSignal( model.filePath(selectedIdxList.at(0)) );
             break;
 
         default:
