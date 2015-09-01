@@ -46,14 +46,20 @@ private:
     void initSettingAction();
     void changeTreeView(QString dir);
 
+    void resetLeftImgTools();
+    void resetRightImgTools();
+    void setLeftImgToolsVisible(bool isVisible);
+    void setRightImgToolsVisible(bool isVisible);
+
     QFileSystemModel *model;
-    QDir *mQDir;
+    QDir *currFolderQDir;
 
     // The images
     QLabel *leftImageLabel, *rightImageLabel;
     QPixmap leftImage, rightImage;
     QString leftImgFilePath, rightImgFilePath;
     QSize leftImageSize, rightImageSize;
+
 
 };
 

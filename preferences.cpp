@@ -40,6 +40,7 @@ public:
             QString line = inStream.readLine();
             folderPath = line;
         }
+        preferencesFile.close();
         return true;
     }
 

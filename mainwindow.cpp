@@ -21,7 +21,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // =====================
     // Initialize parameters
+    // =====================
     isNoteDirty = false;
     isSavedFileExist = false;
     model = new QFileSystemModel;
@@ -43,24 +45,31 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->rightImgRatioSlider->setMaximum(300);
     ui->rightImgRatioSlider->setSingleStep(10);
 
+    ui->leftImgRatioSlider->setValue(100);
+    ui->rightImgRatioSlider->setValue(100);
+
     ui->leftImgRatioLabel->setAlignment(Qt::AlignRight);
     ui->rightImgRatioLabel->setAlignment(Qt::AlignRight);
 
-    changeTreeView(Preferences::getFolderPath());
+    setLeftImgToolsVisible(false);
+    setRightImgToolsVisible(false);
 
+
+    // Initialize TreeView
+    changeTreeView(Preferences::getFolderPath());
 
     // Initialize actions
     initOpenFolderAction();
     initSettingAction();
 
-    mQDir = new QDir(Preferences::getFolderPath());
+    currFolderQDir = new QDir(Preferences::getFolderPath());
 
 }
 
 MainWindow::~MainWindow(){
     delete ui;
     delete model;
-    delete mQDir;
+    delete currFolderQDir;
     delete leftImageLabel, rightImageLabel;
 }
 
@@ -195,11 +204,28 @@ void MainWindow::on_testButton_clicked(){
     // QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "/Users/blue", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
 
+    // ============== Save function ==============    
+    QFile noteFile(currFolderQDir->path() + QDir::separator() + currFolderQDir->dirName() + "_note.txt");
+    if(!noteFile.exists()){
+        cout << "File do not exist" << endl;
+        return;
+    }
 
+    if (!noteFile.open(QIODevice::WriteOnly | QIODevice::Text)){
+        cout << "Open fail" << endl;
+        return;
+    }
 
+    QString noteText = ui->noteTextEdit->toPlainText();
+    QTextStream outStream(&noteFile);
+    outStream << noteText;
+    noteFile.close();
 
-    // ============== Save function ==============
-    // QString noteText = ui->noteTextEdit->toPlainText();
+    // while (!outStream.atEnd()) {
+    //     QString line = outStream.readLine();
+    //     folderPath = line;
+    // }
+
 
     // ofstream fout("/Users/blue/Pictures/temp.txt");
     // if(!fout)
@@ -217,28 +243,36 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index){
     ui->patientNameLabel->setText(model->fileName(index));
     model->fileInfo(index);
 
-    mQDir->setPath(model->filePath(index));
-    QStringList imgFileList = mQDir->entryList(QDir::Files);
+    currFolderQDir->setPath(model->filePath(index));
+    QStringList imgFileList = currFolderQDir->entryList(QDir::Files);
 
     leftImageSize = QSize(ui->leftScrollArea->width(), ui->leftScrollArea->height());
     rightImageSize = QSize(ui->rightScrollArea->width(), ui->rightScrollArea->height());
 
     switch (imgFileList.size()) {
     case 1:
-        leftImgFilePath = mQDir->path() + QDir::separator() + imgFileList.at(0);
-        leftImage = QPixmap(leftImgFilePath).scaled(leftImageSize);
-
+        leftImgFilePath = currFolderQDir->path() + QDir::separator() + imgFileList.at(0);
+        leftImage = QPixmap(leftImgFilePath).scaled(leftImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
         leftImageLabel->setPixmap(leftImage);
+        setLeftImgToolsVisible(true);
+        resetLeftImgTools();
+
+        setRightImgToolsVisible(false);
+        resetRightImgTools();
         rightImageLabel->clear();
         break;
     case 2:
-        leftImgFilePath = mQDir->path() + QDir::separator() + imgFileList.at(0);
-        leftImage = QPixmap(leftImgFilePath).scaled(leftImageSize);
+        leftImgFilePath = currFolderQDir->path() + QDir::separator() + imgFileList.at(0);
+        leftImage = QPixmap(leftImgFilePath).scaled(leftImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
         leftImageLabel->setPixmap(leftImage);
+        setLeftImgToolsVisible(true);
+        resetLeftImgTools();
 
-        rightImgFilePath = mQDir->path() + QDir::separator() + imgFileList.at(1);
-        rightImage = QPixmap(rightImgFilePath).scaled(rightImageSize);
+        rightImgFilePath = currFolderQDir->path() + QDir::separator() + imgFileList.at(1);
+        rightImage = QPixmap(rightImgFilePath).scaled(rightImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
         rightImageLabel->setPixmap(rightImage);
+        setRightImgToolsVisible(true);
+        resetRightImgTools();
         break;
     default:
         // TODO
@@ -246,49 +280,48 @@ void MainWindow::on_treeView_clicked(const QModelIndex &index){
     }
 }
 
-// void MainWindow::on_zoomInLeftButton_clicked(){
-    
-//     if(imgRatioListIdx + 1 < IMAGE_RATIO_LIST.size()){
-//         imgRatioListIdx++;
-//         ui->leftImgRatioLabel->setText(IMAGE_RATIO_LIST.at(imgRatioListIdx));
+void MainWindow::resetLeftImgTools(){
+    ui->leftImgRatioLabel->setText("100%");
+    ui->leftImgRatioSlider->setValue(100);
+}
 
-//         leftImageSize *= ZOOM_IN_FACTOR;
-//         leftImage = leftImage.scaled(leftImageSize);
-//         leftImageLabel->setPixmap(leftImage);
-//     }
-    
-// }
+void MainWindow::resetRightImgTools(){
+    ui->rightImgRatioLabel->setText("100%");
+    ui->rightImgRatioSlider->setValue(100);
+}
 
-// void MainWindow::on_zoomOutLeftButton_clicked(){
-    
-//     if(imgRatioListIdx - 1 >= 0){
-//         imgRatioListIdx--;
-//         ui->leftImgRatioLabel->setText(IMAGE_RATIO_LIST.at(imgRatioListIdx));
+void MainWindow::setLeftImgToolsVisible(bool isVisible){
+    ui->leftImgRatioLabel->setVisible(isVisible);
+    ui->leftImgRatioSlider->setVisible(isVisible);
+}
 
-//         leftImageSize *= ZOOM_OUT_FACTOR;
-//         leftImage = leftImage.scaled(leftImageSize);
-//         leftImageLabel->setPixmap(leftImage);
-//     }
-    
-// }
-
+void MainWindow::setRightImgToolsVisible(bool isVisible){
+    ui->rightImgRatioLabel->setVisible(isVisible);
+    ui->rightImgRatioSlider->setVisible(isVisible);
+}
 
 void MainWindow::on_leftImgRatioSlider_valueChanged(int value){
+    if(leftImage.isNull())
+        return;
+
     QString newRatioText = QString::number(value) + "%";
     ui->leftImgRatioLabel->setText(newRatioText);
 
     QSize newScaledSize = leftImageSize * (value / 100.0);
     QPixmap newScaledPixmap;
-    newScaledPixmap = leftImage.scaled(newScaledSize);
+    newScaledPixmap = leftImage.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     leftImageLabel->setPixmap(newScaledPixmap);
 }
 
 void MainWindow::on_rightImgRatioSlider_valueChanged(int value){
+    if(rightImage.isNull())
+        return;
+
     QString newRatioText = QString::number(value) + "%";
     ui->rightImgRatioLabel->setText(newRatioText);
 
     QSize newScaledSize = rightImageSize * (value / 100.0);
     QPixmap newScaledPixmap;
-    newScaledPixmap = rightImage.scaled(newScaledSize);
+    newScaledPixmap = rightImage.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     rightImageLabel->setPixmap(newScaledPixmap);
 }
