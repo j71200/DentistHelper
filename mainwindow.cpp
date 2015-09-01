@@ -64,6 +64,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     currFolderQDir = new QDir(Preferences::getFolderPath());
 
+    // Connecting
+    connect(ui->treeView, SIGNAL(zKeyPressedSignal(QString)), this, SLOT(on_zKeyPressed(QString)));
+    connect(ui->treeView, SIGNAL(xKeyPressedSignal(QString)), this, SLOT(on_xKeyPressed(QString)));
+
 }
 
 MainWindow::~MainWindow(){
@@ -321,6 +325,18 @@ void MainWindow::on_rightImgRatioSlider_valueChanged(int value){
     rightImageLabel->setPixmap(newScaledPixmap);
 }
 
-void MainWindow::test(){
-    cout << "this is a test function, good luck" << endl;
+void MainWindow::on_zKeyPressed(QString newImagePath){
+    leftImage = QPixmap(newImagePath).scaled(leftImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    leftImageLabel->setPixmap(leftImage);
+    setLeftImgToolsVisible(true);
+    resetLeftImgTools();
 }
+
+void MainWindow::on_xKeyPressed(QString newImagePath){
+    rightImage = QPixmap(newImagePath).scaled(rightImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    rightImageLabel->setPixmap(rightImage);
+    setRightImgToolsVisible(true);
+    resetRightImgTools();
+}
+
+

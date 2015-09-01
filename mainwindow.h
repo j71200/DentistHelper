@@ -19,7 +19,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void test();
+public slots:
+    void on_zKeyPressed(QString);
+    void on_xKeyPressed(QString);
 
 private slots:
 	// =====================
@@ -27,13 +29,10 @@ private slots:
 	// =====================
 	void on_openFolder_active();
 	void on_setting_active();
-	
 
 	// ===========================
 	//          Listeners
 	// ===========================
-    // void on_changeLeftButton_clicked();
-    // void on_changeRightButton_clicked();
     void closeEvent(QCloseEvent *event);
     void on_testButton_clicked();
     void on_plainTextEdit_textChanged();
@@ -61,8 +60,6 @@ private:
     QPixmap leftImage, rightImage;
     QString leftImgFilePath, rightImgFilePath;
     QSize leftImageSize, rightImageSize;
-
-
 };
 
 #endif // MAINWINDOW_H
