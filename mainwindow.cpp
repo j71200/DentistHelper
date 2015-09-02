@@ -67,8 +67,6 @@ MainWindow::MainWindow(QWidget *parent) :
     initOpenFolderAction();
     initSettingAction();
 
-    // currFolderQDir = new QDir(Preferences::getFolderPath());
-
     // ===============
     // Initialize note
     // ===============
@@ -84,7 +82,6 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow(){
     delete ui;
     delete model;
-    // delete currFolderQDir;
     delete leftImageLabel, rightImageLabel;
 }
 

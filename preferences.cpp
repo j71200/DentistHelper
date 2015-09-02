@@ -72,7 +72,8 @@ public:
     // }
 
 private:
-    static QString folderPath;
+    static QStringList 
+    // static QString folderPath;
 };
 
 #endif // PREFERENCES_CPP
