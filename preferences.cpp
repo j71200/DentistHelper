@@ -17,27 +17,30 @@ public:
     ~Preferences(){
     }
 
-    static void setFolderPath(QString newFolderPath){
-        folderPath = newFolderPath;
-    }
-    
-    static QString getFolderPath(){
-        return folderPath;
-    }
-
     static bool load(){
         QFile preferencesFile(PREFERENCES_FILE_PATH);
         if (!preferencesFile.open(QIODevice::ReadOnly | QIODevice::Text)){
             cout << "Read preference file failed" << endl;
             // Set the initial value
-            folderPath = DEFAULT_FOLDER_PATH;
+            homeFolderPath = DEFAULT_FOLDER_PATH;
             return false;
         }
 
         QTextStream inStream(&preferencesFile);
-        while (!inStream.atEnd()) {
-            QString line = inStream.readLine();
-            folderPath = line;
+        int i = 0;
+        while(!inStream.atEnd()) {
+            switch(i){
+                case 0:
+                    homeFolderPath = inStream.readLine();
+                    break;
+                case 1:
+                    patientFolderPath = inStream.readLine();
+                    break;
+                default:
+                    inStreamBuffer = inStream.readLine();
+                    break;
+            }
+            i++;
         }
         preferencesFile.close();
         return true;
@@ -50,30 +53,36 @@ public:
             return;
         }
         QTextStream outStream(&preferencesFile);
-        outStream << folderPath << endl;
+        outStream << homeFolderPath << endl
+                  << patientFolderPath << endl;
         preferencesFile.close();
     }
 
-    // static QString getInitFolderPath(){
-    //     QFile preferencesFile(PREFERENCES_FILE_PATH);
-    //     bool isPrefFileExist = preferencesFile.open(QIODevice::ReadOnly | QIODevice::Text);
 
-    //     if(isPrefFileExist == true){
-    //         QTextStream inStream(&preferencesFile);
-    //         while (!inStream.atEnd()) {
-    //             QString line = inStream.readLine();
-    //             return line;
-    //         }
-    //     }
-    //     else{
-    //         cout << "Preferences file do not exist." << endl;
-    //         return DEFAULT_FOLDER_PATH;
-    //     }
-    // }
+    // ========================================= [ TreeView ] ==
+    // Home Folder Path
+    // =========================================================
+    static void setHomeFolderPath(QString newHomeFolderPath){
+        homeFolderPath = newHomeFolderPath;
+    }
+    static QString getHomeFolderPath(){
+        return homeFolderPath;
+    }
+
+    // ========================================= [ TreeView ] ==
+    // Last Patient Folder Path
+    // =========================================================
+    static void setPatientFolderPath(QString newPatientFolderPath){
+        patientFolderPath = newPatientFolderPath;
+    }
+    static QString getPatientFolderPath(){
+        return patientFolderPath;
+    }
+    
 
 private:
-    static QStringList 
-    // static QString folderPath;
+    static QString homeFolderPath, patientFolderPath;
+    static QString inStreamBuffer;
 };
 
 #endif // PREFERENCES_CPP

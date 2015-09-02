@@ -17,7 +17,9 @@ There are several classes in my classification, like
 #include <QMessageBox>
 #include "default_setting.h"
 
-QString Preferences::folderPath = DEFAULT_FOLDER_PATH;
+QString Preferences::homeFolderPath = DEFAULT_FOLDER_PATH;
+QString Preferences::patientFolderPath = DEFAULT_FOLDER_PATH;
+QString Preferences::inStreamBuffer = "";
 
 using namespace std;
 
@@ -61,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     // Initialize TreeView
-    changeTreeView(Preferences::getFolderPath());
+    changeTreeView(Preferences::getHomeFolderPath());
 
     // Initialize actions
     initOpenFolderAction();
@@ -110,12 +112,12 @@ void MainWindow::initOpenFolderAction(){
 void MainWindow::on_openFolder_active(){
     // Open a file dialog and ask for a new directory
     QString dir = QFileDialog::getExistingDirectory(this,
-        tr("Open Folder"), Preferences::getFolderPath(),
+        tr("Open Folder"), Preferences::getHomeFolderPath(),
         QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
     if(!dir.isEmpty()){
         changeTreeView(dir);
-
+        Preferences::setPatientFolderPath(dir);
     }
 }
 
