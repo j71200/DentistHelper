@@ -12,9 +12,6 @@ QString Preferences::folderPath = Preferences::getInitFolderPath();
 
 using namespace std;
 
-// File I/O
-bool isSavedFileExist, isNoteDirty;
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -24,8 +21,6 @@ MainWindow::MainWindow(QWidget *parent) :
     // =====================
     // Initialize parameters
     // =====================
-    isNoteDirty = false;
-    isSavedFileExist = false;
     model = new QFileSystemModel;
 
     // ======================
@@ -63,6 +58,11 @@ MainWindow::MainWindow(QWidget *parent) :
     initSettingAction();
 
     currFolderQDir = new QDir(Preferences::getFolderPath());
+
+    // ===============
+    // Initialize note
+    // ===============
+    ui->noteTextEdit->setPlaceholderText(PLAIN_TEXT_EDIT_HINT);
 
     // Connecting
     connect(ui->treeView, SIGNAL(zKeyPressedSignal(QString)), this, SLOT(on_zKeyPressed(QString)));
@@ -108,9 +108,7 @@ void MainWindow::on_openFolder_active(){
 void MainWindow::changeTreeView(QString dir){
     // Set file system model
     model->setRootPath(dir);
-    QStringList allowedFileFilterList;
-    allowedFileFilterList << "*.jpg" << "*.bmp" << "*.png" << "*.gif";
-    model->setNameFilters(allowedFileFilterList);
+    model->setNameFilters(READABLE_IMAGE_LIST);
     model->setNameFilterDisables(false);
     ui->treeView->setModel(model);
     
@@ -145,39 +143,8 @@ void MainWindow::on_setting_active(){
 }
 
 void MainWindow::closeEvent(QCloseEvent *event){
-    if(isNoteDirty){
-
-        QMessageBox msgBox;
-        msgBox.setText("The document has been modified.");
-        msgBox.setInformativeText("Do you want to save your changes?");
-        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-        msgBox.setDefaultButton(QMessageBox::Save);
-        int ret = msgBox.exec();
-
-        switch (ret) {
-            case QMessageBox::Save:
-                // Save was clicked
-                if(isSavedFileExist){
-                    // TODO Directly save
-                }
-                else{
-                    // TODO Open save as dialog
-                }
-                break;
-            case QMessageBox::Discard:
-                // Don't Save was clicked
-                event->accept();
-                break;
-            case QMessageBox::Cancel:
-                // Cancel was clicked
-                event->ignore();
-                break;
-            default:
-                // should never be reached
-                break;
-        }
-
-    }
+    saveNote();
+    QMainWindow::closeEvent(event);
 }
 
 void MainWindow::on_testButton_clicked(){
@@ -206,10 +173,6 @@ void MainWindow::on_testButton_clicked(){
     // outStream << noteText;
     // noteFile.close();
 
-}
-
-void MainWindow::on_plainTextEdit_textChanged(){
-    isNoteDirty = true;
 }
 
 void MainWindow::on_treeView_clicked(const QModelIndex &index){
@@ -331,12 +294,11 @@ void MainWindow::on_folderChanged(QString newFolderPath, QString newFolderName){
     currFolderPath = newFolderPath;
     currFolderName = newFolderName;
 
-    QString noteFilePath = newFolderPath + QDir::separator() + newFolderName + "_note.txt";
+    QString noteFilePath = newFolderPath + QDir::separator() + newFolderName + NOTE_FILE_SUFFIX_NAME;
 
     QFile noteFile(noteFilePath);
     if(!noteFile.open(QIODevice::ReadOnly | QIODevice::Text)){
         cout << "Read note file failed" << endl;
-        ui->noteTextEdit->setPlainText("How about taking some note");
     }
     else{
         cout << "Read note file successfully" << endl;
@@ -350,7 +312,7 @@ void MainWindow::on_folderChanged(QString newFolderPath, QString newFolderName){
 }
 
 void MainWindow::saveNote(){
-    QFile noteFile(currFolderPath + QDir::separator() + currFolderName + "_note.txt");
+    QFile noteFile(currFolderPath + QDir::separator() + currFolderName + NOTE_FILE_SUFFIX_NAME);
 
     if (!noteFile.open(QIODevice::WriteOnly | QIODevice::Text)){
         cout << "Open note file for writing fail" << endl;
