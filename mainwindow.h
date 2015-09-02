@@ -36,7 +36,6 @@ private slots:
 	// ===========================
     void closeEvent(QCloseEvent *event);
     void on_testButton_clicked();
-    void on_treeView_clicked(const QModelIndex &index);
     void on_leftImgRatioSlider_valueChanged(int value);
     void on_rightImgRatioSlider_valueChanged(int value);
 

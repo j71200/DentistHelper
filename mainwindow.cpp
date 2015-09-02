@@ -1,3 +1,12 @@
+/*
+There are several classes in my classification, like
+[MainWindow]
+[Action]
+[TreeView]
+[Image]
+[Development]
+*/
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QScrollArea>
@@ -78,9 +87,17 @@ MainWindow::~MainWindow(){
     delete leftImageLabel, rightImageLabel;
 }
 
-// ================================
+// ======================================= [ MainWindow ] ==
+// Window Events
+// =========================================================
+void MainWindow::closeEvent(QCloseEvent *event){
+    saveNote();
+    QMainWindow::closeEvent(event);
+}
+
+// =========================================== [ Action ] ==
 // Initialize Open Folder Action
-// ================================
+// =========================================================
 void MainWindow::initOpenFolderAction(){
     QAction *openFolderAct;
 
@@ -105,6 +122,32 @@ void MainWindow::on_openFolder_active(){
     }
 }
 
+// =========================================== [ Action ] ==
+// Initialize Setting Action
+// =========================================================
+void MainWindow::initSettingAction(){
+    QAction *settingAct;
+
+    QString iconPath(APP_FOLDER_PATH + QString("icons/setting.png"));
+    settingAct = new QAction(QIcon( iconPath ), tr("Setting"), this);
+    // TODO
+    // settingAct->setShortcuts(QKeySequence::Preferences);
+    settingAct->setStatusTip(tr("Setting"));
+    connect(settingAct, SIGNAL(triggered()), this, SLOT(on_setting_active()));
+
+    ui->menuFile->addAction(settingAct);
+    ui->mainToolBar->addAction(settingAct);
+}
+
+void MainWindow::on_setting_active(){
+    SettingDialog mSettingDialog;
+    mSettingDialog.setFixedSize(mSettingDialog.size());  // Fix the size of setting dialog
+    mSettingDialog.exec();
+}
+
+// ========================================= [ TreeView ] ==
+// Change the Directory of TreeView
+// =========================================================
 void MainWindow::changeTreeView(QString dir){
     // Set file system model
     model->setRootPath(dir);
@@ -120,108 +163,34 @@ void MainWindow::changeTreeView(QString dir){
     }
 }
 
-// =========================
-// Initialize Setting Action
-// =========================
-void MainWindow::initSettingAction(){
-    QAction *settingAct;
-
-    QString iconPath(APP_FOLDER_PATH + QString("icons/setting.png"));
-    settingAct = new QAction(QIcon( iconPath ), tr("Setting"), this);
-    // settingAct->setShortcuts(QKeySequence::Preferences);
-    settingAct->setStatusTip(tr("Setting"));
-    connect(settingAct, SIGNAL(triggered()), this, SLOT(on_setting_active()));
-
-    ui->menuFile->addAction(settingAct);
-    ui->mainToolBar->addAction(settingAct);
-}
-
-void MainWindow::on_setting_active(){
-    SettingDialog mSettingDialog;
-    mSettingDialog.setFixedSize(mSettingDialog.size());  // Fix the size of setting dialog
-    mSettingDialog.exec();
-}
-
-void MainWindow::closeEvent(QCloseEvent *event){
-    saveNote();
-    QMainWindow::closeEvent(event);
-}
-
-void MainWindow::on_testButton_clicked(){
-
-
-    // ============== Open Directory function ==============
-    // QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "/Users/blue", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-
-
-    // ============== Save function ==============    
-    // QFile noteFile(currFolderQDir->path() + QDir::separator() + currFolderQDir->dirName() + "_note.txt");
-    // if(!noteFile.exists()){
-    //     cout << "File do not exist" << endl;
-    //     return;
-    // }
-
-    // QFile noteFile(currFolderPath + QDir::separator() + currFolderName + "_note.txt");
-
-    // if (!noteFile.open(QIODevice::WriteOnly | QIODevice::Text)){
-    //     cout << "Open note file for writing fail" << endl;
-    //     return;
-    // }
-
-    // QString noteText = ui->noteTextEdit->toPlainText();
-    // QTextStream outStream(&noteFile);
-    // outStream << noteText;
-    // noteFile.close();
-
-}
-
-void MainWindow::on_treeView_clicked(const QModelIndex &index){
-    ui->patientNameLabel->setText(model->fileName(index));
-    model->fileInfo(index);  // TODO Delete it
-
-    currFolderQDir->setPath(model->filePath(index));
-    QStringList imgFileList = currFolderQDir->entryList(QDir::Files);
-
+// ========================================= [ TreeView ] ==
+// Shortcuts
+// =========================================================
+void MainWindow::on_zKeyPressed(QString newImagePath){
+    leftImage = QPixmap(newImagePath);
+    if(leftImage.isNull())
+        return;
     leftImageSize = QSize(ui->leftScrollArea->width(), ui->leftScrollArea->height());
-    rightImageSize = QSize(ui->rightScrollArea->width(), ui->rightScrollArea->height());
-
-    switch (imgFileList.size()) {
-    case 0:
-        // cout << "No image in folder: " << currFolderQDir->path().toStdString() << endl;
-        break;
-
-    case 1:
-        leftImgFilePath = currFolderQDir->path() + QDir::separator() + imgFileList.at(0);
-        leftImage = QPixmap(leftImgFilePath).scaled(leftImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-        leftImageLabel->setPixmap(leftImage);
-        setLeftImgToolsVisible(true);
-        resetLeftImgTools();
-
-        setRightImgToolsVisible(false);
-        resetRightImgTools();
-        rightImageLabel->clear();
-        break;
-
-    case 2:
-        leftImgFilePath = currFolderQDir->path() + QDir::separator() + imgFileList.at(0);
-        leftImage = QPixmap(leftImgFilePath).scaled(leftImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-        leftImageLabel->setPixmap(leftImage);
-        setLeftImgToolsVisible(true);
-        resetLeftImgTools();
-
-        rightImgFilePath = currFolderQDir->path() + QDir::separator() + imgFileList.at(1);
-        rightImage = QPixmap(rightImgFilePath).scaled(rightImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-        rightImageLabel->setPixmap(rightImage);
-        setRightImgToolsVisible(true);
-        resetRightImgTools();
-        break;
-        
-    default:
-        
-        break;
-    }
+    leftImage = leftImage.scaled(leftImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    leftImageLabel->setPixmap(leftImage);
+    setLeftImgToolsVisible(true);
+    resetLeftImgTools();
 }
 
+void MainWindow::on_xKeyPressed(QString newImagePath){
+    rightImage = QPixmap(newImagePath);
+    if(rightImage.isNull())
+        return;
+    rightImageSize = QSize(ui->rightScrollArea->width(), ui->rightScrollArea->height());
+    rightImage = rightImage.scaled(rightImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    rightImageLabel->setPixmap(rightImage);
+    setRightImgToolsVisible(true);
+    resetRightImgTools();
+}
+
+// ============================================ [ Image ] ==
+// Set/Reset Image Tools
+// =========================================================
 void MainWindow::resetLeftImgTools(){
     ui->leftImgRatioLabel->setText("100%");
     ui->leftImgRatioSlider->setValue(100);
@@ -242,6 +211,9 @@ void MainWindow::setRightImgToolsVisible(bool isVisible){
     ui->rightImgRatioSlider->setVisible(isVisible);
 }
 
+// ============================================ [ Image ] ==
+// Image RatioSlider Slot
+// =========================================================
 void MainWindow::on_leftImgRatioSlider_valueChanged(int value){
     if(leftImage.isNull())
         return;
@@ -268,26 +240,9 @@ void MainWindow::on_rightImgRatioSlider_valueChanged(int value){
     rightImageLabel->setPixmap(newScaledPixmap);
 }
 
-void MainWindow::on_zKeyPressed(QString newImagePath){
-    leftImage = QPixmap(newImagePath);
-    if(leftImage.isNull())
-        return;
-    leftImage = leftImage.scaled(leftImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    leftImageLabel->setPixmap(leftImage);
-    setLeftImgToolsVisible(true);
-    resetLeftImgTools();
-}
-
-void MainWindow::on_xKeyPressed(QString newImagePath){
-    rightImage = QPixmap(newImagePath);
-    if(rightImage.isNull())
-        return;
-    rightImage = rightImage.scaled(rightImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    rightImageLabel->setPixmap(rightImage);
-    setRightImgToolsVisible(true);
-    resetRightImgTools();
-}
-
+// ============================================= [ Note ] ==
+// Refresh Note Content if Folder Changed
+// =========================================================
 void MainWindow::on_folderChanged(QString newFolderPath, QString newFolderName){
     saveNote();
 
@@ -311,6 +266,9 @@ void MainWindow::on_folderChanged(QString newFolderPath, QString newFolderName){
     noteFile.close();
 }
 
+// ============================================= [ Note ] ==
+// Function for Saving Note
+// =========================================================
 void MainWindow::saveNote(){
     QFile noteFile(currFolderPath + QDir::separator() + currFolderName + NOTE_FILE_SUFFIX_NAME);
 
@@ -324,3 +282,14 @@ void MainWindow::saveNote(){
     outStream << noteText;
     noteFile.close();
 }
+
+// ====================================== [ Development ] ==
+// Test Button
+// =========================================================
+void MainWindow::on_testButton_clicked(){
+
+}
+
+
+
+

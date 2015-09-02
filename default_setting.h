@@ -1,11 +1,12 @@
 #ifndef DEFAULT_SETTING
 #define DEFAULT_SETTING
 
+// Setting
 const QString DEFAULT_FOLDER_PATH("/Users/blue/");
 const QString APP_FOLDER_PATH("/Users/blue/QtWorkspace/firstQt/");
 const QString PREFERENCES_FILE_PATH("/Users/blue/QtWorkspace/firstQt/Output/my_preferences.txt");
 
-// Images
+// Image
 const QStringList READABLE_IMAGE_LIST = QStringList() << "*.jpg" << "*.bmp" << "*.png" << "*.gif";
 
 // Note
