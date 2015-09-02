@@ -60,7 +60,7 @@ private:
 
     // Folder/File system
     QFileSystemModel *model;
-    QDir *currFolderQDir;
+    // QDir *currFolderQDir;
     QString currFolderPath, currFolderName;
 
     // The images

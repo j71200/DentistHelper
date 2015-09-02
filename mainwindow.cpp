@@ -17,7 +17,7 @@ There are several classes in my classification, like
 #include <QMessageBox>
 #include "default_setting.h"
 
-QString Preferences::folderPath = Preferences::getInitFolderPath();
+QString Preferences::folderPath = DEFAULT_FOLDER_PATH;
 
 using namespace std;
 
@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // Initialize parameters
     // =====================
     model = new QFileSystemModel;
+    Preferences::load();
 
     // ======================
     // Initialize image block
@@ -66,7 +67,7 @@ MainWindow::MainWindow(QWidget *parent) :
     initOpenFolderAction();
     initSettingAction();
 
-    currFolderQDir = new QDir(Preferences::getFolderPath());
+    // currFolderQDir = new QDir(Preferences::getFolderPath());
 
     // ===============
     // Initialize note
@@ -83,7 +84,7 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow(){
     delete ui;
     delete model;
-    delete currFolderQDir;
+    // delete currFolderQDir;
     delete leftImageLabel, rightImageLabel;
 }
 
@@ -117,7 +118,7 @@ void MainWindow::on_openFolder_active(){
 
     if(!dir.isEmpty()){
         changeTreeView(dir);
-        
+
     }
 }
 

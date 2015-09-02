@@ -13,25 +13,24 @@ using namespace std;
 class Preferences{
 public:
     Preferences(){
-        bool isLoadingSuccessful = load();
-        if( !isLoadingSuccessful ){
-            // Load fail then use the default setting
-            folderPath = DEFAULT_FOLDER_PATH;
-        }
     }
     ~Preferences(){
     }
 
-    static void setFolderPath(QString newFolderPath)
+    static void setFolderPath(QString newFolderPath){
         folderPath = newFolderPath;
+    }
     
-    static QString getFolderPath()
+    static QString getFolderPath(){
         return folderPath;
+    }
 
     static bool load(){
         QFile preferencesFile(PREFERENCES_FILE_PATH);
         if (!preferencesFile.open(QIODevice::ReadOnly | QIODevice::Text)){
             cout << "Read preference file failed" << endl;
+            // Set the initial value
+            folderPath = DEFAULT_FOLDER_PATH;
             return false;
         }
 
@@ -55,22 +54,22 @@ public:
         preferencesFile.close();
     }
 
-    static QString getInitFolderPath(){
-        QFile preferencesFile(PREFERENCES_FILE_PATH);
-        bool isPrefFileExist = preferencesFile.open(QIODevice::ReadOnly | QIODevice::Text);
+    // static QString getInitFolderPath(){
+    //     QFile preferencesFile(PREFERENCES_FILE_PATH);
+    //     bool isPrefFileExist = preferencesFile.open(QIODevice::ReadOnly | QIODevice::Text);
 
-        if(isPrefFileExist == true){
-            QTextStream inStream(&preferencesFile);
-            while (!inStream.atEnd()) {
-                QString line = inStream.readLine();
-                return line;
-            }
-        }
-        else{
-            cout << "Preferences file do not exist." << endl;
-            return DEFAULT_FOLDER_PATH;
-        }
-    }
+    //     if(isPrefFileExist == true){
+    //         QTextStream inStream(&preferencesFile);
+    //         while (!inStream.atEnd()) {
+    //             QString line = inStream.readLine();
+    //             return line;
+    //         }
+    //     }
+    //     else{
+    //         cout << "Preferences file do not exist." << endl;
+    //         return DEFAULT_FOLDER_PATH;
+    //     }
+    // }
 
 private:
     static QString folderPath;
