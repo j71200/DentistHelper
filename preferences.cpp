@@ -22,13 +22,11 @@ public:
     ~Preferences(){
     }
 
-    static void setFolderPath(QString newFolderPath){
+    static void setFolderPath(QString newFolderPath)
         folderPath = newFolderPath;
-    }
-
-    static QString getFolderPath(){
+    
+    static QString getFolderPath()
         return folderPath;
-    }
 
     static bool load(){
         QFile preferencesFile(PREFERENCES_FILE_PATH);

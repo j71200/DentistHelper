@@ -117,6 +117,7 @@ void MainWindow::on_openFolder_active(){
 
     if(!dir.isEmpty()){
         changeTreeView(dir);
+        
     }
 }
 
