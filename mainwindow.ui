@@ -148,58 +148,6 @@
      <string>TextLabel</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="zoomInLeftButton">
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>370</y>
-      <width>115</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Zoom In</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="zoomOutLeftButton">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>370</y>
-      <width>115</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Zoom Out</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="zoomInRightButton">
-    <property name="geometry">
-     <rect>
-      <x>580</x>
-      <y>370</y>
-      <width>115</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Zoom In</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="zoomOutRightButton">
-    <property name="geometry">
-     <rect>
-      <x>720</x>
-      <y>370</y>
-      <width>115</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Zoom Out</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="leftImgRatioLabel">
     <property name="geometry">
      <rect>
@@ -272,10 +220,6 @@
    <zorder>noteTextEdit</zorder>
    <zorder>testButton</zorder>
    <zorder>patientNameLabel</zorder>
-   <zorder>zoomInLeftButton</zorder>
-   <zorder>zoomOutLeftButton</zorder>
-   <zorder>zoomInRightButton</zorder>
-   <zorder>zoomOutRightButton</zorder>
    <zorder>leftImgRatioLabel</zorder>
    <zorder>rightImgRatioLabel</zorder>
    <zorder>leftImgRatioSlider</zorder>
