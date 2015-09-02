@@ -99,8 +99,6 @@ void MainWindow::closeEvent(QCloseEvent *event){
 // Initialize Open Folder Action
 // =========================================================
 void MainWindow::initOpenFolderAction(){
-    QAction *openFolderAct;
-
     QString iconPath(APP_FOLDER_PATH + QString("icons/open_folder.png"));
     openFolderAct = new QAction(QIcon( iconPath ), tr("Open Folder"), this);
     openFolderAct->setShortcuts(QKeySequence::Open);
@@ -126,11 +124,8 @@ void MainWindow::on_openFolder_active(){
 // Initialize Setting Action
 // =========================================================
 void MainWindow::initSettingAction(){
-    QAction *settingAct;
-
     QString iconPath(APP_FOLDER_PATH + QString("icons/setting.png"));
     settingAct = new QAction(QIcon( iconPath ), tr("Setting"), this);
-    // TODO
     // settingAct->setShortcuts(QKeySequence::Preferences);
     settingAct->setStatusTip(tr("Setting"));
     connect(settingAct, SIGNAL(triggered()), this, SLOT(on_setting_active()));

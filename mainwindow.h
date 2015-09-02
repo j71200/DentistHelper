@@ -54,6 +54,10 @@ private:
     // Note
     void saveNote();
 
+    // Action
+    QAction *openFolderAct;
+    QAction *settingAct;
+
     // Folder/File system
     QFileSystemModel *model;
     QDir *currFolderQDir;
