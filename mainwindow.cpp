@@ -18,7 +18,7 @@ There are several classes in my classification, like
 #include "default_setting.h"
 
 QString Preferences::homeFolderPath = DEFAULT_FOLDER_PATH;
-QString Preferences::patientFolderPath = DEFAULT_FOLDER_PATH;
+QString Preferences::patientFolderPath = "";
 QString Preferences::inStreamBuffer = "";
 
 using namespace std;
@@ -147,6 +147,9 @@ void MainWindow::on_setting_active(){
 // Change the Directory of TreeView
 // =========================================================
 void MainWindow::changeTreeView(QString dir){
+    if(dir.isEmpty())
+        return;
+    
     // Set file system model
     model->setRootPath(dir);
     model->setNameFilters(READABLE_IMAGE_LIST);
