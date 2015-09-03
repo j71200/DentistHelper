@@ -1,1 +1,2 @@
 /Users/blue/QtWorkspace/firstQt/data
+/Users/blue/QtWorkspace/firstQt/data/鍾文藍

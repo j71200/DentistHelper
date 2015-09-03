@@ -63,7 +63,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     // Initialize TreeView
-    changeTreeView(Preferences::getHomeFolderPath());
+    // changeTreeView(Preferences::getHomeFolderPath());
+    changeTreeView(Preferences::getPatientFolderPath());
 
     // Initialize actions
     initOpenFolderAction();
@@ -92,6 +93,7 @@ MainWindow::~MainWindow(){
 // =========================================================
 void MainWindow::closeEvent(QCloseEvent *event){
     saveNote();
+    Preferences::save();
     QMainWindow::closeEvent(event);
 }
 
@@ -118,6 +120,7 @@ void MainWindow::on_openFolder_active(){
     if(!dir.isEmpty()){
         changeTreeView(dir);
         Preferences::setPatientFolderPath(dir);
+        Preferences::save();
     }
 }
 

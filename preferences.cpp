@@ -17,27 +17,34 @@ public:
     ~Preferences(){
     }
 
+    // ============================================== [ I/O ] ==
+    // Load and Save User's Prefeerences
+    // =========================================================
     static bool load(){
         QFile preferencesFile(PREFERENCES_FILE_PATH);
         if (!preferencesFile.open(QIODevice::ReadOnly | QIODevice::Text)){
             cout << "Read preference file failed" << endl;
             // Set the initial value
-            homeFolderPath = DEFAULT_FOLDER_PATH;
             return false;
         }
 
         QTextStream inStream(&preferencesFile);
         int i = 0;
+        QString line;
         while(!inStream.atEnd()) {
+            line = inStream.readLine();
+            if(line.isEmpty())
+                continue;
+
             switch(i){
                 case 0:
-                    homeFolderPath = inStream.readLine();
+                    homeFolderPath = line;
                     break;
                 case 1:
-                    patientFolderPath = inStream.readLine();
+                    patientFolderPath = line;
                     break;
                 default:
-                    inStreamBuffer = inStream.readLine();
+                    inStreamBuffer = line;
                     break;
             }
             i++;
