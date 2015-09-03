@@ -63,7 +63,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     // Initialize TreeView
-    // changeTreeView(Preferences::getHomeFolderPath());
     changeTreeView(Preferences::getPatientFolderPath());
 
     // Initialize actions
