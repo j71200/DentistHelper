@@ -16,6 +16,8 @@ There are several classes in my classification, like
 #include <fstream>
 #include <QMessageBox>
 #include "default_setting.h"
+#include <QDesktopServices>
+#include "/Users/blue/Desktop/poppler-0.35.0/qt5/src/poppler-qt5.h"
 
 QString Preferences::homeFolderPath = DEFAULT_FOLDER_PATH;
 QString Preferences::patientFolderPath = "";
@@ -149,7 +151,7 @@ void MainWindow::on_setting_active(){
 void MainWindow::changeTreeView(QString dir){
     if(dir.isEmpty())
         return;
-    
+
     // Set file system model
     model->setRootPath(dir);
     model->setNameFilters(READABLE_IMAGE_LIST);
@@ -288,7 +290,7 @@ void MainWindow::saveNote(){
 // Test Button
 // =========================================================
 void MainWindow::on_testButton_clicked(){
-
+    // QDesktopServices::openUrl(QUrl("file:///Users/blue/aaa.pdf", QUrl::TolerantMode));
 }
 
 
