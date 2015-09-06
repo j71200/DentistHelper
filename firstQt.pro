@@ -11,7 +11,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = firstQt
 TEMPLATE = app
 
-
 SOURCES += main.cpp\
         mainwindow.cpp \
     settingdialog.cpp \
@@ -22,7 +21,7 @@ HEADERS  += mainwindow.h \
     default_setting.h \
     settingdialog.h \
     messagedialog.h \
-    customtreeview.h
+    customtreeview.h \
 
 FORMS    += mainwindow.ui \
     settingdialog.ui \

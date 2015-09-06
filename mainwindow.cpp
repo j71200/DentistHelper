@@ -17,7 +17,7 @@ There are several classes in my classification, like
 #include <QMessageBox>
 #include "default_setting.h"
 #include <QDesktopServices>
-#include "/Users/blue/Desktop/poppler-0.35.0/qt5/src/poppler-qt5.h"
+
 
 QString Preferences::homeFolderPath = DEFAULT_FOLDER_PATH;
 QString Preferences::patientFolderPath = "";
@@ -290,7 +290,19 @@ void MainWindow::saveNote(){
 // Test Button
 // =========================================================
 void MainWindow::on_testButton_clicked(){
+
     // QDesktopServices::openUrl(QUrl("file:///Users/blue/aaa.pdf", QUrl::TolerantMode));
+    // QDesktopServices::openUrl(QUrl("file:///Users/blue/Desktop/實數的建構.pdf", QUrl::TolerantMode));
+
+
+    // QString filename = "/Users/blue/aaa.pdf";
+    // Poppler::Document* document = Poppler::Document::load(filename);
+    // if (!document || document->isLocked()) {
+    //     // ... error message ....
+    //     delete document;
+    //     return;
+    // }
+    // delete document;
 }
 
 
