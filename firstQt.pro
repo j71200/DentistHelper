@@ -15,14 +15,20 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     settingdialog.cpp \
     preferences.cpp \
-    messagedialog.cpp
+    messagedialog.cpp \
+    xraywindow.cpp \
+    imagewindow.cpp
 
 HEADERS  += mainwindow.h \
     default_setting.h \
     settingdialog.h \
     messagedialog.h \
     customtreeview.h \
+    xraywindow.h \
+    imagewindow.h
 
 FORMS    += mainwindow.ui \
     settingdialog.ui \
-    messagedialog.ui
+    messagedialog.ui \
+    xraywindow.ui \
+    imagewindow.ui
