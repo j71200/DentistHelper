@@ -32,41 +32,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // =====================
-    // Initialize parameters
-    // =====================
-    model = new QFileSystemModel;
-//    Preferences::load();
 
-    // ======================
-    // Initialize image block
-    // ======================
-    leftImageLabel = new QLabel;
-    rightImageLabel = new QLabel;
-    leftImageLabel->setAlignment(Qt::AlignCenter);
-    rightImageLabel->setAlignment(Qt::AlignCenter);
-    ui->leftScrollArea->setWidget(leftImageLabel);
-    ui->rightScrollArea->setWidget(rightImageLabel);
+    // Initialize UI
+    ui->patientIDLabel->setAlignment(Qt::AlignCenter);
 
-    ui->leftImgRatioSlider->setMinimum(10);
-    ui->leftImgRatioSlider->setMaximum(300);
-    ui->leftImgRatioSlider->setSingleStep(10);
-    ui->rightImgRatioSlider->setMinimum(10);
-    ui->rightImgRatioSlider->setMaximum(300);
-    ui->rightImgRatioSlider->setSingleStep(10);
-
-    ui->leftImgRatioSlider->setValue(100);
-    ui->rightImgRatioSlider->setValue(100);
-
-    ui->leftImgRatioLabel->setAlignment(Qt::AlignRight);
-    ui->rightImgRatioLabel->setAlignment(Qt::AlignRight);
-
-    setLeftImgToolsVisible(false);
-    setRightImgToolsVisible(false);
-
-
-    // Initialize TreeView
-    changeTreeView(Preferences::getPatientFolderPath());
 
     // Initialize actions
     initOpenFolderAction();
@@ -77,17 +46,10 @@ MainWindow::MainWindow(QWidget *parent) :
     // ===============
     ui->noteTextEdit->setPlaceholderText(PLAIN_TEXT_EDIT_HINT);
 
-    // Connecting
-    // connect(ui->treeView, SIGNAL(zKeyPressedSignal(QString)), this, SLOT(on_zKeyPressed(QString)));
-    // connect(ui->treeView, SIGNAL(xKeyPressedSignal(QString)), this, SLOT(on_xKeyPressed(QString)));
-    // connect(ui->treeView, SIGNAL(fileChangedSignal(QString)), this, SLOT(on_fileChanged(QString)));
-
 }
 
 MainWindow::~MainWindow(){
     delete ui;
-    delete model;
-    delete leftImageLabel, rightImageLabel;
 }
 
 // =========================================== [ Window ] ==
@@ -120,7 +82,8 @@ void MainWindow::on_openFolder_active(){
         QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
     if(!dir.isEmpty()){
-        changeTreeView(dir);
+        QDir mQDir(dir);
+        ui->patientIDLabel->setText(mQDir.dirName());
         Preferences::setPatientFolderPath(dir);
         Preferences::save();
     }
@@ -146,103 +109,6 @@ void MainWindow::on_setting_active(){
     mSettingDialog.exec();
 }
 
-// ========================================= [ TreeView ] ==
-// Change the Directory of TreeView
-// =========================================================
-void MainWindow::changeTreeView(QString dir){
-    if(dir.isEmpty())
-        return;
-
-    // Set file system model
-    model->setRootPath(dir);
-    model->setNameFilters(READABLE_IMAGE_LIST);
-    model->setNameFilterDisables(false);
-    ui->treeView->setModel(model);
-    
-    // Set the treeView so that it will only show particular folder
-    ui->treeView->setRootIndex(model->index(dir));
-    // Hide the useless columns, like file size, kind and date modified
-    for(int i = 1; i < model->columnCount(); i++){
-        ui->treeView->setColumnHidden(i, true);
-    }
-}
-
-// ========================================= [ TreeView ] ==
-// Shortcuts
-// =========================================================
-// void MainWindow::on_zKeyPressed(QString newImagePath){
-//     leftImage = QPixmap(newImagePath);
-//     if(leftImage.isNull())
-//         return;
-//     leftImageSize = QSize(ui->leftScrollArea->width(), ui->leftScrollArea->height());
-//     leftImage = leftImage.scaled(leftImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-//     leftImageLabel->setPixmap(leftImage);
-//     setLeftImgToolsVisible(true);
-//     resetLeftImgTools();
-// }
-
-// void MainWindow::on_xKeyPressed(QString newImagePath){
-//     rightImage = QPixmap(newImagePath);
-//     if(rightImage.isNull())
-//         return;
-//     rightImageSize = QSize(ui->rightScrollArea->width(), ui->rightScrollArea->height());
-//     rightImage = rightImage.scaled(rightImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-//     rightImageLabel->setPixmap(rightImage);
-//     setRightImgToolsVisible(true);
-//     resetRightImgTools();
-// }
-
-// ============================================ [ Image ] ==
-// Set/Reset Image Tools
-// =========================================================
-void MainWindow::resetLeftImgTools(){
-    ui->leftImgRatioLabel->setText("100%");
-    ui->leftImgRatioSlider->setValue(100);
-}
-
-void MainWindow::resetRightImgTools(){
-    ui->rightImgRatioLabel->setText("100%");
-    ui->rightImgRatioSlider->setValue(100);
-}
-
-void MainWindow::setLeftImgToolsVisible(bool isVisible){
-    ui->leftImgRatioLabel->setVisible(isVisible);
-    ui->leftImgRatioSlider->setVisible(isVisible);
-}
-
-void MainWindow::setRightImgToolsVisible(bool isVisible){
-    ui->rightImgRatioLabel->setVisible(isVisible);
-    ui->rightImgRatioSlider->setVisible(isVisible);
-}
-
-// ============================================ [ Image ] ==
-// Image RatioSlider Slot
-// =========================================================
-void MainWindow::on_leftImgRatioSlider_valueChanged(int value){
-    if(leftImage.isNull())
-        return;
-
-    QString newRatioText = QString::number(value) + "%";
-    ui->leftImgRatioLabel->setText(newRatioText);
-
-    QSize newScaledSize = leftImageSize * (value / 100.0);
-    QPixmap newScaledPixmap;
-    newScaledPixmap = leftImage.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    leftImageLabel->setPixmap(newScaledPixmap);
-}
-
-void MainWindow::on_rightImgRatioSlider_valueChanged(int value){
-    if(rightImage.isNull())
-        return;
-
-    QString newRatioText = QString::number(value) + "%";
-    ui->rightImgRatioLabel->setText(newRatioText);
-
-    QSize newScaledSize = rightImageSize * (value / 100.0);
-    QPixmap newScaledPixmap;
-    newScaledPixmap = rightImage.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    rightImageLabel->setPixmap(newScaledPixmap);
-}
 
 // ============================================= [ Note ] ==
 // Refresh Note Content if Folder Changed

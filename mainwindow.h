@@ -19,11 +19,6 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-public slots:
-    // void on_zKeyPressed(QString);
-    // void on_xKeyPressed(QString);
-    // void on_folderChanged(QString, QString);
-
 private slots:
 	// =====================
 	//        Actions
@@ -36,20 +31,12 @@ private slots:
 	// ===========================
     void closeEvent(QCloseEvent *event);
     void on_testButton_clicked();
-    void on_leftImgRatioSlider_valueChanged(int value);
-    void on_rightImgRatioSlider_valueChanged(int value);
 
 private:
     Ui::MainWindow *ui;
 
     void initOpenFolderAction();
     void initSettingAction();
-    void changeTreeView(QString dir);
-
-    void resetLeftImgTools();
-    void resetRightImgTools();
-    void setLeftImgToolsVisible(bool isVisible);
-    void setRightImgToolsVisible(bool isVisible);
 
     // Note
     void saveNote();
@@ -62,11 +49,6 @@ private:
     QFileSystemModel *model;
     QString currFolderPath, currFolderName;
 
-    // The images
-    QLabel *leftImageLabel, *rightImageLabel;
-    QPixmap leftImage, rightImage;
-    QString leftImgFilePath, rightImgFilePath;
-    QSize leftImageSize, rightImageSize;
 };
 
 #endif // MAINWINDOW_H

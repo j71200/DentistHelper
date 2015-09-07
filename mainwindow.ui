@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1314</width>
+    <width>544</width>
     <height>541</height>
    </rect>
   </property>
@@ -14,195 +14,32 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QLabel" name="testLabel">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>250</y>
-      <width>221</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TestLabel</string>
-    </property>
-   </widget>
-   <widget class="CustomTreeView" name="treeView">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>50</y>
-      <width>256</width>
-      <height>192</height>
-     </rect>
-    </property>
-    <property name="dragEnabled">
-     <bool>true</bool>
-    </property>
-    <property name="dragDropMode">
-     <enum>QAbstractItemView::DragOnly</enum>
-    </property>
-   </widget>
-   <widget class="QPlainTextEdit" name="noteTextEdit">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>340</y>
-      <width>231</width>
-      <height>121</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="testButton">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>290</y>
-      <width>115</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>testButton</string>
-    </property>
-   </widget>
-   <widget class="QSplitter" name="splitter">
-    <property name="geometry">
-     <rect>
-      <x>280</x>
-      <y>60</y>
-      <width>561</width>
-      <height>300</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-    <widget class="QScrollArea" name="leftScrollArea">
-     <property name="widgetResizable">
-      <bool>true</bool>
-     </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>275</width>
-        <height>298</height>
-       </rect>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="patientIDLabel">
+      <property name="text">
+       <string>TextLabel</string>
       </property>
      </widget>
-    </widget>
-    <widget class="QScrollArea" name="rightScrollArea">
-     <property name="widgetResizable">
-      <bool>true</bool>
-     </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents_4">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>275</width>
-        <height>298</height>
-       </rect>
+    </item>
+    <item>
+     <widget class="QPlainTextEdit" name="noteTextEdit"/>
+    </item>
+    <item>
+     <widget class="QPushButton" name="testButton">
+      <property name="text">
+       <string>testButton</string>
       </property>
      </widget>
-    </widget>
-   </widget>
-   <widget class="QLabel" name="patientNameLabel">
-    <property name="geometry">
-     <rect>
-      <x>470</x>
-      <y>20</y>
-      <width>211</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="leftImgRatioLabel">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>380</y>
-      <width>59</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>100%</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="rightImgRatioLabel">
-    <property name="geometry">
-     <rect>
-      <x>680</x>
-      <y>400</y>
-      <width>59</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>100%</string>
-    </property>
-   </widget>
-   <widget class="QSlider" name="leftImgRatioSlider">
-    <property name="geometry">
-     <rect>
-      <x>340</x>
-      <y>410</y>
-      <width>160</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::ClickFocus</enum>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-    <property name="tickPosition">
-     <enum>QSlider::TicksBelow</enum>
-    </property>
-   </widget>
-   <widget class="QSlider" name="rightImgRatioSlider">
-    <property name="geometry">
-     <rect>
-      <x>620</x>
-      <y>410</y>
-      <width>160</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-    <property name="tickPosition">
-     <enum>QSlider::TicksBelow</enum>
-    </property>
-    <property name="tickInterval">
-     <number>0</number>
-    </property>
-   </widget>
-   <zorder>splitter</zorder>
-   <zorder>testLabel</zorder>
-   <zorder>treeView</zorder>
-   <zorder>noteTextEdit</zorder>
-   <zorder>testButton</zorder>
-   <zorder>patientNameLabel</zorder>
-   <zorder>leftImgRatioLabel</zorder>
-   <zorder>rightImgRatioLabel</zorder>
-   <zorder>leftImgRatioSlider</zorder>
-   <zorder>rightImgRatioSlider</zorder>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1314</width>
+     <width>544</width>
      <height>22</height>
     </rect>
    </property>
@@ -229,13 +66,6 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets>
-  <customwidget>
-   <class>CustomTreeView</class>
-   <extends>QTreeView</extends>
-   <header>customtreeview.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>
