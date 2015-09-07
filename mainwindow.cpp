@@ -1,8 +1,9 @@
 /*
 There are several classes in my classification, like
-[MainWindow]
+[Window]
 [Action]
-[TreeView]
+--[TreeView]
+[X-ray]
 [Image]
 [Development]
 */
@@ -35,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // Initialize parameters
     // =====================
     model = new QFileSystemModel;
-    Preferences::load();
+//    Preferences::load();
 
     // ======================
     // Initialize image block
@@ -89,7 +90,7 @@ MainWindow::~MainWindow(){
     delete leftImageLabel, rightImageLabel;
 }
 
-// ======================================= [ MainWindow ] ==
+// =========================================== [ Window ] ==
 // Window Events
 // =========================================================
 void MainWindow::closeEvent(QCloseEvent *event){

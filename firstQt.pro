@@ -14,7 +14,6 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     settingdialog.cpp \
-    preferences.cpp \
     messagedialog.cpp \
     xraywindow.cpp \
     imagewindow.cpp
@@ -25,7 +24,8 @@ HEADERS  += mainwindow.h \
     messagedialog.h \
     customtreeview.h \
     xraywindow.h \
-    imagewindow.h
+    imagewindow.h \
+    preferences.h
 
 FORMS    += mainwindow.ui \
     settingdialog.ui \

@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QAbstractButton>
-#include "preferences.cpp"
+#include "preferences.h"
 
 namespace Ui {
 class SettingDialog;

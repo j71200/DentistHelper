@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include "settingdialog.h"
-#include "preferences.cpp"
+#include "preferences.h"
 #include <QFileSystemModel>
 #include <QLabel>
 
