@@ -15,13 +15,22 @@ XRayWindow::XRayWindow(QWidget *parent) :
     // Initialize parameters
     // =====================
     model = new QFileSystemModel;
+    xrayLabel = new QLabel;
+
 
     // ======================
     // Initialize image block
     // ======================
-    xrayLabel = new QLabel;
     xrayLabel->setAlignment(Qt::AlignCenter);
     ui->scrollArea->setWidget(xrayLabel);
+
+
+    ui->scaleSlider->setMinimum(10);
+    ui->scaleSlider->setMaximum(300);
+    ui->scaleSlider->setSingleStep(10);
+    resetScaleTools();
+    setScaleToolsVisible(false);
+
 
 
     // =====================
@@ -80,12 +89,16 @@ void XRayWindow::changeTreeView(QString dir){
 // =========================================================
 void XRayWindow::loadImage(QString imagePath){
     xrayImage = QPixmap(imagePath);
-    if(xrayImage.isNull())
+    if(xrayImage.isNull()){
         return;
-
+    }
+    
     xrayImageSize = QSize(ui->scrollArea->width(), ui->scrollArea->height());
     xrayImage = xrayImage.scaled(xrayImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     xrayLabel->setPixmap(xrayImage);
+
+    resetScaleTools();
+	setScaleToolsVisible(true);
 }
 
 // ============================================ [ Image ] ==
@@ -94,6 +107,38 @@ void XRayWindow::loadImage(QString imagePath){
 void XRayWindow::on_fileChanged(QString newFilePath){
 	selectedFilePath = newFilePath;
 	loadImage(newFilePath);
+	resetScaleTools();
 }
+
+// ============================================ [ Image ] ==
+// Image ratioSlider slot
+// =========================================================
+void XRayWindow::on_scaleSlider_valueChanged(int value){
+    if(xrayImage.isNull())
+        return;
+
+    QString newRatioText = QString::number(value) + "%";
+    ui->scaleLabel->setText(newRatioText);
+
+    QSize newScaledSize = xrayImageSize * (value / 100.0);
+    QPixmap newScaledPixmap;
+    newScaledPixmap = xrayImage.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    xrayLabel->setPixmap(newScaledPixmap);
+}
+
+// ============================================ [ Image ] ==
+// Image scale tools
+// =========================================================
+void XRayWindow::resetScaleTools(){
+	ui->scaleSlider->setValue(100);
+    ui->scaleLabel->setText("100%");
+}
+
+void XRayWindow::setScaleToolsVisible(bool isVisible){
+    ui->scaleSlider->setVisible(isVisible);
+    ui->scaleLabel->setVisible(isVisible);
+}
+
+
 
 
