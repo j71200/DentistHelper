@@ -6,12 +6,17 @@ const QString DEFAULT_FOLDER_PATH("/Users/blue/");
 const QString APP_FOLDER_PATH("/Users/blue/QtWorkspace/firstQt/");
 const QString PREFERENCES_FILE_PATH("/Users/blue/QtWorkspace/firstQt/Output/my_preferences.txt");
 
+const qreal FIT_IMAGE_SIZE_RATIO = 0.95;
+const QStringList READABLE_IMAGE_LIST = QStringList() << "*.jpg" << "*.bmp" << "*.png" << "*.gif";
+
+
 // X-ray
 const QString XRAY_TO_XRAY_PATH("x-ray/");
-const qreal FIT_IMAGE_SIZE_RATIO = 0.95;
+
 
 // Image
-const QStringList READABLE_IMAGE_LIST = QStringList() << "*.jpg" << "*.bmp" << "*.png" << "*.gif";
+const QString PHOTO_TO_PHOTO_PATH("照片/");
+
 
 // Note
 const QString NOTE_FILE_SUFFIX_NAME("_note.txt");
