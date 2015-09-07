@@ -19,8 +19,8 @@ public:
     ~XRayWindow();
 
 private slots:
-	void on_treeView_clicked(const QModelIndex &index);
 	void resizeEvent(QResizeEvent *event);
+	void on_fileChanged(QString);
 
 private:
     Ui::XRayWindow *ui;

@@ -27,19 +27,15 @@ XRayWindow::XRayWindow(QWidget *parent) :
     // =====================
     //      TreeView
     // =====================
-    changeTreeView(Preferences::getPatientFolderPath() + QDir::separator() + XRAY_TO_PANO_PATH);
-    
+    changeTreeView(Preferences::getPatientFolderPath() + QDir::separator() + XRAY_TO_XRAY_PATH);
+
+    // =====================
+    //     Connecting
+    // =====================
+    connect(ui->treeView, SIGNAL(fileChangedSignal(QString)), this, SLOT(on_fileChanged(QString)));
 
 
 
-
-
-
-
-    // QPixmap aa = QPixmap("/Users/blue/Pictures/lena.gif");
-    // QLabel *qq = new QLabel;
-    // qq->setPixmap(aa);
-    // ui->scrollArea->setWidget(qq);
 }
 
 XRayWindow::~XRayWindow()
@@ -79,14 +75,6 @@ void XRayWindow::changeTreeView(QString dir){
     }
 }
 
-// ========================================= [ TreeView ] ==
-// Set the click reaction of TreeView
-// =========================================================
-void XRayWindow::on_treeView_clicked(const QModelIndex &index){
-    selectedFilePath = model->filePath(index);
-    loadImage(selectedFilePath);
-}
-
 // ============================================ [ Image ] ==
 // Load image into the label
 // =========================================================
@@ -98,6 +86,14 @@ void XRayWindow::loadImage(QString imagePath){
     xrayImageSize = QSize(ui->scrollArea->width(), ui->scrollArea->height());
     xrayImage = xrayImage.scaled(xrayImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     xrayLabel->setPixmap(xrayImage);
+}
+
+// ============================================ [ Image ] ==
+// Refresh image if folder changed
+// =========================================================
+void XRayWindow::on_fileChanged(QString newFilePath){
+	selectedFilePath = newFilePath;
+	loadImage(newFilePath);
 }
 
 

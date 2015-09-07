@@ -22,10 +22,10 @@ HEADERS  += mainwindow.h \
     default_setting.h \
     settingdialog.h \
     messagedialog.h \
-    customtreeview.h \
     xraywindow.h \
     imagewindow.h \
-    preferences.h
+    preferences.h \
+    customtreeview.h
 
 FORMS    += mainwindow.ui \
     settingdialog.ui \

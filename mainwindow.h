@@ -20,9 +20,9 @@ public:
     ~MainWindow();
 
 public slots:
-    void on_zKeyPressed(QString);
-    void on_xKeyPressed(QString);
-    void on_folderChanged(QString, QString);
+    // void on_zKeyPressed(QString);
+    // void on_xKeyPressed(QString);
+    // void on_folderChanged(QString, QString);
 
 private slots:
 	// =====================

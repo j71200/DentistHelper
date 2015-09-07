@@ -78,9 +78,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->noteTextEdit->setPlaceholderText(PLAIN_TEXT_EDIT_HINT);
 
     // Connecting
-    connect(ui->treeView, SIGNAL(zKeyPressedSignal(QString)), this, SLOT(on_zKeyPressed(QString)));
-    connect(ui->treeView, SIGNAL(xKeyPressedSignal(QString)), this, SLOT(on_xKeyPressed(QString)));
-    connect(ui->treeView, SIGNAL(folderChangedSignal(QString, QString)), this, SLOT(on_folderChanged(QString, QString)));
+    // connect(ui->treeView, SIGNAL(zKeyPressedSignal(QString)), this, SLOT(on_zKeyPressed(QString)));
+    // connect(ui->treeView, SIGNAL(xKeyPressedSignal(QString)), this, SLOT(on_xKeyPressed(QString)));
+    // connect(ui->treeView, SIGNAL(fileChangedSignal(QString)), this, SLOT(on_fileChanged(QString)));
 
 }
 
@@ -170,27 +170,27 @@ void MainWindow::changeTreeView(QString dir){
 // ========================================= [ TreeView ] ==
 // Shortcuts
 // =========================================================
-void MainWindow::on_zKeyPressed(QString newImagePath){
-    leftImage = QPixmap(newImagePath);
-    if(leftImage.isNull())
-        return;
-    leftImageSize = QSize(ui->leftScrollArea->width(), ui->leftScrollArea->height());
-    leftImage = leftImage.scaled(leftImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    leftImageLabel->setPixmap(leftImage);
-    setLeftImgToolsVisible(true);
-    resetLeftImgTools();
-}
+// void MainWindow::on_zKeyPressed(QString newImagePath){
+//     leftImage = QPixmap(newImagePath);
+//     if(leftImage.isNull())
+//         return;
+//     leftImageSize = QSize(ui->leftScrollArea->width(), ui->leftScrollArea->height());
+//     leftImage = leftImage.scaled(leftImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+//     leftImageLabel->setPixmap(leftImage);
+//     setLeftImgToolsVisible(true);
+//     resetLeftImgTools();
+// }
 
-void MainWindow::on_xKeyPressed(QString newImagePath){
-    rightImage = QPixmap(newImagePath);
-    if(rightImage.isNull())
-        return;
-    rightImageSize = QSize(ui->rightScrollArea->width(), ui->rightScrollArea->height());
-    rightImage = rightImage.scaled(rightImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    rightImageLabel->setPixmap(rightImage);
-    setRightImgToolsVisible(true);
-    resetRightImgTools();
-}
+// void MainWindow::on_xKeyPressed(QString newImagePath){
+//     rightImage = QPixmap(newImagePath);
+//     if(rightImage.isNull())
+//         return;
+//     rightImageSize = QSize(ui->rightScrollArea->width(), ui->rightScrollArea->height());
+//     rightImage = rightImage.scaled(rightImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+//     rightImageLabel->setPixmap(rightImage);
+//     setRightImgToolsVisible(true);
+//     resetRightImgTools();
+// }
 
 // ============================================ [ Image ] ==
 // Set/Reset Image Tools
@@ -247,28 +247,28 @@ void MainWindow::on_rightImgRatioSlider_valueChanged(int value){
 // ============================================= [ Note ] ==
 // Refresh Note Content if Folder Changed
 // =========================================================
-void MainWindow::on_folderChanged(QString newFolderPath, QString newFolderName){
-    saveNote();
+// void MainWindow::on_folderChanged(QString newFolderPath, QString newFolderName){
+//     saveNote();
 
-    currFolderPath = newFolderPath;
-    currFolderName = newFolderName;
+//     currFolderPath = newFolderPath;
+//     currFolderName = newFolderName;
 
-    QString noteFilePath = newFolderPath + QDir::separator() + newFolderName + NOTE_FILE_SUFFIX_NAME;
+//     QString noteFilePath = newFolderPath + QDir::separator() + newFolderName + NOTE_FILE_SUFFIX_NAME;
 
-    QFile noteFile(noteFilePath);
-    if(!noteFile.open(QIODevice::ReadOnly | QIODevice::Text)){
-        cout << "Read note file failed" << endl;
-    }
-    else{
-        cout << "Read note file successfully" << endl;
-        QTextStream inStream(&noteFile);
-        ui->noteTextEdit->clear();
-        while (!inStream.atEnd()) {
-            ui->noteTextEdit->appendPlainText(inStream.readLine());
-        }
-    }
-    noteFile.close();
-}
+//     QFile noteFile(noteFilePath);
+//     if(!noteFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+//         cout << "Read note file failed" << endl;
+//     }
+//     else{
+//         cout << "Read note file successfully" << endl;
+//         QTextStream inStream(&noteFile);
+//         ui->noteTextEdit->clear();
+//         while (!inStream.atEnd()) {
+//             ui->noteTextEdit->appendPlainText(inStream.readLine());
+//         }
+//     }
+//     noteFile.close();
+// }
 
 // ============================================= [ Note ] ==
 // Function for Saving Note
