@@ -28,7 +28,6 @@ ImageWindow::ImageWindow(QWidget *parent) :
     setScaleToolsVisible(false);
 
 
-
     // =====================
     //      TreeView
     // =====================
@@ -38,7 +37,6 @@ ImageWindow::ImageWindow(QWidget *parent) :
     //     Connecting
     // =====================
     connect(ui->treeView, SIGNAL(fileChangedSignal(QString)), this, SLOT(on_fileChanged(QString)));
-
 
 
 }

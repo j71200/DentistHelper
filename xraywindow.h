@@ -26,7 +26,6 @@ private slots:
 private:
     Ui::XRayWindow *ui;
 
-
     // Image
     QLabel *xrayLabel;
     QSize xrayImageSize;
@@ -40,7 +39,6 @@ private:
     void changeTreeView(QString dir);
     QString selectedFilePath;
     
-
 };
 
 #endif // XRAYWINDOW_H
