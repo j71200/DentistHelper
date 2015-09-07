@@ -24,10 +24,10 @@ XRayWindow::XRayWindow(QWidget *parent) :
     xrayLabel->setAlignment(Qt::AlignCenter);
     ui->scrollArea->setWidget(xrayLabel);
 
-
     ui->scaleSlider->setMinimum(10);
     ui->scaleSlider->setMaximum(300);
     ui->scaleSlider->setSingleStep(10);
+    ui->scaleLabel->setAlignment(Qt::AlignCenter);
     resetScaleTools();
     setScaleToolsVisible(false);
 
@@ -94,6 +94,7 @@ void XRayWindow::loadImage(QString imagePath){
     }
     
     xrayImageSize = QSize(ui->scrollArea->width(), ui->scrollArea->height());
+    xrayImageSize *= FIT_IMAGE_SIZE_RATIO;
     xrayImage = xrayImage.scaled(xrayImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     xrayLabel->setPixmap(xrayImage);
 

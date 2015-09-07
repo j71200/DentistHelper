@@ -8,11 +8,7 @@ const QString PREFERENCES_FILE_PATH("/Users/blue/QtWorkspace/firstQt/Output/my_p
 
 // X-ray
 const QString XRAY_TO_XRAY_PATH("x-ray/");
-// const QString XRAY_TO_PANO_PATH("x-ray/PANO/");
-// const QString XRAY_TO_PERIAPICAL_PATH("x-ray/Periapical/");
-// const QString XRAY_TO_BITEWINGS_PATH("x-ray/Bitewings/");
-
-// const QString DEFAULT_XRAY_PATH();
+const qreal FIT_IMAGE_SIZE_RATIO = 0.95;
 
 // Image
 const QStringList READABLE_IMAGE_LIST = QStringList() << "*.jpg" << "*.bmp" << "*.png" << "*.gif";
