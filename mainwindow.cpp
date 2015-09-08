@@ -232,12 +232,6 @@ void MainWindow::saveNote(){
 // =========================================================
 void MainWindow::on_testButton_clicked(){
 
-
-
-//    QWindow xRayWindow;
-//    QWindow imageWindow;
-
-
     // QDesktopServices::openUrl(QUrl("file:///Users/blue/aaa.pdf", QUrl::TolerantMode));
     // QDesktopServices::openUrl(QUrl("file:///Users/blue/Desktop/實數的建構.pdf", QUrl::TolerantMode));
 
