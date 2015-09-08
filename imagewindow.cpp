@@ -78,6 +78,17 @@ void ImageWindow::changeTreeView(QString dir){
     }
 }
 
+// ========================================= [ TreeView ] ==
+// Refresh the TreeView when patient changed
+// =========================================================
+void ImageWindow::on_patientChanged(QString newPatientFolderPath){
+    changeTreeView(newPatientFolderPath + QDir::separator() + PHOTO_TO_PHOTO_PATH);
+
+    resetImage();
+    resetScaleTools();
+    setScaleToolsVisible(false);
+}
+
 // ============================================ [ Image ] ==
 // Load image into the label
 // =========================================================
@@ -122,8 +133,13 @@ void ImageWindow::on_scaleSlider_valueChanged(int value){
 }
 
 // ============================================ [ Image ] ==
-// Image scale tools
+// Reset/Set image block
 // =========================================================
+void ImageWindow::resetImage(){
+    image = QPixmap();
+    imageLabel->clear();
+}
+
 void ImageWindow::resetScaleTools(){
 	ui->scaleSlider->setValue(100);
     ui->scaleLabel->setText("100%");

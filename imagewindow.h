@@ -21,6 +21,7 @@ private slots:
 	void resizeEvent(QResizeEvent *event);
 	void on_fileChanged(QString);
 	void on_scaleSlider_valueChanged(int value);
+    void on_patientChanged(QString newPatientFolderPath);
 
 private:
     Ui::ImageWindow *ui;
@@ -30,6 +31,7 @@ private:
     QSize imageSize;
     QPixmap image;
     void loadImage(QString imagePath);
+    void resetImage();
     void resetScaleTools();
     void setScaleToolsVisible(bool isVisible);
 

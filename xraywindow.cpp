@@ -84,6 +84,18 @@ void XRayWindow::changeTreeView(QString dir){
     }
 }
 
+// ========================================= [ TreeView ] ==
+// Refresh the TreeView when patient changed
+// =========================================================
+void XRayWindow::on_patientChanged(QString newPatientFolderPath){
+    changeTreeView(newPatientFolderPath + QDir::separator() + XRAY_TO_XRAY_PATH);
+
+    resetImage();
+    resetScaleTools();
+    setScaleToolsVisible(false);
+}
+
+
 // ============================================ [ Image ] ==
 // Load image into the label
 // =========================================================
@@ -128,8 +140,13 @@ void XRayWindow::on_scaleSlider_valueChanged(int value){
 }
 
 // ============================================ [ Image ] ==
-// Image scale tools
+// Reset/Set image block
 // =========================================================
+void XRayWindow::resetImage(){
+    xrayImage = QPixmap();
+    xrayLabel->clear();
+}
+
 void XRayWindow::resetScaleTools(){
 	ui->scaleSlider->setValue(100);
     ui->scaleLabel->setText("100%");

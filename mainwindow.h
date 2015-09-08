@@ -40,6 +40,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
+    void initWindows();
     void initOpenFolderAction();
     void initSettingAction();
 

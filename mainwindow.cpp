@@ -1,6 +1,6 @@
 /*
 There are several classes in my classification, like
-[Window]
+[MainWindow]
 [Action]
 --[TreeView]
 [X-ray]
@@ -24,6 +24,7 @@ There are several classes in my classification, like
 
 QString Preferences::homeFolderPath = DEFAULT_FOLDER_PATH;
 QString Preferences::patientFolderPath = "";
+QString Preferences::patientID = "";
 QString Preferences::inStreamBuffer = "";
 
 using namespace std;
@@ -34,10 +35,50 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-
     // ==================
     // Initialize windows
     // ==================
+    initWindows();
+
+    // ==================
+    //   Initialize UI
+    // ==================
+    ui->patientIDLabel->setAlignment(Qt::AlignCenter);
+    ui->patientIDLabel->setText("");  // TODO Preference
+
+    // ==================
+    // Initialize actions
+    // ==================
+    initOpenFolderAction();
+    initSettingAction();
+
+
+    // =================================
+    // Initialize patient label and note
+    // =================================
+    ui->noteTextEdit->setPlaceholderText(NOTE_HINT);
+    ui->patientIDLabel->setText(Preferences::getPatientID());
+
+
+    // ===============
+    //   Connecting
+    // ===============
+    connect(this, SIGNAL(patientChangedSignal(QString)), xrayWindowPtr, SLOT(on_patientChanged(QString)));
+    connect(this, SIGNAL(patientChangedSignal(QString)), imageWindowPtr, SLOT(on_patientChanged(QString)));
+
+}
+
+MainWindow::~MainWindow(){
+    delete ui;
+    delete xrayWindowPtr;
+    delete imageWindowPtr;
+}
+
+
+// =========================================== [ MainWindow ] ==
+// Initilize windows
+// =========================================================
+void MainWindow::initWindows(){
     QRect rec = QApplication::desktop()->screenGeometry();
 
     const int SCREEN_WIDTH = rec.width();
@@ -57,40 +98,10 @@ MainWindow::MainWindow(QWidget *parent) :
     imageWindowPtr->resize(DEFAULT_IMAGE_WINDOW_SIZE);
     // imageWindowPtr->setFixedSize(DEFAULT_IMAGE_WINDOW_SIZE);
     imageWindowPtr->move(SCREEN_WIDTH/2 + 1, DEFAULT_XRAY_WINDOW_SIZE.height() + 1);
-
-
-    // ==================
-    //   Initialize UI
-    // ==================
-    ui->patientIDLabel->setAlignment(Qt::AlignCenter);
-    ui->patientIDLabel->setText("");  // TODO Preference
-
-
-    // Initialize actions
-    initOpenFolderAction();
-    initSettingAction();
-
-
-    // ===============
-    // Initialize note
-    // ===============
-    ui->noteTextEdit->setPlaceholderText(NOTE_HINT);
-
-
-    // ===============
-    //   Connecting
-    // ===============
-    // connect(ui->treeView, SIGNAL(fileChangedSignal(QString)), this, SLOT(on_fileChanged(QString)));
-
 }
 
-MainWindow::~MainWindow(){
-    delete ui;
-    delete xrayWindowPtr;
-}
-
-// =========================================== [ Window ] ==
-// Window Events
+// =========================================== [ MainWindow ] ==
+// Window events
 // =========================================================
 void MainWindow::closeEvent(QCloseEvent *event){
     saveNote();

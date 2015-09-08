@@ -43,6 +43,8 @@ public:
                 case 1:
                     patientFolderPath = line;
                     break;
+                case 2:
+                    patientID = line;
                 default:
                     inStreamBuffer = line;
                     break;
@@ -61,7 +63,8 @@ public:
         }
         QTextStream outStream(&preferencesFile);
         outStream << homeFolderPath << endl
-                  << patientFolderPath << endl;
+                  << patientFolderPath << endl
+                  << patientID << endl;
         preferencesFile.close();
     }
 
@@ -85,10 +88,20 @@ public:
     static QString getPatientFolderPath(){
         return patientFolderPath;
     }
-    
+
+    // ======================================= [ MainWindow ] ==
+    // Last Patient Folder Path
+    // =========================================================
+    static void setPatientID(QString newPatientID){
+        patientID = newPatientID;
+    }
+    static QString getPatientID(){
+        return patientID;
+    }
+
 
 private:
-    static QString homeFolderPath, patientFolderPath;
+    static QString homeFolderPath, patientFolderPath, patientID;
     static QString inStreamBuffer;
 };
 
