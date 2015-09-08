@@ -14,6 +14,7 @@ SettingDialog::SettingDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
+
     ui->currentFolderEdit->setText(Preferences::getHomeFolderPath());
 }
 
@@ -31,22 +32,6 @@ void SettingDialog::on_changeFolderButton_clicked(){
 	}
 }
 
-void SettingDialog::closeEvent(QCloseEvent *event){
-    // QDir tempQDir(ui->currentFolderEdit->text());
-    // if(tempQDir.isReadable()){
-    //     cout << "Readable!!!" << endl;
-
-    //     event->accept();
-    // }
-    // else{
-    //     MessageDialog mMessageDialog;
-    //     mMessageDialog.exec();
-
-    //     event->ignore();
-
-    // }
-}
-
 void SettingDialog::on_saveButton_clicked(){
     QDir tempQDir(ui->currentFolderEdit->text());
     if(tempQDir.isReadable()){
@@ -57,8 +42,9 @@ void SettingDialog::on_saveButton_clicked(){
     }
     else{
         MessageDialog mMessageDialog;
-        QString message = QString("Wrong folder path!");
-        mMessageDialog.setMessage(message);
+        mMessageDialog.setWindowTitle(MESSAGE_DIALOG_TITLE);
+        mMessageDialog.setMessage("Wrong folder path!");
+        mMessageDialog.setFixedSize(mMessageDialog.size());
         mMessageDialog.exec();
     }
 }

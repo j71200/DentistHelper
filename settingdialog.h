@@ -20,8 +20,6 @@ public:
 private slots:
     void on_changeFolderButton_clicked();
 
-    void closeEvent(QCloseEvent *event);
-
     void on_saveButton_clicked();
 
     void on_discardButton_clicked();

@@ -13,6 +13,8 @@ const QStringList READABLE_IMAGE_LIST = QStringList() << "*.jpg" << "*.bmp" << "
 const QString MAIN_WINDOW_TITLE("Case Viewer");
 const QString XRAY_WINDOW_TITLE("X-ray Photo");
 const QString IMAGE_WINDOW_TITLE("Original Photo");
+const QString SETTING_DIALOG_TITLE("Setting");
+const QString MESSAGE_DIALOG_TITLE("Message!");
 
 // TreeView
 const int MAX_TREEVIEW_WIDTH = 300;

@@ -169,6 +169,7 @@ void MainWindow::initSettingAction(){
 
 void MainWindow::on_setting_active(){
     SettingDialog mSettingDialog;
+    mSettingDialog.setWindowTitle(SETTING_DIALOG_TITLE);
     mSettingDialog.setFixedSize(mSettingDialog.size());  // Fix the size of setting dialog
     mSettingDialog.exec();
 }
