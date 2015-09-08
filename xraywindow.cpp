@@ -31,15 +31,15 @@ XRayWindow::XRayWindow(QWidget *parent) :
     resetScaleTools();
     setScaleToolsVisible(false);
 
-
-
-    // =====================
-    //      TreeView
-    // =====================
+    // ===================
+    // Initialize TreeView
+    // ===================
+    ui->treeView->setMaximumWidth(MAX_TREEVIEW_WIDTH);
+    ui->scaleSlider->setMaximumWidth(MAX_TREEVIEW_WIDTH);
     changeTreeView(Preferences::getPatientFolderPath() + QDir::separator() + XRAY_TO_XRAY_PATH);
 
     // =====================
-    //     Connecting
+    // Connecting
     // =====================
     connect(ui->treeView, SIGNAL(fileChangedSignal(QString)), this, SLOT(on_fileChanged(QString)));
 

@@ -14,6 +14,9 @@ const QString MAIN_WINDOW_TITLE("Case Viewer");
 const QString XRAY_WINDOW_TITLE("X-ray Photo");
 const QString IMAGE_WINDOW_TITLE("Original Photo");
 
+// TreeView
+const int MAX_TREEVIEW_WIDTH = 300;
+
 // X-ray
 const QString XRAY_TO_XRAY_PATH("x-ray/");
 
