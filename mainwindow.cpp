@@ -45,6 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // ==================
     initOpenFolderAction();
     initSettingAction();
+    initOpenXRayWindowAction();
 
 
     // ========================
@@ -71,12 +72,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow(){
     delete ui;
-    delete xrayWindowPtr;
-    delete imageWindowPtr;
+    delete openFolderAct, settingAct, xrayAct;
+    delete xrayWindowPtr, imageWindowPtr;
 }
 
 
-// =========================================== [ MainWindow ] ==
+// ======================================= [ MainWindow ] ==
 // Initilize windows
 // =========================================================
 void MainWindow::initWindows(){
@@ -101,7 +102,7 @@ void MainWindow::initWindows(){
     imageWindowPtr->move(SCREEN_WIDTH/2 + 1, DEFAULT_XRAY_WINDOW_SIZE.height() + 1);
 }
 
-// =========================================== [ MainWindow ] ==
+// ======================================= [ MainWindow ] ==
 // Window events
 // =========================================================
 void MainWindow::closeEvent(QCloseEvent *event){
@@ -183,6 +184,42 @@ void MainWindow::on_setting_active(){
     mSettingDialog.exec();
 }
 
+
+// =========================================== [ Action ] ==
+// Initialize open x-ray window action
+// =========================================================
+void MainWindow::initOpenXRayWindowAction(){
+    QString iconPath(APP_FOLDER_PATH + QString("icons/xray_icon.png"));
+    xrayAct = new QAction(QIcon( iconPath ), tr("X-ray window"), this);
+    // xrayAct->setShortcuts(QKeySequence::Preferences);
+    xrayAct->setStatusTip(tr("X-ray window"));
+    connect(xrayAct, SIGNAL(triggered()), this, SLOT(on_xray_active()));
+
+    ui->menuFile->addAction(xrayAct);
+    ui->mainToolBar->addAction(xrayAct);
+}
+
+void MainWindow::on_xray_active(){
+    if(xrayWindowPtr->isHidden()){
+        cout << "hidden" << endl;
+    }
+    else
+        cout << "visible" << endl;
+
+    // QRect rec = QApplication::desktop()->screenGeometry();
+
+    // const int SCREEN_WIDTH = rec.width();
+    // const int SCREEN_HEIGHT = rec.height();
+
+    // const QSize DEFAULT_XRAY_WINDOW_SIZE = QSize( SCREEN_WIDTH/2 , SCREEN_HEIGHT/2 );
+    // const QSize DEFAULT_IMAGE_WINDOW_SIZE = QSize( SCREEN_WIDTH/2 , SCREEN_HEIGHT/2 );
+
+    // xrayWindowPtr = new XRayWindow();
+    // xrayWindowPtr->show();
+    // xrayWindowPtr->resize(DEFAULT_XRAY_WINDOW_SIZE);
+    // // xrayWindowPtr->setFixedSize(DEFAULT_XRAY_WINDOW_SIZE);
+    // xrayWindowPtr->move(SCREEN_WIDTH/2 + 1, 0);
+}
 
 // ============================================= [ Note ] ==
 // Refresh Note Content if Folder Changed
