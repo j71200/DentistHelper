@@ -19,10 +19,10 @@ public:
     ~XRayWindow();
 
 private slots:
-	// void resizeEvent(QResizeEvent *event);
 	void on_fileChanged(QString);
 	void on_scaleSlider_valueChanged(int value);
     void on_patientChanged(QString newPatientFolderPath);
+    void on_fitWindowSizeButton_clicked();
 
 private:
     Ui::XRayWindow *ui;
@@ -34,7 +34,6 @@ private:
     void loadImage(QString imagePath);
     void resetImage();
     void setScaleTools(int value);
-    int scaleRatio;
 
     // TreeView
     QFileSystemModel *model;

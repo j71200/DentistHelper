@@ -42,8 +42,12 @@ XRayWindow::XRayWindow(QWidget *parent) :
     // =====================
     connect(ui->treeView, SIGNAL(fileChangedSignal(QString)), this, SLOT(on_fileChanged(QString)));
 
+    // QPixmap lockIcon(APP_FOLDER_PATH + LOCK_ICON_SUFFIX);
+    // lockIcon = lockIcon.scaled(DEFAULT_ICON_SIZE, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    // ui->lockLabel->setPixmap(lockIcon);
 
-
+    ui->fitWindowSizeButton->setText(FIT_WINDOW_TEXT);
+    
 }
 
 XRayWindow::~XRayWindow()
@@ -111,7 +115,8 @@ void XRayWindow::loadImage(QString imagePath){
     newScaledPixmap = xrayImage.scaled(scrollAreaSize, Qt::KeepAspectRatio, Qt::FastTransformation);
     xrayLabel->setPixmap(newScaledPixmap);
 
-    scaleRatio = 100 * newScaledPixmap.width() / xrayImageSize.width();
+    int scaleRatio = 100 * newScaledPixmap.width() / xrayImageSize.width();
+    setScaleTools(scaleRatio);
 }
 
 // ============================================ [ Image ] ==
@@ -120,7 +125,6 @@ void XRayWindow::loadImage(QString imagePath){
 void XRayWindow::on_fileChanged(QString newFilePath){
 	selectedFilePath = newFilePath;
 	loadImage(newFilePath);
-    setScaleTools(scaleRatio);
 }
 
 // ============================================ [ Image ] ==
@@ -167,5 +171,9 @@ void XRayWindow::setScaleTools(int value){
     }
 }
 
-
-
+// ============================================ [ Image ] ==
+// Fit windows size tool
+// =========================================================
+void XRayWindow::on_fitWindowSizeButton_clicked(){
+    loadImage(selectedFilePath);
+}
