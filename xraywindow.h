@@ -35,6 +35,7 @@ private:
     void resetImage();
     void resetScaleTools();
     void setScaleToolsVisible(bool isVisible);
+    void setImageSize(QSize newImageSize);
 
     // TreeView
     QFileSystemModel *model;

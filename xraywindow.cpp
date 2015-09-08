@@ -59,7 +59,7 @@ XRayWindow::~XRayWindow()
 // Window Events
 // =========================================================
 void XRayWindow::resizeEvent(QResizeEvent *event){
-    loadImage(selectedFilePath);
+    setImageSize(event->size());
     QWidget::resizeEvent(event);
 }
 
@@ -109,9 +109,6 @@ void XRayWindow::loadImage(QString imagePath){
     xrayImageSize *= FIT_IMAGE_SIZE_RATIO;
     xrayImage = xrayImage.scaled(xrayImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     xrayLabel->setPixmap(xrayImage);
-
-    resetScaleTools();
-	setScaleToolsVisible(true);
 }
 
 // ============================================ [ Image ] ==
@@ -120,7 +117,8 @@ void XRayWindow::loadImage(QString imagePath){
 void XRayWindow::on_fileChanged(QString newFilePath){
 	selectedFilePath = newFilePath;
 	loadImage(newFilePath);
-	resetScaleTools();
+    resetScaleTools();
+    setScaleToolsVisible(true);
 }
 
 // ============================================ [ Image ] ==
@@ -138,6 +136,23 @@ void XRayWindow::on_scaleSlider_valueChanged(int value){
     newScaledPixmap = xrayImage.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
     xrayLabel->setPixmap(newScaledPixmap);
 }
+
+// ============================================ [ Image ] ==
+// set image size
+// =========================================================
+void XRayWindow::setImageSize(QSize newImageSize){
+    if(xrayImage.isNull())
+        return;
+
+    // QString newRatioText = QString::number(value) + "%";
+    // ui->scaleLabel->setText(newRatioText);
+
+    // QSize newScaledSize = xrayImageSize * (value / 100.0);
+    QPixmap newScaledPixmap;
+    newScaledPixmap = xrayImage.scaled(newImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    xrayLabel->setPixmap(newScaledPixmap);
+}
+
 
 // ============================================ [ Image ] ==
 // Reset/Set image block
