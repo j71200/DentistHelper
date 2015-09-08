@@ -184,24 +184,12 @@ void MainWindow::initOpenXRayWindowAction(){
 
 void MainWindow::on_xray_active(){
     if(xrayWindowPtr->isHidden()){
-        cout << "hidden" << endl;
+        xrayWindowPtr->show();
     }
-    else
-        cout << "visible" << endl;
-
-    // QRect rec = QApplication::desktop()->screenGeometry();
-
-    // const int SCREEN_WIDTH = rec.width();
-    // const int SCREEN_HEIGHT = rec.height();
-
-    // const QSize DEFAULT_XRAY_WINDOW_SIZE = QSize( SCREEN_WIDTH/2 , SCREEN_HEIGHT/2 );
-    // const QSize DEFAULT_IMAGE_WINDOW_SIZE = QSize( SCREEN_WIDTH/2 , SCREEN_HEIGHT/2 );
-
-    // xrayWindowPtr = new XRayWindow();
-    // xrayWindowPtr->show();
-    // xrayWindowPtr->resize(DEFAULT_XRAY_WINDOW_SIZE);
-    // // xrayWindowPtr->setFixedSize(DEFAULT_XRAY_WINDOW_SIZE);
-    // xrayWindowPtr->move(SCREEN_WIDTH/2 + 1, 0);
+    else{
+        xrayWindowPtr->raise();
+        xrayWindowPtr->activateWindow();
+    }
 }
 
 // ============================================= [ Note ] ==
