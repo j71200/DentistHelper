@@ -46,6 +46,7 @@ MainWindow::MainWindow(QWidget *parent) :
     initOpenFolderAction();
     initSettingAction();
     initOpenXRayWindowAction();
+    initOpenImageWindowAction();
 
 
     // ========================
@@ -174,7 +175,6 @@ void MainWindow::on_setting_active(){
 void MainWindow::initOpenXRayWindowAction(){
     QString iconPath(APP_FOLDER_PATH + QString("icons/xray_icon.png"));
     xrayAct = new QAction(QIcon( iconPath ), tr("X-ray window"), this);
-    // xrayAct->setShortcuts(QKeySequence::Preferences);
     xrayAct->setStatusTip(tr("X-ray window"));
     connect(xrayAct, SIGNAL(triggered()), this, SLOT(on_xray_active()));
 
@@ -191,6 +191,30 @@ void MainWindow::on_xray_active(){
         xrayWindowPtr->activateWindow();
     }
 }
+
+// =========================================== [ Action ] ==
+// Initialize open image window action
+// =========================================================
+void MainWindow::initOpenImageWindowAction(){
+    QString iconPath(APP_FOLDER_PATH + QString("icons/image_icon.png"));
+    imageAct = new QAction(QIcon( iconPath ), tr("Image window"), this);
+    imageAct->setStatusTip(tr("Image window"));
+    connect(imageAct, SIGNAL(triggered()), this, SLOT(on_image_active()));
+
+    ui->menuFile->addAction(imageAct);
+    ui->mainToolBar->addAction(imageAct);
+}
+
+void MainWindow::on_image_active(){
+    if(imageWindowPtr->isHidden()){
+        imageWindowPtr->show();
+    }
+    else{
+        imageWindowPtr->raise();
+        imageWindowPtr->activateWindow();
+    }
+}
+
 
 // ============================================= [ Note ] ==
 // Save note

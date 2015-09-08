@@ -31,6 +31,7 @@ private slots:
 	void on_openFolder_active();
 	void on_setting_active();
     void on_xray_active();
+    void on_image_active();
 
 	// ===========================
 	//          Listeners
@@ -45,13 +46,14 @@ private:
     void initOpenFolderAction();
     void initSettingAction();
     void initOpenXRayWindowAction();
+    void initOpenImageWindowAction();
 
     // Note
     void saveNote();
     void refreshNote();
 
     // Action
-    QAction *openFolderAct, *settingAct, *xrayAct;
+    QAction *openFolderAct, *settingAct, *xrayAct, *imageAct;
 
     // Folder/File system
     QFileSystemModel *model;
