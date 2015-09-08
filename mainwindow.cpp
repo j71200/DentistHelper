@@ -41,12 +41,6 @@ MainWindow::MainWindow(QWidget *parent) :
     initWindows();
 
     // ==================
-    //   Initialize UI
-    // ==================
-    ui->patientIDLabel->setAlignment(Qt::AlignCenter);
-    ui->patientIDLabel->setText("");  // TODO Preference
-
-    // ==================
     // Initialize actions
     // ==================
     initOpenFolderAction();
@@ -57,6 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // Initialize patient label and note
     // =================================
     ui->noteTextEdit->setPlaceholderText(NOTE_HINT);
+    ui->patientIDLabel->setAlignment(Qt::AlignCenter);
     ui->patientIDLabel->setText(Preferences::getPatientID());
 
 
@@ -132,7 +127,7 @@ void MainWindow::on_openFolder_active(){
     if(!dir.isEmpty()){
         QDir mQDir(dir);
         ui->patientIDLabel->setText(mQDir.dirName());
-        
+
         Preferences::setPatientID(mQDir.dirName());
         Preferences::setPatientFolderPath(dir);
         Preferences::save();
