@@ -23,6 +23,7 @@ private slots:
 	void on_scaleSlider_valueChanged(int value);
     void on_patientChanged(QString newPatientFolderPath);
     void on_fitWindowSizeButton_clicked();
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::XRayWindow *ui;
