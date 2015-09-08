@@ -2,8 +2,9 @@
 #define IMAGEWINDOW_H
 
 #include <QWidget>
-#include <QLabel>
 #include <QFileSystemModel>
+#include <QLabel>
+#include <QPixmap>
 
 namespace Ui {
 class ImageWindow;
@@ -18,10 +19,10 @@ public:
     ~ImageWindow();
 
 private slots:
-	void resizeEvent(QResizeEvent *event);
-	void on_fileChanged(QString);
-	void on_scaleSlider_valueChanged(int value);
+    void on_fileChanged(QString);
+    void on_scaleSlider_valueChanged(int value);
     void on_patientChanged(QString newPatientFolderPath);
+    void on_fitWindowSizeButton_clicked();
 
 private:
     Ui::ImageWindow *ui;
@@ -32,8 +33,7 @@ private:
     QPixmap image;
     void loadImage(QString imagePath);
     void resetImage();
-    void resetScaleTools();
-    void setScaleToolsVisible(bool isVisible);
+    void setScaleTools(int value);
 
     // TreeView
     QFileSystemModel *model;

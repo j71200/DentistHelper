@@ -45,8 +45,7 @@ XRayWindow::XRayWindow(QWidget *parent) :
     // Connecting
     // =====================
     connect(ui->treeView, SIGNAL(fileChangedSignal(QString)), this, SLOT(on_fileChanged(QString)));
-    
-    
+       
 }
 
 XRayWindow::~XRayWindow()

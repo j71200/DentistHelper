@@ -1,5 +1,9 @@
 #include "imagewindow.h"
 #include "ui_imagewindow.h"
+#include <QLabel>
+#include "preferences.h"
+#include <QDir>
+#include "default_setting.h"
 
 ImageWindow::ImageWindow(QWidget *parent) :
     QWidget(parent),
@@ -20,13 +24,15 @@ ImageWindow::ImageWindow(QWidget *parent) :
     imageLabel->setAlignment(Qt::AlignCenter);
     ui->scrollArea->setWidget(imageLabel);
 
+    // ======================
+    // Initialize image tools
+    // ======================
     ui->scaleSlider->setMinimum(MIN_SCALE_RATIO);
     ui->scaleSlider->setMaximum(MAX_SCALE_RATIO);
     ui->scaleSlider->setSingleStep(SLIDER_SINGLE_STEP);
     ui->scaleLabel->setAlignment(Qt::AlignCenter);
-    resetScaleTools();
-    setScaleToolsVisible(false);
-
+    ui->fitWindowSizeButton->setText(FIT_WINDOW_TEXT);
+    setScaleTools(0);
 
     // ===================
     // Initialize TreeView
@@ -39,7 +45,6 @@ ImageWindow::ImageWindow(QWidget *parent) :
     // Connecting
     // =====================
     connect(ui->treeView, SIGNAL(fileChangedSignal(QString)), this, SLOT(on_fileChanged(QString)));
-
 
 }
 
@@ -54,10 +59,10 @@ ImageWindow::~ImageWindow()
 // =========================================== [ Window ] ==
 // Window Events
 // =========================================================
-void ImageWindow::resizeEvent(QResizeEvent *event){
-    loadImage(selectedFilePath);
-    QWidget::resizeEvent(event);
-}
+// void ImageWindow::resizeEvent(QResizeEvent *event){
+//     loadImage(selectedFilePath);
+//     QWidget::resizeEvent(event);
+// }
 
 // ========================================= [ TreeView ] ==
 // Change the Directory of TreeView
@@ -87,9 +92,9 @@ void ImageWindow::on_patientChanged(QString newPatientFolderPath){
     changeTreeView(newPatientFolderPath + QDir::separator() + PHOTO_TO_PHOTO_PATH);
 
     resetImage();
-    resetScaleTools();
-    setScaleToolsVisible(false);
+    setScaleTools(0);
 }
+
 
 // ============================================ [ Image ] ==
 // Load image into the label
@@ -99,14 +104,20 @@ void ImageWindow::loadImage(QString imagePath){
     if(image.isNull()){
         return;
     }
-    
-    imageSize = QSize(ui->scrollArea->width(), ui->scrollArea->height());
-    imageSize *= FIT_IMAGE_SIZE_RATIO;
-    image = image.scaled(imageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    imageLabel->setPixmap(image);
 
-    resetScaleTools();
-	setScaleToolsVisible(true);
+    imageSize = image.size();
+    QSize scrollAreaSize = ui->scrollArea->size();
+    scrollAreaSize *= FIT_IMAGE_SIZE_RATIO;
+
+    QPixmap newScaledPixmap;
+    newScaledPixmap = image.scaled(scrollAreaSize, Qt::KeepAspectRatio, Qt::FastTransformation);
+    
+    int scaleRatio = 100 * newScaledPixmap.width() / imageSize.width();
+    QSize newScaledSize = imageSize * (scaleRatio / 100.0);
+    newScaledPixmap = image.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::FastTransformation);
+    imageLabel->setPixmap(newScaledPixmap);
+
+    setScaleTools(scaleRatio);
 }
 
 // ============================================ [ Image ] ==
@@ -115,7 +126,6 @@ void ImageWindow::loadImage(QString imagePath){
 void ImageWindow::on_fileChanged(QString newFilePath){
 	selectedFilePath = newFilePath;
 	loadImage(newFilePath);
-	resetScaleTools();
 }
 
 // ============================================ [ Image ] ==
@@ -142,12 +152,32 @@ void ImageWindow::resetImage(){
     imageLabel->clear();
 }
 
-void ImageWindow::resetScaleTools(){
-	ui->scaleSlider->setValue(100);
-    ui->scaleLabel->setText("100%");
+// ============================================ [ Image ] ==
+// Set image scale tools
+// Let the parameter "value" be 0, the tools will diappear
+// =========================================================
+void ImageWindow::setScaleTools(int value){
+    if(value > 0){
+        QString newRatioText = QString::number(value) + "%";
+        ui->scaleSlider->setValue(value);
+        ui->scaleLabel->setText(newRatioText);
+
+        ui->scaleSlider->setVisible(true);
+        ui->scaleLabel->setVisible(true);
+        ui->fitWindowSizeButton->setVisible(true);
+    }
+    else{
+        ui->scaleSlider->setVisible(false);
+        ui->scaleLabel->setVisible(false);
+        ui->fitWindowSizeButton->setVisible(false);
+    }
 }
 
-void ImageWindow::setScaleToolsVisible(bool isVisible){
-    ui->scaleSlider->setVisible(isVisible);
-    ui->scaleLabel->setVisible(isVisible);
+// ============================================ [ Image ] ==
+// Fit windows size tool
+// =========================================================
+void ImageWindow::on_fitWindowSizeButton_clicked(){
+    loadImage(selectedFilePath);
 }
+
+
