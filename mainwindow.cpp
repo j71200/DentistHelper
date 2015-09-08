@@ -147,23 +147,6 @@ void MainWindow::on_openFolder_active(){
     }
 }
 
-void MainWindow::refreshNote(){
-    ui->noteTextEdit->clear();
-
-    QFile noteFile(Preferences::getPatientFolderPath() + QDir::separator() + Preferences::getPatientID() + NOTE_FILE_SUFFIX_NAME);
-    if(!noteFile.open(QIODevice::ReadOnly | QIODevice::Text)){
-        cout << "Read note file failed" << endl;
-    }
-    else{
-        cout << "Read note file successfully" << endl;
-        QTextStream inStream(&noteFile);
-        while (!inStream.atEnd()) {
-            ui->noteTextEdit->appendPlainText(inStream.readLine());
-        }
-    }
-    noteFile.close();
-}
-
 // =========================================== [ Action ] ==
 // Initialize Setting Action
 // =========================================================
@@ -222,33 +205,7 @@ void MainWindow::on_xray_active(){
 }
 
 // ============================================= [ Note ] ==
-// Refresh Note Content if Folder Changed
-// =========================================================
-// void MainWindow::on_folderChanged(QString newFolderPath, QString newFolderName){
-//     saveNote();
-
-//     currFolderPath = newFolderPath;
-//     currFolderName = newFolderName;
-
-//     QString noteFilePath = newFolderPath + QDir::separator() + newFolderName + NOTE_FILE_SUFFIX_NAME;
-
-//     QFile noteFile(noteFilePath);
-//     if(!noteFile.open(QIODevice::ReadOnly | QIODevice::Text)){
-//         cout << "Read note file failed" << endl;
-//     }
-//     else{
-//         cout << "Read note file successfully" << endl;
-//         QTextStream inStream(&noteFile);
-//         ui->noteTextEdit->clear();
-//         while (!inStream.atEnd()) {
-//             ui->noteTextEdit->appendPlainText(inStream.readLine());
-//         }
-//     }
-//     noteFile.close();
-// }
-
-// ============================================= [ Note ] ==
-// Function for Saving Note
+// Save note
 // =========================================================
 void MainWindow::saveNote(){
     QFile noteFile(Preferences::getPatientFolderPath() + QDir::separator() + Preferences::getPatientID() + NOTE_FILE_SUFFIX_NAME);
@@ -261,6 +218,26 @@ void MainWindow::saveNote(){
     QString noteText = ui->noteTextEdit->toPlainText();
     QTextStream outStream(&noteFile);
     outStream << noteText;
+    noteFile.close();
+}
+
+// ============================================= [ Note ] ==
+// Refresh note
+// =========================================================
+void MainWindow::refreshNote(){
+    ui->noteTextEdit->clear();
+
+    QFile noteFile(Preferences::getPatientFolderPath() + QDir::separator() + Preferences::getPatientID() + NOTE_FILE_SUFFIX_NAME);
+    if(!noteFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+        cout << "Read note file failed" << endl;
+    }
+    else{
+        cout << "Read note file successfully" << endl;
+        QTextStream inStream(&noteFile);
+        while (!inStream.atEnd()) {
+            ui->noteTextEdit->appendPlainText(inStream.readLine());
+        }
+    }
     noteFile.close();
 }
 
