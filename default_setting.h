@@ -9,6 +9,10 @@ const QString PREFERENCES_FILE_PATH("/Users/blue/QtWorkspace/firstQt/Output/my_p
 const qreal FIT_IMAGE_SIZE_RATIO = 0.95;
 const QStringList READABLE_IMAGE_LIST = QStringList() << "*.jpg" << "*.bmp" << "*.png" << "*.gif";
 
+// Window title
+const QString MAIN_WINDOW_TITLE("Case Viewer");
+const QString XRAY_WINDOW_TITLE("X-ray Photo");
+const QString IMAGE_WINDOW_TITLE("Original Photo");
 
 // X-ray
 const QString XRAY_TO_XRAY_PATH("x-ray/");

@@ -101,6 +101,12 @@ void MainWindow::initWindows(){
     imageWindowPtr->resize(DEFAULT_IMAGE_WINDOW_SIZE);
     // imageWindowPtr->setFixedSize(DEFAULT_IMAGE_WINDOW_SIZE);
     imageWindowPtr->move(SCREEN_WIDTH/2 + 1, DEFAULT_XRAY_WINDOW_SIZE.height() + 1);
+
+
+    // Setting titles
+    this->setWindowTitle(MAIN_WINDOW_TITLE);
+    xrayWindowPtr->setWindowTitle(XRAY_WINDOW_TITLE);
+    imageWindowPtr->setWindowTitle(IMAGE_WINDOW_TITLE);
 }
 
 // ======================================= [ MainWindow ] ==
