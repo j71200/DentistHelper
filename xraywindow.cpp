@@ -24,11 +24,18 @@ XRayWindow::XRayWindow(QWidget *parent) :
     xrayLabel->setAlignment(Qt::AlignCenter);
     ui->scrollArea->setWidget(xrayLabel);
 
+    // ======================
+    // Initialize image tools
+    // ======================
     ui->scaleSlider->setMinimum(MIN_SCALE_RATIO);
     ui->scaleSlider->setMaximum(MAX_SCALE_RATIO);
     ui->scaleSlider->setSingleStep(SLIDER_SINGLE_STEP);
     ui->scaleLabel->setAlignment(Qt::AlignCenter);
+    ui->fitWindowSizeButton->setText(FIT_WINDOW_TEXT);
     setScaleTools(0);
+
+    
+
 
     // ===================
     // Initialize TreeView
@@ -41,12 +48,7 @@ XRayWindow::XRayWindow(QWidget *parent) :
     // Connecting
     // =====================
     connect(ui->treeView, SIGNAL(fileChangedSignal(QString)), this, SLOT(on_fileChanged(QString)));
-
-    // QPixmap lockIcon(APP_FOLDER_PATH + LOCK_ICON_SUFFIX);
-    // lockIcon = lockIcon.scaled(DEFAULT_ICON_SIZE, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-    // ui->lockLabel->setPixmap(lockIcon);
-
-    ui->fitWindowSizeButton->setText(FIT_WINDOW_TEXT);
+    
     
 }
 
@@ -164,10 +166,12 @@ void XRayWindow::setScaleTools(int value){
 
         ui->scaleSlider->setVisible(true);
         ui->scaleLabel->setVisible(true);
+        ui->fitWindowSizeButton->setVisible(true);
     }
     else{
         ui->scaleSlider->setVisible(false);
         ui->scaleLabel->setVisible(false);
+        ui->fitWindowSizeButton->setVisible(false);
     }
 }
 
