@@ -112,9 +112,12 @@ void XRayWindow::loadImage(QString imagePath){
 
     QPixmap newScaledPixmap;
     newScaledPixmap = xrayImage.scaled(scrollAreaSize, Qt::KeepAspectRatio, Qt::FastTransformation);
+    
+    int scaleRatio = 100 * newScaledPixmap.width() / xrayImageSize.width();
+    QSize newScaledSize = xrayImageSize * (scaleRatio / 100.0);
+    newScaledPixmap = xrayImage.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::FastTransformation);
     xrayLabel->setPixmap(newScaledPixmap);
 
-    int scaleRatio = 100 * newScaledPixmap.width() / xrayImageSize.width();
     setScaleTools(scaleRatio);
 }
 
