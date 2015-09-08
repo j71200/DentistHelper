@@ -6,6 +6,8 @@
 #include "preferences.h"
 #include <QFileSystemModel>
 #include <QLabel>
+#include "xraywindow.h"
+#include "imagewindow.h"
 
 namespace Ui {
 class MainWindow;
@@ -18,6 +20,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+signals:
+    void patientChangedSignal(QString);
 
 private slots:
 	// =====================
@@ -48,6 +53,9 @@ private:
     // Folder/File system
     QFileSystemModel *model;
     QString currFolderPath, currFolderName;
+
+    XRayWindow *xrayWindowPtr;
+    ImageWindow *imageWindowPtr;
 
 };
 

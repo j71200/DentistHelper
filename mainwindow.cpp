@@ -18,6 +18,8 @@ There are several classes in my classification, like
 #include <QMessageBox>
 #include "default_setting.h"
 #include <QDesktopServices>
+#include <QRect>
+#include <QDesktopWidget>
 
 
 QString Preferences::homeFolderPath = DEFAULT_FOLDER_PATH;
@@ -33,23 +35,58 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
 
-    // Initialize UI
+    // ==================
+    // Initialize windows
+    // ==================
+    QRect rec = QApplication::desktop()->screenGeometry();
+
+    const int SCREEN_WIDTH = rec.width();
+    const int SCREEN_HEIGHT = rec.height();
+
+    const QSize DEFAULT_XRAY_WINDOW_SIZE = QSize( SCREEN_WIDTH/2 , SCREEN_HEIGHT/2 );
+    const QSize DEFAULT_IMAGE_WINDOW_SIZE = QSize( SCREEN_WIDTH/2 , SCREEN_HEIGHT/2 );
+
+    xrayWindowPtr = new XRayWindow();
+    xrayWindowPtr->show();
+    xrayWindowPtr->resize(DEFAULT_XRAY_WINDOW_SIZE);
+    // xrayWindowPtr->setFixedSize(DEFAULT_XRAY_WINDOW_SIZE);
+    xrayWindowPtr->move(SCREEN_WIDTH/2 + 1, 0);
+
+    imageWindowPtr = new ImageWindow();
+    imageWindowPtr->show();
+    imageWindowPtr->resize(DEFAULT_IMAGE_WINDOW_SIZE);
+    // imageWindowPtr->setFixedSize(DEFAULT_IMAGE_WINDOW_SIZE);
+    imageWindowPtr->move(SCREEN_WIDTH/2 + 1, DEFAULT_XRAY_WINDOW_SIZE.height() + 1);
+
+
+    // ==================
+    //   Initialize UI
+    // ==================
     ui->patientIDLabel->setAlignment(Qt::AlignCenter);
+    ui->patientIDLabel->setText("");  // TODO Preference
 
 
     // Initialize actions
     initOpenFolderAction();
     initSettingAction();
 
+
     // ===============
     // Initialize note
     // ===============
-    ui->noteTextEdit->setPlaceholderText(PLAIN_TEXT_EDIT_HINT);
+    ui->noteTextEdit->setPlaceholderText(NOTE_HINT);
+
+
+    // ===============
+    //   Connecting
+    // ===============
+    // connect(ui->treeView, SIGNAL(fileChangedSignal(QString)), this, SLOT(on_fileChanged(QString)));
 
 }
 
 MainWindow::~MainWindow(){
     delete ui;
+    delete xrayWindowPtr;
 }
 
 // =========================================== [ Window ] ==
@@ -84,6 +121,7 @@ void MainWindow::on_openFolder_active(){
     if(!dir.isEmpty()){
         QDir mQDir(dir);
         ui->patientIDLabel->setText(mQDir.dirName());
+        emit patientChangedSignal(dir);
         Preferences::setPatientFolderPath(dir);
         Preferences::save();
     }
@@ -157,6 +195,8 @@ void MainWindow::saveNote(){
 // Test Button
 // =========================================================
 void MainWindow::on_testButton_clicked(){
+
+
 
 //    QWindow xRayWindow;
 //    QWindow imageWindow;

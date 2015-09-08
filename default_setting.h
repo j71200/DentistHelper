@@ -20,7 +20,7 @@ const QString PHOTO_TO_PHOTO_PATH("照片/");
 
 // Note
 const QString NOTE_FILE_SUFFIX_NAME("_note.txt");
-const QString PLAIN_TEXT_EDIT_HINT("How about taking some note");
+const QString NOTE_HINT("How about taking some note");
 
 #endif // DEFAULT_SETTING
 
