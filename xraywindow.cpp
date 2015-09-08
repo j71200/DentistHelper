@@ -11,7 +11,7 @@ XRayWindow::XRayWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-	// =====================
+    // =====================
     // Initialize parameters
     // =====================
     model = new QFileSystemModel;
@@ -24,12 +24,11 @@ XRayWindow::XRayWindow(QWidget *parent) :
     xrayLabel->setAlignment(Qt::AlignCenter);
     ui->scrollArea->setWidget(xrayLabel);
 
-    ui->scaleSlider->setMinimum(10);
-    ui->scaleSlider->setMaximum(300);
-    ui->scaleSlider->setSingleStep(10);
+    ui->scaleSlider->setMinimum(MIN_SCALE_RATIO);
+    ui->scaleSlider->setMaximum(MAX_SCALE_RATIO);
+    ui->scaleSlider->setSingleStep(SLIDER_SINGLE_STEP);
     ui->scaleLabel->setAlignment(Qt::AlignCenter);
-    resetScaleTools();
-    setScaleToolsVisible(false);
+    setScaleTools(0);
 
     // ===================
     // Initialize TreeView
@@ -58,10 +57,10 @@ XRayWindow::~XRayWindow()
 // =========================================== [ Window ] ==
 // Window Events
 // =========================================================
-void XRayWindow::resizeEvent(QResizeEvent *event){
-    setImageSize(event->size());
-    QWidget::resizeEvent(event);
-}
+// void XRayWindow::resizeEvent(QResizeEvent *event){
+//     // assignImageSize(event->size());
+//     QWidget::resizeEvent(event);
+// }
 
 // ========================================= [ TreeView ] ==
 // Change the Directory of TreeView
@@ -91,8 +90,7 @@ void XRayWindow::on_patientChanged(QString newPatientFolderPath){
     changeTreeView(newPatientFolderPath + QDir::separator() + XRAY_TO_XRAY_PATH);
 
     resetImage();
-    resetScaleTools();
-    setScaleToolsVisible(false);
+    setScaleTools(0);
 }
 
 
@@ -104,11 +102,16 @@ void XRayWindow::loadImage(QString imagePath){
     if(xrayImage.isNull()){
         return;
     }
-    
-    xrayImageSize = QSize(ui->scrollArea->width(), ui->scrollArea->height());
-    xrayImageSize *= FIT_IMAGE_SIZE_RATIO;
-    xrayImage = xrayImage.scaled(xrayImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    xrayLabel->setPixmap(xrayImage);
+
+    xrayImageSize = xrayImage.size();
+    QSize scrollAreaSize = ui->scrollArea->size();
+    scrollAreaSize *= FIT_IMAGE_SIZE_RATIO;
+
+    QPixmap newScaledPixmap;
+    newScaledPixmap = xrayImage.scaled(scrollAreaSize, Qt::KeepAspectRatio, Qt::FastTransformation);
+    xrayLabel->setPixmap(newScaledPixmap);
+
+    scaleRatio = 100 * newScaledPixmap.width() / xrayImageSize.width();
 }
 
 // ============================================ [ Image ] ==
@@ -117,8 +120,7 @@ void XRayWindow::loadImage(QString imagePath){
 void XRayWindow::on_fileChanged(QString newFilePath){
 	selectedFilePath = newFilePath;
 	loadImage(newFilePath);
-    resetScaleTools();
-    setScaleToolsVisible(true);
+    setScaleTools(scaleRatio);
 }
 
 // ============================================ [ Image ] ==
@@ -133,45 +135,37 @@ void XRayWindow::on_scaleSlider_valueChanged(int value){
 
     QSize newScaledSize = xrayImageSize * (value / 100.0);
     QPixmap newScaledPixmap;
-    newScaledPixmap = xrayImage.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    xrayLabel->setPixmap(newScaledPixmap);
-}
-
-// ============================================ [ Image ] ==
-// set image size
-// =========================================================
-void XRayWindow::setImageSize(QSize newImageSize){
-    if(xrayImage.isNull())
-        return;
-
-    // QString newRatioText = QString::number(value) + "%";
-    // ui->scaleLabel->setText(newRatioText);
-
-    // QSize newScaledSize = xrayImageSize * (value / 100.0);
-    QPixmap newScaledPixmap;
-    newScaledPixmap = xrayImage.scaled(newImageSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    newScaledPixmap = xrayImage.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::FastTransformation);
     xrayLabel->setPixmap(newScaledPixmap);
 }
 
 
 // ============================================ [ Image ] ==
-// Reset/Set image block
+// Reset image block
 // =========================================================
 void XRayWindow::resetImage(){
     xrayImage = QPixmap();
     xrayLabel->clear();
 }
 
-void XRayWindow::resetScaleTools(){
-	ui->scaleSlider->setValue(100);
-    ui->scaleLabel->setText("100%");
-}
+// ============================================ [ Image ] ==
+// Set image scale tools
+// Let the parameter "value" be 0, the tools will diappear
+// =========================================================
+void XRayWindow::setScaleTools(int value){
+    if(value > 0){
+        QString newRatioText = QString::number(value) + "%";
+        ui->scaleSlider->setValue(value);
+        ui->scaleLabel->setText(newRatioText);
 
-void XRayWindow::setScaleToolsVisible(bool isVisible){
-    ui->scaleSlider->setVisible(isVisible);
-    ui->scaleLabel->setVisible(isVisible);
+        ui->scaleSlider->setVisible(true);
+        ui->scaleLabel->setVisible(true);
+    }
+    else{
+        ui->scaleSlider->setVisible(false);
+        ui->scaleLabel->setVisible(false);
+    }
 }
-
 
 
 

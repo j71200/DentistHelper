@@ -19,11 +19,16 @@ const QString MESSAGE_DIALOG_TITLE("Message!");
 // TreeView
 const int MAX_TREEVIEW_WIDTH = 300;
 
-// X-ray
+// Image
+const int MIN_SCALE_RATIO = 1;
+const int MAX_SCALE_RATIO = 300;
+const int SLIDER_SINGLE_STEP = 10;
+
+
+// X-ray TreeView
 const QString XRAY_TO_XRAY_PATH("x-ray/");
 
-
-// Image
+// Image TreeView
 const QString PHOTO_TO_PHOTO_PATH("照片/");
 
 

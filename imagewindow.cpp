@@ -20,9 +20,9 @@ ImageWindow::ImageWindow(QWidget *parent) :
     imageLabel->setAlignment(Qt::AlignCenter);
     ui->scrollArea->setWidget(imageLabel);
 
-    ui->scaleSlider->setMinimum(10);
-    ui->scaleSlider->setMaximum(300);
-    ui->scaleSlider->setSingleStep(10);
+    ui->scaleSlider->setMinimum(MIN_SCALE_RATIO);
+    ui->scaleSlider->setMaximum(MAX_SCALE_RATIO);
+    ui->scaleSlider->setSingleStep(SLIDER_SINGLE_STEP);
     ui->scaleLabel->setAlignment(Qt::AlignCenter);
     resetScaleTools();
     setScaleToolsVisible(false);
