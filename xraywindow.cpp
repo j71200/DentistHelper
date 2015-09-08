@@ -34,9 +34,6 @@ XRayWindow::XRayWindow(QWidget *parent) :
     ui->fitWindowSizeButton->setText(FIT_WINDOW_TEXT);
     setScaleTools(0);
 
-    
-
-
     // ===================
     // Initialize TreeView
     // ===================
