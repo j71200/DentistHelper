@@ -21,10 +21,10 @@ int main(int argc, char *argv[])
     const QSize DEFAULT_MAIN_WINDOW_SIZE = QSize( SCREEN_WIDTH/2 , SCREEN_HEIGHT/4 );
 
     MainWindow w;
-	w.show();
     w.resize(DEFAULT_MAIN_WINDOW_SIZE);
     // w.setFixedSize(DEFAULT_MAIN_WINDOW_SIZE);
     w.move(0, 0);
+	w.show();
 
 
 	return a.exec();

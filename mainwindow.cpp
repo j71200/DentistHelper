@@ -91,16 +91,16 @@ void MainWindow::initWindows(){
     const QSize DEFAULT_IMAGE_WINDOW_SIZE = QSize( SCREEN_WIDTH/2 , SCREEN_HEIGHT/2.5 );
 
     xrayWindowPtr = new XRayWindow();
-    xrayWindowPtr->show();
     xrayWindowPtr->resize(DEFAULT_XRAY_WINDOW_SIZE);
     // xrayWindowPtr->setFixedSize(DEFAULT_XRAY_WINDOW_SIZE);
     xrayWindowPtr->move(SCREEN_WIDTH/2 + 1, 0);
+    xrayWindowPtr->show();
 
     imageWindowPtr = new ImageWindow();
-    imageWindowPtr->show();
     imageWindowPtr->resize(DEFAULT_IMAGE_WINDOW_SIZE);
     // imageWindowPtr->setFixedSize(DEFAULT_IMAGE_WINDOW_SIZE);
     imageWindowPtr->move(SCREEN_WIDTH/2 + 1, DEFAULT_XRAY_WINDOW_SIZE.height() * 1.2);
+    imageWindowPtr->show();
 
     // Setting titles
     this->setWindowTitle(MAIN_WINDOW_TITLE);
@@ -170,7 +170,7 @@ void MainWindow::initSettingAction(){
 void MainWindow::on_setting_active(){
     SettingDialog mSettingDialog;
     mSettingDialog.setWindowTitle(SETTING_DIALOG_TITLE);
-    mSettingDialog.setFixedSize(mSettingDialog.size());  // Fix the size of setting dialog
+    mSettingDialog.setFixedSize(mSettingDialog.size());
     mSettingDialog.exec();
 }
 
