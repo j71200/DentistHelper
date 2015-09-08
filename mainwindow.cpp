@@ -44,9 +44,9 @@ MainWindow::MainWindow(QWidget *parent) :
     // Initialize actions
     // ==================
     initOpenFolderAction();
-    initSettingAction();
     initOpenXRayWindowAction();
     initOpenImageWindowAction();
+    initSettingAction();
 
 
     // ========================
