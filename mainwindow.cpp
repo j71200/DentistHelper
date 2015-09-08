@@ -73,7 +73,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow(){
     delete ui;
-    delete openFolderAct, settingAct, xrayAct;
+    delete openFolderAct, settingAct, xrayAct, imageAct;
     delete xrayWindowPtr, imageWindowPtr;
 }
 
