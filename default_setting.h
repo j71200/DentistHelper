@@ -11,7 +11,7 @@ const QString LOCK_ICON_SUFFIX("icons/lock.png");
 const QString UNLOCK_ICON_SUFFIX("icons/unlock.png");
 
 // Image scale and format
-const qreal FIT_IMAGE_SIZE_RATIO = 0.95;
+const qreal FIT_IMAGE_SIZE_RATIO = 0.98;
 const QStringList READABLE_IMAGE_LIST = QStringList() << "*.jpg" << "*.bmp" << "*.png" << "*.gif";
 
 // Window title

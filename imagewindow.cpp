@@ -113,11 +113,14 @@ void ImageWindow::loadImage(QString imagePath){
     newScaledPixmap = image.scaled(scrollAreaSize, Qt::KeepAspectRatio, Qt::FastTransformation);
     
     int scaleRatio = 100 * newScaledPixmap.width() / imageSize.width();
-    QSize newScaledSize = imageSize * (scaleRatio / 100.0);
-    newScaledPixmap = image.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::FastTransformation);
-    imageLabel->setPixmap(newScaledPixmap);
-
-    setScaleTools(scaleRatio);
+    if(ui->scaleSlider->value() == scaleRatio){  // If you don't need to set the scale slider
+        QSize newScaledSize = imageSize * (scaleRatio / 100.0);
+        newScaledPixmap = image.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::FastTransformation);
+        imageLabel->setPixmap(newScaledPixmap);
+    }
+    else{
+        setScaleTools(scaleRatio);
+    }
 }
 
 // ============================================ [ Image ] ==
