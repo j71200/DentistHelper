@@ -132,9 +132,12 @@ void MainWindow::on_openFolder_active(){
     if(!dir.isEmpty()){
         QDir mQDir(dir);
         ui->patientIDLabel->setText(mQDir.dirName());
-        emit patientChangedSignal(dir);
+        
+        Preferences::setPatientID(mQDir.dirName());
         Preferences::setPatientFolderPath(dir);
         Preferences::save();
+
+        emit patientChangedSignal(dir);
     }
 }
 
