@@ -47,12 +47,18 @@ MainWindow::MainWindow(QWidget *parent) :
     initSettingAction();
 
 
-    // =================================
-    // Initialize patient label and note
-    // =================================
-    ui->noteTextEdit->setPlaceholderText(NOTE_HINT);
+    // ========================
+    // Initialize patient label
+    // ========================
     ui->patientIDLabel->setAlignment(Qt::AlignCenter);
     ui->patientIDLabel->setText(Preferences::getPatientID());
+
+
+    // ===============
+    // Initialize note
+    // ===============
+    ui->noteTextEdit->setPlaceholderText(NOTE_HINT);
+    refreshNote();
 
 
     // ===============
@@ -120,20 +126,41 @@ void MainWindow::initOpenFolderAction(){
 
 void MainWindow::on_openFolder_active(){
     // Open a file dialog and ask for a new directory
-    QString dir = QFileDialog::getExistingDirectory(this,
+    QString newPatientPath = QFileDialog::getExistingDirectory(this,
         tr("Open Folder"), Preferences::getHomeFolderPath(),
         QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
-    if(!dir.isEmpty()){
-        QDir mQDir(dir);
-        ui->patientIDLabel->setText(mQDir.dirName());
+    if(!newPatientPath.isEmpty()){
+        QDir newPatientQDir(newPatientPath);
+        
+        ui->patientIDLabel->setText(newPatientQDir.dirName());
+        saveNote();
 
-        Preferences::setPatientID(mQDir.dirName());
-        Preferences::setPatientFolderPath(dir);
+        Preferences::setPatientID(newPatientQDir.dirName());
+        Preferences::setPatientFolderPath(newPatientPath);
         Preferences::save();
 
-        emit patientChangedSignal(dir);
+        refreshNote();
+
+        emit patientChangedSignal(newPatientPath);
     }
+}
+
+void MainWindow::refreshNote(){
+    ui->noteTextEdit->clear();
+
+    QFile noteFile(Preferences::getPatientFolderPath() + QDir::separator() + Preferences::getPatientID() + NOTE_FILE_SUFFIX_NAME);
+    if(!noteFile.open(QIODevice::ReadOnly | QIODevice::Text)){
+        cout << "Read note file failed" << endl;
+    }
+    else{
+        cout << "Read note file successfully" << endl;
+        QTextStream inStream(&noteFile);
+        while (!inStream.atEnd()) {
+            ui->noteTextEdit->appendPlainText(inStream.readLine());
+        }
+    }
+    noteFile.close();
 }
 
 // =========================================== [ Action ] ==
@@ -187,7 +214,7 @@ void MainWindow::on_setting_active(){
 // Function for Saving Note
 // =========================================================
 void MainWindow::saveNote(){
-    QFile noteFile(currFolderPath + QDir::separator() + currFolderName + NOTE_FILE_SUFFIX_NAME);
+    QFile noteFile(Preferences::getPatientFolderPath() + QDir::separator() + Preferences::getPatientID() + NOTE_FILE_SUFFIX_NAME);
 
     if (!noteFile.open(QIODevice::WriteOnly | QIODevice::Text)){
         cout << "Open note file for writing fail" << endl;

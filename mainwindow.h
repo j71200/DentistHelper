@@ -46,6 +46,7 @@ private:
 
     // Note
     void saveNote();
+    void refreshNote();
 
     // Action
     QAction *openFolderAct;
