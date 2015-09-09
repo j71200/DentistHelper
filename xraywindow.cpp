@@ -105,23 +105,50 @@ void XRayWindow::loadImage(QString imagePath){
         return;
     }
 
+    // xrayImageSize = xrayImage.size();
+    // QSize scrollAreaSize = ui->scrollArea->size();
+    // scrollAreaSize *= FIT_IMAGE_SIZE_RATIO;
+
+    // QPixmap newScaledPixmap;
+    // newScaledPixmap = xrayImage.scaled(scrollAreaSize, Qt::KeepAspectRatio, Qt::FastTransformation);
+    
+    // int scaleRatio = 100 * newScaledPixmap.width() / xrayImageSize.width();
+
+    int fitScaleRatio = calculateFitScaleRatio();
+    if(ui->scaleSlider->value() == fitScaleRatio){  // If you don't need to set the scale slider
+        QSize newScaledSize = xrayImageSize * (fitScaleRatio / 100.0);
+        QPixmap newScaledPixmap = xrayImage.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::FastTransformation);
+        xrayLabel->setPixmap(newScaledPixmap);
+    }
+    else{
+        setScaleTools(fitScaleRatio);
+    }
+}
+
+
+// ============================================ [ Image ] ==
+// Calculate the fit scale ratio
+// =========================================================
+int XRayWindow::calculateFitScaleRatio(){
+    if(xrayImage.isNull()){
+        return 0;
+    }
+
     xrayImageSize = xrayImage.size();
     QSize scrollAreaSize = ui->scrollArea->size();
     scrollAreaSize *= FIT_IMAGE_SIZE_RATIO;
 
-    QPixmap newScaledPixmap;
-    newScaledPixmap = xrayImage.scaled(scrollAreaSize, Qt::KeepAspectRatio, Qt::FastTransformation);
-    
-    int scaleRatio = 100 * newScaledPixmap.width() / xrayImageSize.width();
-    if(ui->scaleSlider->value() == scaleRatio){  // If you don't need to set the scale slider
-        QSize newScaledSize = xrayImageSize * (scaleRatio / 100.0);
-        newScaledPixmap = xrayImage.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::FastTransformation);
-        xrayLabel->setPixmap(newScaledPixmap);
-    }
-    else{
-        setScaleTools(scaleRatio);
-    }
+    qreal scrollAreaHWRatio = scrollAreaSize.height() / (qreal) scrollAreaSize.width();
+    qreal xrayImageHWRatio = xrayImageSize.height() / (qreal) xrayImageSize.width();
+
+    int fitScaleRatio;
+    if( xrayImageHWRatio > scrollAreaHWRatio )
+        fitScaleRatio = 100 * scrollAreaSize.height() / xrayImageSize.height();
+    else
+        fitScaleRatio = 100 * scrollAreaSize.width() / xrayImageSize.width();
+    return fitScaleRatio;
 }
+
 
 // ============================================ [ Image ] ==
 // Refresh image if folder changed
@@ -192,7 +219,8 @@ void XRayWindow::keyPressEvent(QKeyEvent *event){
         default:
             break;
     }
-
     QWidget::keyPressEvent(event);
 }
+
+
 

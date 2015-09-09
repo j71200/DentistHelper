@@ -35,6 +35,7 @@ private:
     void loadImage(QString imagePath);
     void resetImage();
     void setScaleTools(int value);
+    int calculateFitScaleRatio();
 
     // TreeView
     QFileSystemModel *model;
