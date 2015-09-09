@@ -24,6 +24,7 @@ private slots:
     void on_patientChanged(QString newPatientFolderPath);
     void on_fitWindowSizeButton_clicked();
     void keyPressEvent(QKeyEvent *event);
+    void on_tvSpacePressed();
 
 private:
     Ui::ImageWindow *ui;

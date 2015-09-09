@@ -45,6 +45,7 @@ ImageWindow::ImageWindow(QWidget *parent) :
     // Connecting
     // =====================
     connect(ui->treeView, SIGNAL(fileChangedSignal(QString)), this, SLOT(on_fileChanged(QString)));
+    connect(ui->treeView, SIGNAL(tvSpacePressedSignal()), this, SLOT(on_tvSpacePressed()));
 
 }
 
@@ -164,6 +165,15 @@ void ImageWindow::on_fileChanged(QString newFilePath){
 	selectedFilePath = newFilePath;
 	loadImage(newFilePath);
 }
+
+
+// ============================================ [ Image ] ==
+// Key pressed in TreeView
+// =========================================================
+void ImageWindow::on_tvSpacePressed(){
+    loadImage(selectedFilePath);
+}
+
 
 // ============================================ [ Image ] ==
 // Image ratioSlider slot
