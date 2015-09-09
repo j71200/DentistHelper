@@ -12,7 +12,7 @@ class MessageDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit MessageDialog(QWidget *parent = 0);
+	explicit MessageDialog(QWidget *parent = 0);
     ~MessageDialog();
     void setMessage(QString message);
 

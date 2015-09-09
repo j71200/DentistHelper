@@ -152,10 +152,8 @@ void MainWindow::on_openFolder_active(){
     if(newPatientPath.isEmpty())
         return;
 
-
     QString xrayRootPath = newPatientPath + QDir::separator() + Preferences::getXrayFolderName();
     QString imageRootPath = newPatientPath + QDir::separator() + Preferences::getImageFolderName();
-
     bool isXRayRootPathExist = QDir(xrayRootPath).isReadable();
     bool isImageRootPathExist = QDir(imageRootPath).isReadable();
 
@@ -174,27 +172,18 @@ void MainWindow::on_openFolder_active(){
     }
     else if(!isXRayRootPathExist && isImageRootPathExist){
         MessageDialog mMessageDialog;
-        mMessageDialog.setWindowTitle(MESSAGE_DIALOG_TITLE);
         mMessageDialog.setMessage(WRONG_XRAY_FOLDER_MESSAGE);
-        mMessageDialog.setFixedSize(mMessageDialog.size());
         mMessageDialog.exec();
-        return;
     }
     else if(isXRayRootPathExist && !isImageRootPathExist){
         MessageDialog mMessageDialog;
-        mMessageDialog.setWindowTitle(MESSAGE_DIALOG_TITLE);
         mMessageDialog.setMessage(WRONG_IMAGE_FOLDER_MESSAGE);
-        mMessageDialog.setFixedSize(mMessageDialog.size());
         mMessageDialog.exec();
-        return;
     }
     else{
         MessageDialog mMessageDialog;
-        mMessageDialog.setWindowTitle(MESSAGE_DIALOG_TITLE);
         mMessageDialog.setMessage(WRONG_XRAY_IMAGE_FOLDER_MESSAGE);
-        mMessageDialog.setFixedSize(mMessageDialog.size());
         mMessageDialog.exec();
-        return;
     }
 }
 
