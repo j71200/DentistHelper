@@ -39,7 +39,7 @@ ImageWindow::ImageWindow(QWidget *parent) :
     // ===================
     ui->treeView->setMaximumWidth(MAX_TREEVIEW_WIDTH);
     ui->scaleSlider->setMaximumWidth(MAX_TREEVIEW_WIDTH);
-    changeTreeView(Preferences::getPatientFolderPath() + QDir::separator() + PHOTO_TO_PHOTO_PATH);
+    changeTreeView(Preferences::getPatientFolderPath() + QDir::separator() + Preferences::getImageFolderName());
 
     // =====================
     // Connecting
@@ -108,7 +108,7 @@ void ImageWindow::changeTreeView(QString dir){
 void ImageWindow::on_patientChanged(QString newPatientFolderPath){
     this->setWindowTitle(IMAGE_WINDOW_TITLE + HYPHEN + Preferences::getPatientID());
 
-    changeTreeView(newPatientFolderPath + QDir::separator() + PHOTO_TO_PHOTO_PATH);
+    changeTreeView(newPatientFolderPath + QDir::separator() + Preferences::getImageFolderName());
 
     resetImage();
     setScaleTools(0);

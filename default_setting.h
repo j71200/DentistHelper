@@ -50,12 +50,6 @@ const int SLIDER_SINGLE_STEP = 10;
 // ==================
 const QString FIT_WINDOW_TEXT("Fit window size (space)");
 
-// X-ray TreeView
-const QString XRAY_TO_XRAY_PATH("x-ray/");
-
-// Image TreeView
-const QString PHOTO_TO_PHOTO_PATH("照片/");
-
 
 // Note
 const QString NOTE_FILE_SUFFIX_NAME("_note.txt");

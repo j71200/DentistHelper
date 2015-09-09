@@ -39,7 +39,7 @@ XRayWindow::XRayWindow(QWidget *parent) :
     // ===================
     ui->treeView->setMaximumWidth(MAX_TREEVIEW_WIDTH);
     ui->scaleSlider->setMaximumWidth(MAX_TREEVIEW_WIDTH);
-    changeTreeView(Preferences::getPatientFolderPath() + QDir::separator() + XRAY_TO_XRAY_PATH);
+    changeTreeView(Preferences::getPatientFolderPath() + QDir::separator() + Preferences::getXrayFolderName());
 
     // =====================
     // Connecting
@@ -108,7 +108,7 @@ void XRayWindow::changeTreeView(QString dir){
 void XRayWindow::on_patientChanged(QString newPatientFolderPath){
     this->setWindowTitle(XRAY_WINDOW_TITLE + HYPHEN + Preferences::getPatientID());
 
-    changeTreeView(newPatientFolderPath + QDir::separator() + XRAY_TO_XRAY_PATH);
+    changeTreeView(newPatientFolderPath + QDir::separator() + Preferences::getXrayFolderName());
 
     resetImage();
     setScaleTools(0);
