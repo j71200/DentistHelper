@@ -15,6 +15,9 @@ public:
     explicit FAQWindow(QWidget *parent = 0);
     ~FAQWindow();
 
+private slots:
+    void on_okButton_clicked();
+
 private:
     Ui::FAQWindow *ui;
 };
