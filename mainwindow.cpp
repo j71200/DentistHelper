@@ -103,8 +103,14 @@ void MainWindow::initWindows(){
 
     // Setting titles
     this->setWindowTitle(MAIN_WINDOW_TITLE);
-    xrayWindowPtr->setWindowTitle(XRAY_WINDOW_TITLE);
-    imageWindowPtr->setWindowTitle(IMAGE_WINDOW_TITLE);
+    if(Preferences::getPatientID().isEmpty()){
+        xrayWindowPtr->setWindowTitle(XRAY_WINDOW_TITLE);
+        imageWindowPtr->setWindowTitle(IMAGE_WINDOW_TITLE);
+    }
+    else{
+        xrayWindowPtr->setWindowTitle(XRAY_WINDOW_TITLE + HYPHEN + Preferences::getPatientID());
+        imageWindowPtr->setWindowTitle(IMAGE_WINDOW_TITLE + HYPHEN + Preferences::getPatientID());
+    }
 }
 
 // ======================================= [ MainWindow ] ==
@@ -137,16 +143,15 @@ void MainWindow::on_openFolder_active(){
         QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
     if(!newPatientPath.isEmpty()){
-        QDir newPatientQDir(newPatientPath);
-        
-        ui->patientIDLabel->setText(newPatientQDir.dirName());
         saveNote();
 
+        QDir newPatientQDir(newPatientPath);
         Preferences::setPatientID(newPatientQDir.dirName());
         Preferences::setPatientFolderPath(newPatientPath);
         Preferences::save();
 
         refreshNote();
+        ui->patientIDLabel->setText(Preferences::getPatientID());
 
         emit patientChangedSignal(newPatientPath);
     }
