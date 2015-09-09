@@ -121,10 +121,10 @@ void MainWindow::closeEvent(QCloseEvent *event){
 // Initialize Open Folder Action
 // =========================================================
 void MainWindow::initOpenFolderAction(){
-    QString iconPath(APP_FOLDER_PATH + QString("icons/open_folder.png"));
-    openFolderAct = new QAction(QIcon( iconPath ), tr("Open Folder"), this);
+    QString iconPath(APP_FOLDER_PATH + OPEN_FOLDER_ICON_SUFFIX);
+    openFolderAct = new QAction(QIcon( iconPath ), OPEN_FOLDER_TIP_TEXT, this);
     openFolderAct->setShortcuts(QKeySequence::Open);
-    openFolderAct->setStatusTip(tr("Open an folder"));
+    openFolderAct->setStatusTip(OPEN_FOLDER_TIP_TEXT);
     connect(openFolderAct, SIGNAL(triggered()), this, SLOT(on_openFolder_active()));
 
     ui->menuFile->addAction(openFolderAct);
@@ -134,7 +134,7 @@ void MainWindow::initOpenFolderAction(){
 void MainWindow::on_openFolder_active(){
     // Open a file dialog and ask for a new directory
     QString newPatientPath = QFileDialog::getExistingDirectory(this,
-        tr("Open Folder"), Preferences::getHomeFolderPath(),
+        OPEN_FOLDER_TIP_TEXT, Preferences::getHomeFolderPath(),
         QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
     if(!newPatientPath.isEmpty()){
@@ -157,10 +157,9 @@ void MainWindow::on_openFolder_active(){
 // Initialize Setting Action
 // =========================================================
 void MainWindow::initSettingAction(){
-    QString iconPath(APP_FOLDER_PATH + QString("icons/setting.png"));
-    settingAct = new QAction(QIcon( iconPath ), tr("Setting"), this);
-    // settingAct->setShortcuts(QKeySequence::Preferences);
-    settingAct->setStatusTip(tr("Setting"));
+    QString iconPath(APP_FOLDER_PATH + SETTING_ICON_SUFFIX);
+    settingAct = new QAction(QIcon( iconPath ), SETTING_TIP_TEXT, this);
+    settingAct->setStatusTip(SETTING_TIP_TEXT);
     connect(settingAct, SIGNAL(triggered()), this, SLOT(on_setting_active()));
 
     ui->menuFile->addAction(settingAct);
@@ -179,9 +178,9 @@ void MainWindow::on_setting_active(){
 // Initialize open x-ray window action
 // =========================================================
 void MainWindow::initOpenXRayWindowAction(){
-    QString iconPath(APP_FOLDER_PATH + QString("icons/xray_icon.png"));
-    xrayAct = new QAction(QIcon( iconPath ), tr("X-ray window"), this);
-    xrayAct->setStatusTip(tr("X-ray window"));
+    QString iconPath(APP_FOLDER_PATH + XRAY_WINDOW_ICON_SUFFIX);
+    xrayAct = new QAction(QIcon( iconPath ), XRAY_WINDOW_TIP_TEXT, this);
+    xrayAct->setStatusTip(XRAY_WINDOW_TIP_TEXT);
     connect(xrayAct, SIGNAL(triggered()), this, SLOT(on_xray_active()));
 
     ui->menuFile->addAction(xrayAct);
@@ -202,9 +201,9 @@ void MainWindow::on_xray_active(){
 // Initialize open image window action
 // =========================================================
 void MainWindow::initOpenImageWindowAction(){
-    QString iconPath(APP_FOLDER_PATH + QString("icons/image_icon.png"));
-    imageAct = new QAction(QIcon( iconPath ), tr("Image window"), this);
-    imageAct->setStatusTip(tr("Image window"));
+    QString iconPath(APP_FOLDER_PATH + IMAGE_WINDOW_ICON_SUFFIX);
+    imageAct = new QAction(QIcon( iconPath ), IMAGE_WINDOW_TIP_TEXT, this);
+    imageAct->setStatusTip(IMAGE_WINDOW_TIP_TEXT);
     connect(imageAct, SIGNAL(triggered()), this, SLOT(on_image_active()));
 
     ui->menuFile->addAction(imageAct);
@@ -226,7 +225,8 @@ void MainWindow::on_image_active(){
 // Save note
 // =========================================================
 void MainWindow::saveNote(){
-    QFile noteFile(Preferences::getPatientFolderPath() + QDir::separator() + Preferences::getPatientID() + NOTE_FILE_SUFFIX_NAME);
+    QFile noteFile(Preferences::getPatientFolderPath() + QDir::separator()
+        + Preferences::getPatientID() + NOTE_FILE_SUFFIX_NAME);
 
     if (!noteFile.open(QIODevice::WriteOnly | QIODevice::Text)){
         cout << "Open note file for writing fail" << endl;
@@ -245,7 +245,8 @@ void MainWindow::saveNote(){
 void MainWindow::refreshNote(){
     ui->noteTextEdit->clear();
 
-    QFile noteFile(Preferences::getPatientFolderPath() + QDir::separator() + Preferences::getPatientID() + NOTE_FILE_SUFFIX_NAME);
+    QFile noteFile(Preferences::getPatientFolderPath() + QDir::separator()
+        + Preferences::getPatientID() + NOTE_FILE_SUFFIX_NAME);
     if(!noteFile.open(QIODevice::ReadOnly | QIODevice::Text)){
         cout << "Read note file failed" << endl;
     }

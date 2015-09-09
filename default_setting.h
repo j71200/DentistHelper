@@ -7,8 +7,19 @@ const QString APP_FOLDER_PATH("/Users/blue/QtWorkspace/firstQt/");
 const QString PREFERENCES_FILE_PATH("/Users/blue/QtWorkspace/firstQt/Output/my_preferences.txt");
 
 // Icon suffix
+const QString OPEN_FOLDER_ICON_SUFFIX("icons/open_folder.png");
+const QString SETTING_ICON_SUFFIX("icons/setting.png");
+const QString XRAY_WINDOW_ICON_SUFFIX("icons/xray_icon.png");
+const QString IMAGE_WINDOW_ICON_SUFFIX("icons/image_icon.png");
 // const QString LOCK_ICON_SUFFIX("icons/lock.png");
 // const QString UNLOCK_ICON_SUFFIX("icons/unlock.png");
+
+// Action tip text
+const QString OPEN_FOLDER_TIP_TEXT("Open Folder");
+const QString SETTING_TIP_TEXT("Setting");
+const QString XRAY_WINDOW_TIP_TEXT("X-ray window");
+const QString IMAGE_WINDOW_TIP_TEXT("Image window");
+
 
 // Image scale and format
 const qreal FIT_IMAGE_SIZE_RATIO = 0.98;
@@ -30,7 +41,7 @@ const int MAX_SCALE_RATIO = 300;
 const int SLIDER_SINGLE_STEP = 10;
 
 // Icon size
-const QSize DEFAULT_ICON_SIZE(30, 30);
+// const QSize DEFAULT_ICON_SIZE(30, 30);
 
 // ==================
 // String
