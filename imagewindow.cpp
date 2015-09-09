@@ -74,9 +74,9 @@ void ImageWindow::keyPressEvent(QKeyEvent *event){
             loadImage(selectedFilePath);
             break;
         default:
+            QWidget::keyPressEvent(event);
             break;
     }
-    QWidget::keyPressEvent(event);
 }
 
 

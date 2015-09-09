@@ -45,7 +45,8 @@ XRayWindow::XRayWindow(QWidget *parent) :
     // Connecting
     // =====================
     connect(ui->treeView, SIGNAL(fileChangedSignal(QString)), this, SLOT(on_fileChanged(QString)));
-       
+    connect(ui->treeView, SIGNAL(tvSpacePressedSignal()), this, SLOT(on_tvSpacePressed()));
+
 }
 
 XRayWindow::~XRayWindow()
@@ -74,9 +75,9 @@ void XRayWindow::keyPressEvent(QKeyEvent *event){
             loadImage(selectedFilePath);
             break;
         default:
+            QWidget::keyPressEvent(event);
             break;
     }
-    QWidget::keyPressEvent(event);
 }
 
 
@@ -163,6 +164,13 @@ int XRayWindow::calculateFitScaleRatio(){
 void XRayWindow::on_fileChanged(QString newFilePath){
 	selectedFilePath = newFilePath;
 	loadImage(newFilePath);
+}
+
+// ============================================ [ Image ] ==
+// Key pressed in TreeView
+// =========================================================
+void XRayWindow::on_tvSpacePressed(){
+    loadImage(selectedFilePath);
 }
 
 
