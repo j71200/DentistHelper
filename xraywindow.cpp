@@ -105,15 +105,6 @@ void XRayWindow::loadImage(QString imagePath){
         return;
     }
 
-    // xrayImageSize = xrayImage.size();
-    // QSize scrollAreaSize = ui->scrollArea->size();
-    // scrollAreaSize *= FIT_IMAGE_SIZE_RATIO;
-
-    // QPixmap newScaledPixmap;
-    // newScaledPixmap = xrayImage.scaled(scrollAreaSize, Qt::KeepAspectRatio, Qt::FastTransformation);
-    
-    // int scaleRatio = 100 * newScaledPixmap.width() / xrayImageSize.width();
-
     int fitScaleRatio = calculateFitScaleRatio();
     if(ui->scaleSlider->value() == fitScaleRatio){  // If you don't need to set the scale slider
         QSize newScaledSize = xrayImageSize * (fitScaleRatio / 100.0);
@@ -158,6 +149,7 @@ void XRayWindow::on_fileChanged(QString newFilePath){
 	loadImage(newFilePath);
 }
 
+
 // ============================================ [ Image ] ==
 // Image ratioSlider slot
 // =========================================================
@@ -183,6 +175,7 @@ void XRayWindow::resetImage(){
     xrayLabel->clear();
 }
 
+
 // ============================================ [ Image ] ==
 // Set image scale tools
 // Let the parameter "value" be 0, the tools will diappear
@@ -203,6 +196,7 @@ void XRayWindow::setScaleTools(int value){
         ui->fitWindowSizeButton->setVisible(false);
     }
 }
+
 
 // ============================================ [ Image ] ==
 // Fit windows size tool
