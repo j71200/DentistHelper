@@ -7,8 +7,8 @@ const QString APP_FOLDER_PATH("/Users/blue/QtWorkspace/firstQt/");
 const QString PREFERENCES_FILE_PATH("/Users/blue/QtWorkspace/firstQt/Output/my_preferences.txt");
 
 // Icon suffix
-const QString LOCK_ICON_SUFFIX("icons/lock.png");
-const QString UNLOCK_ICON_SUFFIX("icons/unlock.png");
+// const QString LOCK_ICON_SUFFIX("icons/lock.png");
+// const QString UNLOCK_ICON_SUFFIX("icons/unlock.png");
 
 // Image scale and format
 const qreal FIT_IMAGE_SIZE_RATIO = 0.98;
@@ -35,7 +35,7 @@ const QSize DEFAULT_ICON_SIZE(30, 30);
 // ==================
 // String
 // ==================
-const QString FIT_WINDOW_TEXT("Fit window size");
+const QString FIT_WINDOW_TEXT("Fit window size (space)");
 
 // X-ray TreeView
 const QString XRAY_TO_XRAY_PATH("x-ray/");
