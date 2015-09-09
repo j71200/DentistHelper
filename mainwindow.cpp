@@ -19,6 +19,7 @@ There are several classes in my classification, like
 #include <QDesktopServices>
 #include <QRect>
 #include <QDesktopWidget>
+#include "messagedialog.h"
 
 
 QString Preferences::homeFolderPath = DEFAULT_FOLDER_PATH;
@@ -148,7 +149,17 @@ void MainWindow::on_openFolder_active(){
         OPEN_FOLDER_TIP_TEXT, Preferences::getHomeFolderPath(),
         QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
-    if(!newPatientPath.isEmpty()){
+    if(newPatientPath.isEmpty())
+        return;
+
+
+    QString xrayRootPath = newPatientPath + QDir::separator() + Preferences::getXrayFolderName();
+    QString imageRootPath = newPatientPath + QDir::separator() + Preferences::getImageFolderName();
+
+    bool isXRayRootPathExist = QDir(xrayRootPath).isReadable();
+    bool isImageRootPathExist = QDir(imageRootPath).isReadable();
+
+    if(isXRayRootPathExist && isImageRootPathExist){
         saveNote();
 
         QDir newPatientQDir(newPatientPath);
@@ -160,6 +171,30 @@ void MainWindow::on_openFolder_active(){
         ui->patientIDLabel->setText(Preferences::getPatientID());
 
         emit patientChangedSignal(newPatientPath);
+    }
+    else if(!isXRayRootPathExist && isImageRootPathExist){
+        MessageDialog mMessageDialog;
+        mMessageDialog.setWindowTitle(MESSAGE_DIALOG_TITLE);
+        mMessageDialog.setMessage(WRONG_XRAY_FOLDER_MESSAGE);
+        mMessageDialog.setFixedSize(mMessageDialog.size());
+        mMessageDialog.exec();
+        return;
+    }
+    else if(isXRayRootPathExist && !isImageRootPathExist){
+        MessageDialog mMessageDialog;
+        mMessageDialog.setWindowTitle(MESSAGE_DIALOG_TITLE);
+        mMessageDialog.setMessage(WRONG_IMAGE_FOLDER_MESSAGE);
+        mMessageDialog.setFixedSize(mMessageDialog.size());
+        mMessageDialog.exec();
+        return;
+    }
+    else{
+        MessageDialog mMessageDialog;
+        mMessageDialog.setWindowTitle(MESSAGE_DIALOG_TITLE);
+        mMessageDialog.setMessage(WRONG_XRAY_IMAGE_FOLDER_MESSAGE);
+        mMessageDialog.setFixedSize(mMessageDialog.size());
+        mMessageDialog.exec();
+        return;
     }
 }
 

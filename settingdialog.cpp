@@ -16,7 +16,9 @@ SettingDialog::SettingDialog(QWidget *parent) :
 
     ui->homeFolderEdit->setText(Preferences::getHomeFolderPath());
     ui->xrayFolderNameLineEdit->setText(Preferences::getXrayFolderName());
+    ui->xrayCorrectMsgLabel->setText("");
     ui->imageFolderNameLineEdit->setText(Preferences::getImageFolderName());
+    ui->imageCorrectMsgLabel->setText("");
 }
 
 SettingDialog::~SettingDialog(){

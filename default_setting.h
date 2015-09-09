@@ -56,10 +56,16 @@ const QString NOTE_FILE_SUFFIX_NAME("_note.txt");
 const QString NOTE_HINT("How about taking some note");
 
 
-// FAQ / About
+// FAQ/About window
 const QString FAQ_TAB_TITLE("FAQ");
 const QString ABOUT_TAB_TITLE("About");
 const QString OK_TEXT("OK");
+
+
+// Message window
+const QString WRONG_XRAY_FOLDER_MESSAGE("Wrong x-ray folder path!\nPlease check your x-ray folder name\nor correct the X-RAY FOLDER NAME in setting.");
+const QString WRONG_IMAGE_FOLDER_MESSAGE("Wrong image folder path!\nPlease check your image folder name\nor correct the IMAGE FOLDER NAME in setting.");
+const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE("Wrong x-ray and image folder path!\nPlease check your x-ray and image folder name\nor correct both the X-RAY FOLDER NAME and IMAGE FOLDER NAME in setting.");
 
 
 #endif // DEFAULT_SETTING

@@ -89,13 +89,13 @@ void ImageWindow::changeTreeView(QString rootPath){
     if(rootPath.isEmpty())
         return;
 
-    if(!QDir(rootPath).isReadable()){
-        MessageDialog mMessageDialog;
-        mMessageDialog.setWindowTitle(MESSAGE_DIALOG_TITLE);
-        mMessageDialog.setMessage("Wrong image folder path!");
-        mMessageDialog.setFixedSize(mMessageDialog.size());
-        mMessageDialog.exec();
-    }
+    // if(!QDir(rootPath).isReadable()){
+    //     MessageDialog mMessageDialog;
+    //     mMessageDialog.setWindowTitle(MESSAGE_DIALOG_TITLE);
+    //     mMessageDialog.setMessage(WRONG_IMAGE_FOLDER_MESSAGE);
+    //     mMessageDialog.setFixedSize(mMessageDialog.size());
+    //     mMessageDialog.exec();
+    // }
 
     // Set file system model
     model->setRootPath(rootPath);

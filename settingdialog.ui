@@ -47,6 +47,13 @@
      <item>
       <widget class="QLineEdit" name="xrayFolderNameLineEdit"/>
      </item>
+     <item>
+      <widget class="QLabel" name="xrayCorrectMsgLabel">
+       <property name="text">
+        <string>xrayCorrectMsgLabel</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>
@@ -60,6 +67,13 @@
      </item>
      <item>
       <widget class="QLineEdit" name="imageFolderNameLineEdit"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="imageCorrectMsgLabel">
+       <property name="text">
+        <string>imageCorrectMsgLabel</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
