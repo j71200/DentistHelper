@@ -64,6 +64,22 @@ XRayWindow::~XRayWindow()
 //     QWidget::resizeEvent(event);
 // }
 
+
+// =========================================== [ Window ] ==
+// Window key press event
+// =========================================================
+void XRayWindow::keyPressEvent(QKeyEvent *event){
+    switch(event->key()){
+        case Qt::Key_Space:
+            loadImage(selectedFilePath);
+            break;
+        default:
+            break;
+    }
+    QWidget::keyPressEvent(event);
+}
+
+
 // ========================================= [ TreeView ] ==
 // Change the Directory of TreeView
 // =========================================================
@@ -205,16 +221,7 @@ void XRayWindow::on_fitWindowSizeButton_clicked(){
     loadImage(selectedFilePath);
 }
 
-void XRayWindow::keyPressEvent(QKeyEvent *event){
-    switch(event->key()){
-        case Qt::Key_Space:
-            loadImage(selectedFilePath);
-            break;
-        default:
-            break;
-    }
-    QWidget::keyPressEvent(event);
-}
+
 
 
 

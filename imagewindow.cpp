@@ -64,6 +64,22 @@ ImageWindow::~ImageWindow()
 //     QWidget::resizeEvent(event);
 // }
 
+
+// =========================================== [ Window ] ==
+// Window key press event
+// =========================================================
+void ImageWindow::keyPressEvent(QKeyEvent *event){
+    switch(event->key()){
+        case Qt::Key_Space:
+            loadImage(selectedFilePath);
+            break;
+        default:
+            break;
+    }
+    QWidget::keyPressEvent(event);
+}
+
+
 // ========================================= [ TreeView ] ==
 // Change the Directory of TreeView
 // =========================================================
@@ -105,23 +121,41 @@ void ImageWindow::loadImage(QString imagePath){
         return;
     }
 
+    int fitScaleRatio = calculateFitScaleRatio();
+    if(ui->scaleSlider->value() == fitScaleRatio){  // If you don't need to set the scale slider
+        QSize newScaledSize = imageSize * (fitScaleRatio / 100.0);
+        QPixmap newScaledPixmap = image.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::FastTransformation);
+        imageLabel->setPixmap(newScaledPixmap);
+    }
+    else{
+        setScaleTools(fitScaleRatio);
+    }
+}
+
+
+// ============================================ [ Image ] ==
+// Calculate the fit scale ratio
+// =========================================================
+int ImageWindow::calculateFitScaleRatio(){
+    if(image.isNull()){
+        return 0;
+    }
+
     imageSize = image.size();
     QSize scrollAreaSize = ui->scrollArea->size();
     scrollAreaSize *= FIT_IMAGE_SIZE_RATIO;
 
-    QPixmap newScaledPixmap;
-    newScaledPixmap = image.scaled(scrollAreaSize, Qt::KeepAspectRatio, Qt::FastTransformation);
-    
-    int scaleRatio = 100 * newScaledPixmap.width() / imageSize.width();
-    if(ui->scaleSlider->value() == scaleRatio){  // If you don't need to set the scale slider
-        QSize newScaledSize = imageSize * (scaleRatio / 100.0);
-        newScaledPixmap = image.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::FastTransformation);
-        imageLabel->setPixmap(newScaledPixmap);
-    }
-    else{
-        setScaleTools(scaleRatio);
-    }
+    qreal scrollAreaHWRatio = scrollAreaSize.height() / (qreal) scrollAreaSize.width();
+    qreal imageHWRatio = imageSize.height() / (qreal) imageSize.width();
+
+    int fitScaleRatio;
+    if( imageHWRatio > scrollAreaHWRatio )
+        fitScaleRatio = 100 * scrollAreaSize.height() / imageSize.height();
+    else
+        fitScaleRatio = 100 * scrollAreaSize.width() / imageSize.width();
+    return fitScaleRatio;
 }
+
 
 // ============================================ [ Image ] ==
 // Refresh image if folder changed
