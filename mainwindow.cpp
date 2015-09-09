@@ -2,7 +2,6 @@
 There are several classes in my classification, like
 [MainWindow]
 [Action]
---[TreeView]
 [X-ray]
 [Image]
 [Development]
