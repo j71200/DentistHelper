@@ -12,15 +12,13 @@ const QString SETTING_ICON_SUFFIX("icons/setting.png");
 const QString XRAY_WINDOW_ICON_SUFFIX("icons/xray_icon.png");
 const QString IMAGE_WINDOW_ICON_SUFFIX("icons/image_icon.png");
 const QString FAQ_ICON_SUFFIX("icons/faq_icon.png");
-// const QString LOCK_ICON_SUFFIX("icons/lock.png");
-// const QString UNLOCK_ICON_SUFFIX("icons/unlock.png");
 
 // Action tip text
 const QString OPEN_FOLDER_TIP_TEXT("Open Folder");
 const QString SETTING_TIP_TEXT("Setting");
 const QString XRAY_WINDOW_TIP_TEXT("X-ray window");
 const QString IMAGE_WINDOW_TIP_TEXT("Image window");
-const QString FAQ_TIP_TEXT("FAQ");
+const QString FAQ_TIP_TEXT("FAQ / About");
 
 
 // Image scale and format
@@ -33,7 +31,7 @@ const QString XRAY_WINDOW_TITLE("X-ray Photo");
 const QString IMAGE_WINDOW_TITLE("Original Photo");
 const QString SETTING_DIALOG_TITLE("Setting");
 const QString MESSAGE_DIALOG_TITLE("Message!");
-const QString FAQ_WINDOW_TITLE("FAQ");
+const QString FAQ_WINDOW_TITLE("FAQ / About");
 const QString HYPHEN(" - ");
 
 // TreeView
@@ -63,6 +61,11 @@ const QString PHOTO_TO_PHOTO_PATH("照片/");
 const QString NOTE_FILE_SUFFIX_NAME("_note.txt");
 const QString NOTE_HINT("How about taking some note");
 
+
+// FAQ / About
+const QString FAQ_TAB_TITLE("FAQ");
+const QString ABOUT_TAB_TITLE("About");
+const QString OK_TEXT("OK");
 
 
 #endif // DEFAULT_SETTING
