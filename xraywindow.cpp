@@ -217,8 +217,8 @@ void XRayWindow::resetImage(){
 // =========================================================
 void XRayWindow::setScaleTools(int value){
     if(value > 0){
-        QString newRatioText = QString::number(value) + "%";
         ui->scaleSlider->setValue(value);
+        QString newRatioText = QString::number(ui->scaleSlider->value()) + "%";
         ui->scaleLabel->setText(newRatioText);
 
         ui->scaleSlider->setVisible(true);
