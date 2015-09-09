@@ -14,8 +14,9 @@ SettingDialog::SettingDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-
-    ui->currentFolderEdit->setText(Preferences::getHomeFolderPath());
+    ui->homeFolderEdit->setText(Preferences::getHomeFolderPath());
+    ui->xrayFolderNameLineEdit->setText(Preferences::getXrayFolderName());
+    ui->imageFolderNameLineEdit->setText(Preferences::getImageFolderName());
 }
 
 SettingDialog::~SettingDialog(){
@@ -28,14 +29,16 @@ void SettingDialog::on_changeFolderButton_clicked(){
         QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
 	if(!dir.isEmpty()){
-        ui->currentFolderEdit->setText(dir);
+        ui->homeFolderEdit->setText(dir);
 	}
 }
 
 void SettingDialog::on_saveButton_clicked(){
-    QDir tempQDir(ui->currentFolderEdit->text());
+    QDir tempQDir(ui->homeFolderEdit->text());
     if(tempQDir.isReadable()){
-        Preferences::setHomeFolderPath(ui->currentFolderEdit->text());
+        Preferences::setHomeFolderPath(ui->homeFolderEdit->text());
+        Preferences::setXrayFolderName(ui->xrayFolderNameLineEdit->text());
+        Preferences::setImageFolderName(ui->imageFolderNameLineEdit->text());
         Preferences::save();
         
         this->accept();

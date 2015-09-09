@@ -25,6 +25,8 @@ QString Preferences::homeFolderPath = DEFAULT_FOLDER_PATH;
 QString Preferences::patientFolderPath = "";
 QString Preferences::patientID = "";
 QString Preferences::inStreamBuffer = "";
+QString Preferences::xrayFolderName = "x-ray";
+QString Preferences::imageFolderName = "照片";
 
 using namespace std;
 

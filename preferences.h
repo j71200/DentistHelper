@@ -45,6 +45,13 @@ public:
                     break;
                 case 2:
                     patientID = line;
+                    break;
+                case 3:
+                    xrayFolderName = line;
+                    break;
+                case 4:
+                    imageFolderName = line;
+                    break;
                 default:
                     inStreamBuffer = line;
                     break;
@@ -64,7 +71,9 @@ public:
         QTextStream outStream(&preferencesFile);
         outStream << homeFolderPath << endl
                   << patientFolderPath << endl
-                  << patientID << endl;
+                  << patientID << endl
+                  << xrayFolderName << endl
+                  << imageFolderName << endl;
         preferencesFile.close();
     }
 
@@ -99,10 +108,31 @@ public:
         return patientID;
     }
 
+    // ========================================== [ Setting ] ==
+    // X-ray folder name
+    // =========================================================
+    static void setXrayFolderName(QString newFolderName){
+        xrayFolderName = newFolderName;
+    }
+    static QString getXrayFolderName(){
+        return xrayFolderName;
+    }
+
+    // ========================================== [ Setting ] ==
+    // Image folder name
+    // =========================================================
+    static void setImageFolderName(QString newFolderName){
+        imageFolderName = newFolderName;
+    }
+    static QString getImageFolderName(){
+        return imageFolderName;
+    }
+
 
 private:
     static QString homeFolderPath, patientFolderPath, patientID;
     static QString inStreamBuffer;
+    static QString xrayFolderName, imageFolderName;
 };
 
 #endif // PREFERENCES_CPP
