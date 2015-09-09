@@ -17,6 +17,7 @@ public:
 
 private slots:
     void on_okButton_clicked();
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     Ui::FAQWindow *ui;

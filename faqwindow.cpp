@@ -1,6 +1,7 @@
 #include "faqwindow.h"
 #include "ui_faqwindow.h"
 #include "default_setting.h"
+#include <QKeyEvent>
 
 FAQWindow::FAQWindow(QWidget *parent) :
     QWidget(parent),
@@ -27,4 +28,15 @@ FAQWindow::~FAQWindow()
 
 void FAQWindow::on_okButton_clicked(){
     this->close();
+}
+
+void FAQWindow::keyPressEvent(QKeyEvent *event){
+    switch(event->key()){
+        case Qt::Key_Escape:
+            this->close();
+            break;
+        default:
+            QWidget::keyPressEvent(event);
+            break;
+    }
 }
