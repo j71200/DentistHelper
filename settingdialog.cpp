@@ -70,10 +70,24 @@ void SettingDialog::on_saveButton_clicked(){
 
 
 // =========================================== [ Window ] ==
-// Dicard button
+// Discard button
 // =========================================================
 void SettingDialog::on_discardButton_clicked(){
     this->reject();
+}
+
+
+// ============================================= [ Home ] ==
+// Open a dialog to change the path of home folder
+// =========================================================
+void SettingDialog::on_changeFolderButton_clicked(){
+    QString dir = QFileDialog::getExistingDirectory(this,
+        tr("Open Folder"), Preferences::getHomeFolderPath(),
+        QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+
+    if(!dir.isEmpty()){
+        ui->homeFolderEdit->setText(dir);
+    }
 }
 
 
@@ -92,19 +106,6 @@ void SettingDialog::checkHomeFolder(QString newHomeFolderPath){
 // =========================================================
 void SettingDialog::on_homeFolderEdit_textChanged(const QString &newHomeFolderPath){
     checkHomeFolder(newHomeFolderPath);
-}
-
-// ============================================= [ Home ] ==
-// Open a dialog to change the path of home folder
-// =========================================================
-void SettingDialog::on_changeFolderButton_clicked(){
-	QString dir = QFileDialog::getExistingDirectory(this,
-        tr("Open Folder"), Preferences::getHomeFolderPath(),
-        QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-
-	if(!dir.isEmpty()){
-        ui->homeFolderEdit->setText(dir);
-	}
 }
 
 
