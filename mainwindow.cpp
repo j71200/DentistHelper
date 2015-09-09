@@ -230,7 +230,7 @@ void MainWindow::on_image_active(){
 
 
 // =========================================== [ Action ] ==
-// Initialize FAQ action
+// Initialize FAQ/About action
 // =========================================================
 void MainWindow::initFAQAction(){
     QString iconPath(APP_FOLDER_PATH + FAQ_ICON_SUFFIX);

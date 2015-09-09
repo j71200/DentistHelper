@@ -8,6 +8,9 @@ FAQWindow::FAQWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // Initialize window
+    this->setFixedSize(this->size());
+
     // Initialize tab
     ui->tabWidget->setTabText(0, FAQ_TAB_TITLE);
     ui->tabWidget->setTabText(1, ABOUT_TAB_TITLE);
