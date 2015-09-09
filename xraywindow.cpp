@@ -187,7 +187,7 @@ void XRayWindow::on_fitWindowSizeButton_clicked(){
 void XRayWindow::keyPressEvent(QKeyEvent *event){
     switch(event->key()){
         case Qt::Key_Space:
-            cout << "space" << endl;
+            loadImage(selectedFilePath);
             break;
         default:
             break;
