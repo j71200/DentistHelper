@@ -1,22 +1,22 @@
-#ifndef FAQ_H
-#define FAQ_H
+#ifndef FAQWINDOW_H
+#define FAQWINDOW_H
 
 #include <QWidget>
 
 namespace Ui {
-class FAQ;
+class FAQWindow;
 }
 
-class FAQ : public QWidget
+class FAQWindow : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit FAQ(QWidget *parent = 0);
-    ~FAQ();
+    explicit FAQWindow(QWidget *parent = 0);
+    ~FAQWindow();
 
 private:
-    Ui::FAQ *ui;
+    Ui::FAQWindow *ui;
 };
 
-#endif // FAQ_H
+#endif // FAQWINDOW_H

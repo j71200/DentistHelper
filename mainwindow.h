@@ -8,6 +8,7 @@
 #include <QLabel>
 #include "xraywindow.h"
 #include "imagewindow.h"
+#include "faqwindow.h"
 
 namespace Ui {
 class MainWindow;
@@ -32,6 +33,7 @@ private slots:
 	void on_setting_active();
     void on_xray_active();
     void on_image_active();
+    void on_faq_active();
 
 	// ===========================
 	//          Listeners
@@ -47,13 +49,14 @@ private:
     void initSettingAction();
     void initOpenXRayWindowAction();
     void initOpenImageWindowAction();
+    void initFAQAction();
 
     // Note
     void saveNote();
     void refreshNote();
 
     // Action
-    QAction *openFolderAct, *settingAct, *xrayAct, *imageAct;
+    QAction *openFolderAct, *settingAct, *xrayAct, *imageAct, *faqAct;
 
     // Folder/File system
     QFileSystemModel *model;
@@ -61,6 +64,7 @@ private:
 
     XRayWindow *xrayWindowPtr;
     ImageWindow *imageWindowPtr;
+    FAQWindow *faqWindowPtr;
 
 };
 

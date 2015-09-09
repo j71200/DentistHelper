@@ -16,7 +16,8 @@ SOURCES += main.cpp\
     settingdialog.cpp \
     messagedialog.cpp \
     xraywindow.cpp \
-    imagewindow.cpp
+    imagewindow.cpp \
+    faqwindow.cpp
 
 HEADERS  += mainwindow.h \
     default_setting.h \
@@ -25,10 +26,12 @@ HEADERS  += mainwindow.h \
     xraywindow.h \
     imagewindow.h \
     preferences.h \
-    customtreeview.h
+    customtreeview.h \
+    faqwindow.h
 
 FORMS    += mainwindow.ui \
     settingdialog.ui \
     messagedialog.ui \
     xraywindow.ui \
-    imagewindow.ui
+    imagewindow.ui \
+    faqwindow.ui

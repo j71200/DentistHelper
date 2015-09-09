@@ -106,6 +106,8 @@ void XRayWindow::changeTreeView(QString dir){
 // Refresh the TreeView when patient changed
 // =========================================================
 void XRayWindow::on_patientChanged(QString newPatientFolderPath){
+    this->setWindowTitle(XRAY_WINDOW_TITLE + HYPHEN + Preferences::getPatientID());
+
     changeTreeView(newPatientFolderPath + QDir::separator() + XRAY_TO_XRAY_PATH);
 
     resetImage();

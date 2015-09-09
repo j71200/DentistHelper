@@ -106,6 +106,8 @@ void ImageWindow::changeTreeView(QString dir){
 // Refresh the TreeView when patient changed
 // =========================================================
 void ImageWindow::on_patientChanged(QString newPatientFolderPath){
+    this->setWindowTitle(IMAGE_WINDOW_TITLE + HYPHEN + Preferences::getPatientID());
+
     changeTreeView(newPatientFolderPath + QDir::separator() + PHOTO_TO_PHOTO_PATH);
 
     resetImage();

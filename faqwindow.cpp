@@ -1,14 +1,14 @@
-#include "faq.h"
-#include "ui_faq.h"
+#include "faqwindow.h"
+#include "ui_faqwindow.h"
 
-FAQ::FAQ(QWidget *parent) :
+FAQWindow::FAQWindow(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::FAQ)
+    ui(new Ui::FAQWindow)
 {
     ui->setupUi(this);
 }
 
-FAQ::~FAQ()
+FAQWindow::~FAQWindow()
 {
     delete ui;
 }
