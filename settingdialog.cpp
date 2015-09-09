@@ -14,11 +14,18 @@ SettingDialog::SettingDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // Home folder
     ui->homeFolderEdit->setText(Preferences::getHomeFolderPath());
+
+    // X-ray folder
     ui->xrayFolderNameLineEdit->setText(Preferences::getXrayFolderName());
+    ui->xrayPathPrefixLabel->setText(Preferences::getPatientFolderPath() + QDir::separator());
     ui->xrayCorrectMsgLabel->setText("");
-    ui->imageFolderNameLineEdit->setText(Preferences::getImageFolderName());
-    ui->imageCorrectMsgLabel->setText("");
+
+    // Image folder
+    ui->imgFolderNameLineEdit->setText(Preferences::getImageFolderName());
+    ui->imgPathPrefixLabel->setText(Preferences::getPatientFolderPath() + QDir::separator());
+    ui->imgCorrectMsgLabel->setText("");
 }
 
 SettingDialog::~SettingDialog(){
@@ -40,7 +47,7 @@ void SettingDialog::on_saveButton_clicked(){
     if(tempQDir.isReadable()){
         Preferences::setHomeFolderPath(ui->homeFolderEdit->text());
         Preferences::setXrayFolderName(ui->xrayFolderNameLineEdit->text());
-        Preferences::setImageFolderName(ui->imageFolderNameLineEdit->text());
+        Preferences::setImageFolderName(ui->imgFolderNameLineEdit->text());
         Preferences::save();
         
         this->accept();

@@ -15,14 +15,14 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
+    <widget class="QLabel" name="homeFolderLabel">
+     <property name="text">
+      <string>Home Folder</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="homeFolderLabel">
-       <property name="text">
-        <string>Home Folder</string>
-       </property>
-      </widget>
-     </item>
      <item>
       <widget class="QLineEdit" name="homeFolderEdit"/>
      </item>
@@ -36,11 +36,25 @@
     </layout>
    </item>
    <item>
+    <widget class="Line" name="line_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="xrayFolderNameLabel">
+     <property name="text">
+      <string>X-ray Folder Name</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QLabel" name="xrayFolderNameLabel">
+      <widget class="QLabel" name="xrayPathPrefixLabel">
        <property name="text">
-        <string>X-ray Folder Name</string>
+        <string>xrayPathPrefixLabel</string>
        </property>
       </widget>
      </item>
@@ -57,21 +71,35 @@
     </layout>
    </item>
    <item>
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="imageFolderNameLabel">
+     <property name="text">
+      <string>Image Folder Name</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
-      <widget class="QLabel" name="imageFolderNameLabel">
+      <widget class="QLabel" name="imgPathPrefixLabel">
        <property name="text">
-        <string>Image Folder Name</string>
+        <string>imgPathPrefixLabel</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="imageFolderNameLineEdit"/>
+      <widget class="QLineEdit" name="imgFolderNameLineEdit"/>
      </item>
      <item>
-      <widget class="QLabel" name="imageCorrectMsgLabel">
+      <widget class="QLabel" name="imgCorrectMsgLabel">
        <property name="text">
-        <string>imageCorrectMsgLabel</string>
+        <string>imgCorrectMsgLabel</string>
        </property>
       </widget>
      </item>
