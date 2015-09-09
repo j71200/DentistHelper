@@ -46,6 +46,7 @@ MainWindow::MainWindow(QWidget *parent) :
     initOpenXRayWindowAction();
     initOpenImageWindowAction();
     initSettingAction();
+    initFAQAction();
 
 
     // ========================
@@ -73,7 +74,7 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow(){
     delete ui;
     delete openFolderAct, settingAct, xrayAct, imageAct;
-    delete xrayWindowPtr, imageWindowPtr;
+    delete xrayWindowPtr, imageWindowPtr, faqWindowPtr;
 }
 
 
@@ -111,6 +112,9 @@ void MainWindow::initWindows(){
         xrayWindowPtr->setWindowTitle(XRAY_WINDOW_TITLE + HYPHEN + Preferences::getPatientID());
         imageWindowPtr->setWindowTitle(IMAGE_WINDOW_TITLE + HYPHEN + Preferences::getPatientID());
     }
+
+    // Initialize the FAQ window
+    faqWindowPtr = NULL;
 }
 
 // ======================================= [ MainWindow ] ==
@@ -221,6 +225,37 @@ void MainWindow::on_image_active(){
     else{
         imageWindowPtr->raise();
         imageWindowPtr->activateWindow();
+    }
+}
+
+
+// =========================================== [ Action ] ==
+// Initialize FAQ action
+// =========================================================
+void MainWindow::initFAQAction(){
+    QString iconPath(APP_FOLDER_PATH + FAQ_ICON_SUFFIX);
+    faqAct = new QAction(QIcon( iconPath ), FAQ_TIP_TEXT, this);
+    faqAct->setStatusTip(FAQ_TIP_TEXT);
+    connect(faqAct, SIGNAL(triggered()), this, SLOT(on_faq_active()));
+
+    ui->menuFile->addAction(faqAct);
+    ui->mainToolBar->addAction(faqAct);
+}
+
+void MainWindow::on_faq_active(){
+    if(faqWindowPtr == NULL){
+        faqWindowPtr = new FAQWindow();
+        faqWindowPtr->setWindowTitle(FAQ_WINDOW_TITLE);
+        faqWindowPtr->show();
+    }
+    else{
+        if(faqWindowPtr->isHidden()){
+            faqWindowPtr->show();
+        }
+        else{
+            faqWindowPtr->raise();
+            faqWindowPtr->activateWindow();
+        }
     }
 }
 
