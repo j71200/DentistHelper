@@ -4,6 +4,7 @@
 #include "preferences.h"
 #include <QDir>
 #include "default_setting.h"
+#include "messagedialog.h"
 
 ImageWindow::ImageWindow(QWidget *parent) :
     QWidget(parent),
@@ -84,18 +85,26 @@ void ImageWindow::keyPressEvent(QKeyEvent *event){
 // ========================================= [ TreeView ] ==
 // Change the Directory of TreeView
 // =========================================================
-void ImageWindow::changeTreeView(QString dir){
-    if(dir.isEmpty())
+void ImageWindow::changeTreeView(QString rootPath){
+    if(rootPath.isEmpty())
         return;
 
+    if(!QDir(rootPath).isReadable()){
+        MessageDialog mMessageDialog;
+        mMessageDialog.setWindowTitle(MESSAGE_DIALOG_TITLE);
+        mMessageDialog.setMessage("Wrong image folder path!");
+        mMessageDialog.setFixedSize(mMessageDialog.size());
+        mMessageDialog.exec();
+    }
+
     // Set file system model
-    model->setRootPath(dir);
+    model->setRootPath(rootPath);
     model->setNameFilters(READABLE_IMAGE_LIST);
     model->setNameFilterDisables(false);
     ui->treeView->setModel(model);
     
     // Set the treeView so that it will only show particular folder
-    ui->treeView->setRootIndex(model->index(dir));
+    ui->treeView->setRootIndex(model->index(rootPath));
     // Hide the useless columns, like file size, kind and date modified
     for(int i = 1; i < model->columnCount(); i++){
         ui->treeView->setColumnHidden(i, true);
