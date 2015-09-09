@@ -24,8 +24,21 @@ private slots:
 
     void on_discardButton_clicked();
 
+    void on_homeFolderEdit_textChanged(const QString &newHomeFolderPath);
+
+    void on_xrayFolderNameLineEdit_textChanged(const QString &newHomeFolderPath);
+
+    void on_imgFolderNameLineEdit_textChanged(const QString &newHomeFolderPath);
+
 private:
     Ui::SettingDialog *ui;
+    QPixmap legalIcon;
+    QPixmap illegalIcon;
+
+    void checkHomeFolder(QString newHomeFolderPath);
+    void checkXRayFolderName(QString newFolderName);
+    void checkImageFolderName(QString newFolderName);
+
 };
 
 #endif // SETTINGDIALOG_H

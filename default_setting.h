@@ -12,6 +12,8 @@ const QString SETTING_ICON_SUFFIX("icons/setting.png");
 const QString XRAY_WINDOW_ICON_SUFFIX("icons/xray_icon.png");
 const QString IMAGE_WINDOW_ICON_SUFFIX("icons/image_icon.png");
 const QString FAQ_ICON_SUFFIX("icons/faq_icon.png");
+const QString CHECK_ICON_SUFFIX("icons/check_icon.png");
+const QString CROSS_ICON_SUFFIX("icons/cross_icon.png");
 
 // Action tip text
 const QString OPEN_FOLDER_TIP_TEXT("Open Folder");
@@ -43,7 +45,7 @@ const int MAX_SCALE_RATIO = 300;
 const int SLIDER_SINGLE_STEP = 10;
 
 // Icon size
-// const QSize DEFAULT_ICON_SIZE(30, 30);
+const QSize DEFAULT_ICON_SIZE(20, 20);
 
 // ==================
 // String

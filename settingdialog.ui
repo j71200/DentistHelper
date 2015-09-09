@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>615</width>
-    <height>300</height>
+    <height>302</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,12 +24,19 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLineEdit" name="homeFolderEdit"/>
-     </item>
-     <item>
       <widget class="QPushButton" name="changeFolderButton">
        <property name="text">
         <string>Change Folder</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="homeFolderEdit"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="homeCorrectMsgLabel">
+       <property name="text">
+        <string>homeCorrectMsgLabel</string>
        </property>
       </widget>
      </item>
@@ -45,7 +52,7 @@
    <item>
     <widget class="QLabel" name="xrayFolderNameLabel">
      <property name="text">
-      <string>X-ray Folder Name</string>
+      <string>X-ray Folder</string>
      </property>
     </widget>
    </item>
@@ -80,7 +87,7 @@
    <item>
     <widget class="QLabel" name="imageFolderNameLabel">
      <property name="text">
-      <string>Image Folder Name</string>
+      <string>Image Folder</string>
      </property>
     </widget>
    </item>
