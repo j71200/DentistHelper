@@ -19,6 +19,12 @@ FAQWindow::FAQWindow(QWidget *parent) :
 
     // Initialize button
     ui->okButton->setText(OK_TEXT);
+    ui->okButton->setAutoDefault(true);
+    ui->okButton->setFocusPolicy(Qt::StrongFocus);
+
+    // Initialize FAQ
+    ui->faqTextBrowser->setFocusPolicy(Qt::NoFocus);
+    ui->aboutTextBrowser->setFocusPolicy(Qt::NoFocus);
 }
 
 FAQWindow::~FAQWindow()
