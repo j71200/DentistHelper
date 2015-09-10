@@ -44,6 +44,13 @@ MainWindow::MainWindow(QWidget *parent) :
     initWindows();
 
     // ==================
+    // Debug window
+    // ==================
+    // debugWindowPtr = new DebugWindow();
+    // debugWindowPtr->move(0, SCREEN_HEIGHT * 3 / 2);
+    // debugWindowPtr->show();
+
+    // ==================
     // Initialize actions
     // ==================
     initOpenFolderAction();
@@ -141,11 +148,6 @@ void MainWindow::initWindows(){
     // Initialize the FAQ window
     faqWindowPtr = NULL;
 
-    // Debug window
-    debugWindowPtr = new DebugWindow();
-    debugWindowPtr->move(0, SCREEN_HEIGHT * 3 / 2);
-    debugWindowPtr->show();
-
 }
 
 // ======================================= [ MainWindow ] ==
@@ -205,7 +207,6 @@ void MainWindow::on_openFolder_active(){
             imageWindowPtr->show();
             imageAct->setChecked(true);
         }
-
 
         emit patientChangedSignal(newPatientPath);
     }
