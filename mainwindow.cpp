@@ -20,7 +20,6 @@ There are several classes in my classification, like
 #include <QRect>
 #include <QDesktopWidget>
 #include "messagedialog.h"
-#include "systemstate.h"
 
 
 QString Preferences::homeFolderPath = DEFAULT_FOLDER_PATH;
@@ -30,7 +29,7 @@ QString Preferences::inStreamBuffer = "";
 QString Preferences::xrayFolderName = DEFAULT_XRAY_FOLDER_NAME;
 QString Preferences::imageFolderName = DEFAULT_IMAGE_FOLDER_NAME;
 
-bool SystemState::isActive = false;
+//bool SystemState::isActive = false;
 
 
 using namespace std;
@@ -67,7 +66,10 @@ MainWindow::MainWindow(QWidget *parent) :
     // Initialize note
     // ===============
     ui->noteTextEdit->setPlaceholderText(NOTE_HINT);
-    refreshNote();
+    if(Preferences::getPatientID().isEmpty())
+        ui->noteTextEdit->setEnabled(false);
+    else
+        refreshNote();
 
 
     // ===============
@@ -317,10 +319,8 @@ void MainWindow::refreshNote(){
     QFile noteFile(Preferences::getPatientFolderPath() + QDir::separator()
         + Preferences::getPatientID() + NOTE_FILE_SUFFIX_NAME);
 
-    if( !SystemState::getIsActive()
-        || !noteFile.open(QIODevice::ReadOnly | QIODevice::Text) ){
+    if(!noteFile.open(QIODevice::ReadOnly | QIODevice::Text) ){
         cout << "Read note file failed" << endl;
-        ui->noteTextEdit->setEnabled(false);
     }
     else{
         cout << "Read note file successfully" << endl;
@@ -328,7 +328,6 @@ void MainWindow::refreshNote(){
         while (!inStream.atEnd()) {
             ui->noteTextEdit->appendPlainText(inStream.readLine());
         }
-        ui->noteTextEdit->setEnabled(true);
     }
     noteFile.close();
 }

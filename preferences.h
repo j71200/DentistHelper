@@ -68,6 +68,10 @@ public:
             return;
         }
         QTextStream outStream(&preferencesFile);
+        outStream << "######################" << endl
+                  << "Case Viewer ver.1.0"    << endl
+                  << "Don't modify this file"
+                  << "######################" << endl;
         outStream << homeFolderPath << endl
                   << patientFolderPath << endl
                   << patientID << endl

@@ -6,16 +6,16 @@ public:
     SystemState(){}
     ~SystemState(){}
 
-    static bool getIsActive(){
-        return isActive;
-    }
+    // static bool getIsActive(){
+    //     return isActive;
+    // }
 
-    static void setIsActive(bool arg){
-        isActive = arg;
-    }
+    // static void setIsActive(bool arg){
+    //     isActive = arg;
+    // }
 
-private:
-    static bool isActive; // True if user select a patient; false if not.
+// private:
+    // static bool isActive; // True if user select a patient; false if not.
 };
 
 
