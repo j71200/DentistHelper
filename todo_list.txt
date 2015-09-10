@@ -1,4 +1,2 @@
 TODO LIST
 
-1. 設定preference為唯讀。
-

@@ -23,12 +23,18 @@ SettingDialog::SettingDialog(QWidget *parent) :
     ui->homeCorrectMsgLabel->setText("");
 
     // X-ray folder
-    ui->xrayPathPrefixLabel->setText(Preferences::getPatientFolderPath() + QDir::separator());
+    if(!Preferences::getPatientFolderPath().isEmpty())
+        ui->xrayPathPrefixLabel->setText(Preferences::getPatientFolderPath() + QDir::separator());
+    else
+        ui->xrayPathPrefixLabel->setText("");
     ui->xrayFolderNameLineEdit->setText(Preferences::getXrayFolderName());
     ui->xrayCorrectMsgLabel->setText("");
 
     // Image folder
-    ui->imgPathPrefixLabel->setText(Preferences::getPatientFolderPath() + QDir::separator());
+    if(!Preferences::getPatientFolderPath().isEmpty())
+        ui->imgPathPrefixLabel->setText(Preferences::getPatientFolderPath() + QDir::separator());
+    else
+        ui->imgPathPrefixLabel->setText("");
     ui->imgFolderNameLineEdit->setText(Preferences::getImageFolderName());
     ui->imgCorrectMsgLabel->setText("");
 

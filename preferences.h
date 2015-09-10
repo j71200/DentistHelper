@@ -69,10 +69,12 @@ public:
 
     static void save(){
         QFile preferencesFile(PREFERENCES_FILE_PATH);
+        preferencesFile.setPermissions(QFileDevice::WriteOwner);
         if (!preferencesFile.open(QIODevice::WriteOnly | QIODevice::Text)){
             cout << "Write preference file failed" << endl;
             return;
         }
+        
         QTextStream outStream(&preferencesFile);
         for(int i = 0; i < PREFERENCE_FILE_WARNING_LINES.size(); i++){
             outStream << PREFERENCE_FILE_WARNING_LINES.at(i);
@@ -82,6 +84,7 @@ public:
                   << patientID << endl
                   << xrayFolderName << endl
                   << imageFolderName << endl;
+        preferencesFile.setPermissions(QFileDevice::ReadOwner);
         preferencesFile.close();
     }
 
