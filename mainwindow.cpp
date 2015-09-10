@@ -87,8 +87,10 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->patientIDLabel->setText(Preferences::getPatientID());
         refreshNote();
         xrayWindowPtr->show();
+        xrayAct->setEnabled(true);
         xrayAct->setChecked(true);
         imageWindowPtr->show();
+        imageAct->setEnabled(true);
         imageAct->setChecked(true);
     }
     else{
@@ -96,6 +98,8 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->noteTextEdit->setEnabled(false);
         Preferences::setPatientFolderPath("");
         Preferences::setPatientID("");
+        xrayAct->setEnabled(false);
+        imageAct->setEnabled(false);
     }
 
 }
@@ -286,14 +290,20 @@ void MainWindow::initOpenXRayWindowAction(){
 }
 
 void MainWindow::on_xray_active(){
-    if( !Preferences::getPatientID().isEmpty() && xrayWindowPtr->isHidden() ){
-        xrayWindowPtr->show();
-        xrayAct->setChecked(true);
+    if(Preferences::getPatientID().isEmpty()){
+        return;
     }
-    else{
-        xrayWindowPtr->raise();
-        xrayWindowPtr->activateWindow();
-    }
+
+    xrayWindowPtr->setVisible(!xrayWindowPtr->isVisible());
+
+    // if( !Preferences::getPatientID().isEmpty() && xrayWindowPtr->isHidden() ){
+    //     xrayWindowPtr->show();
+    //     xrayAct->setChecked(true);
+    // }
+    // else{
+    //     xrayWindowPtr->raise();
+    //     xrayWindowPtr->activateWindow();
+    // }
 }
 
 // =========================================== [ Action ] ==
