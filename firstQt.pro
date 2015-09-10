@@ -29,7 +29,6 @@ HEADERS  += mainwindow.h \
     preferences.h \
     customtreeview.h \
     faqwindow.h \
-    systemstate.h \
     debugwindow.h
 
 FORMS    += mainwindow.ui \
