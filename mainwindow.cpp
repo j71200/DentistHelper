@@ -84,7 +84,9 @@ MainWindow::MainWindow(QWidget *parent) :
         ui->patientIDLabel->setText(Preferences::getPatientID());
         refreshNote();
         xrayWindowPtr->show();
+        xrayAct->setChecked(true);
         imageWindowPtr->show();
+        imageAct->setChecked(true);
     }
     else{
         ui->patientIDLabel->setText("");
@@ -195,10 +197,14 @@ void MainWindow::on_openFolder_active(){
         refreshNote();
         ui->patientIDLabel->setText(Preferences::getPatientID());
 
-        if(xrayWindowPtr->isHidden())
+        if(xrayWindowPtr->isHidden()){
             xrayWindowPtr->show();
-        if(imageWindowPtr->isHidden())
+            xrayAct->setChecked(true);
+        }
+        if(imageWindowPtr->isHidden()){
             imageWindowPtr->show();
+            imageAct->setChecked(true);
+        }
 
 
         emit patientChangedSignal(newPatientPath);
@@ -276,6 +282,8 @@ void MainWindow::initOpenXRayWindowAction(){
     xrayAct->setStatusTip(XRAY_WINDOW_TIP_TEXT);
     connect(xrayAct, SIGNAL(triggered()), this, SLOT(on_xray_active()));
 
+    xrayAct->setCheckable(true);
+
     ui->menuWindow->addAction(xrayAct);
     ui->mainToolBar->addAction(xrayAct);
 }
@@ -283,6 +291,7 @@ void MainWindow::initOpenXRayWindowAction(){
 void MainWindow::on_xray_active(){
     if( !Preferences::getPatientID().isEmpty() && xrayWindowPtr->isHidden() ){
         xrayWindowPtr->show();
+        xrayAct->setChecked(true);
     }
     else{
         xrayWindowPtr->raise();
@@ -299,6 +308,8 @@ void MainWindow::initOpenImageWindowAction(){
     imageAct->setStatusTip(IMAGE_WINDOW_TIP_TEXT);
     connect(imageAct, SIGNAL(triggered()), this, SLOT(on_image_active()));
 
+    imageAct->setCheckable(true);
+
     ui->menuWindow->addAction(imageAct);
     ui->mainToolBar->addAction(imageAct);
 }
@@ -306,6 +317,7 @@ void MainWindow::initOpenImageWindowAction(){
 void MainWindow::on_image_active(){
     if( !Preferences::getPatientID().isEmpty() && imageWindowPtr->isHidden() ){
         imageWindowPtr->show();
+        imageAct->setChecked(true);
     }
     else{
         imageWindowPtr->raise();
