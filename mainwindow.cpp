@@ -178,6 +178,7 @@ void MainWindow::on_openFolder_active(){
         Preferences::setPatientFolderPath(newPatientPath);
         Preferences::save();
 
+        ui->noteTextEdit->setEnabled(true);
         refreshNote();
         ui->patientIDLabel->setText(Preferences::getPatientID());
 

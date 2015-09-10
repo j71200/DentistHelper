@@ -19,6 +19,13 @@ XRayWindow::XRayWindow(QWidget *parent) :
     xrayLabel = new QLabel;
 
 
+    // =================
+    // Initialize layout
+    // =================
+    ui->treeView->setMaximumWidth(MAX_TREEVIEW_WIDTH);
+    ui->scaleSlider->setMaximumWidth(MAX_TREEVIEW_WIDTH);
+
+
     // ======================
     // Initialize image block
     // ======================
@@ -38,9 +45,10 @@ XRayWindow::XRayWindow(QWidget *parent) :
     // ===================
     // Initialize TreeView
     // ===================
-    ui->treeView->setMaximumWidth(MAX_TREEVIEW_WIDTH);
-    ui->scaleSlider->setMaximumWidth(MAX_TREEVIEW_WIDTH);
-    changeTreeView(Preferences::getPatientFolderPath() + QDir::separator() + Preferences::getXrayFolderName());
+    if(Preferences::getPatientID().isEmpty())
+        ui->treeView->setEnabled(false);
+    else
+        changeTreeView(Preferences::getPatientFolderPath() + QDir::separator() + Preferences::getXrayFolderName());
 
     // =====================
     // Connecting
@@ -117,6 +125,7 @@ void XRayWindow::changeTreeView(QString rootPath){
 void XRayWindow::on_patientChanged(QString newPatientFolderPath){
     this->setWindowTitle(XRAY_WINDOW_TITLE + HYPHEN + Preferences::getPatientID());
 
+    ui->treeView->setEnabled(true);
     changeTreeView(newPatientFolderPath + QDir::separator() + Preferences::getXrayFolderName());
 
     resetImage();

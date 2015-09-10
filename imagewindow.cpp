@@ -19,6 +19,12 @@ ImageWindow::ImageWindow(QWidget *parent) :
     imageLabel = new QLabel;
 
 
+    // =================
+    // Initialize layout
+    // =================
+    ui->treeView->setMaximumWidth(MAX_TREEVIEW_WIDTH);
+    ui->scaleSlider->setMaximumWidth(MAX_TREEVIEW_WIDTH);
+
     // ======================
     // Initialize image block
     // ======================
@@ -38,8 +44,6 @@ ImageWindow::ImageWindow(QWidget *parent) :
     // ===================
     // Initialize TreeView
     // ===================
-    ui->treeView->setMaximumWidth(MAX_TREEVIEW_WIDTH);
-    ui->scaleSlider->setMaximumWidth(MAX_TREEVIEW_WIDTH);
     changeTreeView(Preferences::getPatientFolderPath() + QDir::separator() + Preferences::getImageFolderName());
 
     // =====================
