@@ -90,13 +90,6 @@ const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE_4("」資料夾！\n請確定有�
 const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE_5("」資料夾和「");
 const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE_6("」資料夾或是修改「設定」中的資料夾名稱使它們和病人資料夾裡的名稱一致");
 
-// const QString WRONG_XRAY_FOLDER_MESSAGE("在這個病人資料夾底下找不到X光資料夾！\n請確定有X光資料夾或是確定「設定」中的X光資料夾和病人資料夾裡面的名稱一致");
-// const QString WRONG_IMAGE_FOLDER_MESSAGE("在這個病人資料夾底下找不到一般照片資料夾！\n請確定有一般照片資料夾或是確定「設定」中的一般照片資料夾和病人資料夾裡面的名稱一致");
-// const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE("在這個病人資料夾底下找不到X光資料夾！\n請確定有X光資料夾或是確定「設定」中的X光資料夾和病人資料夾裡面的名稱一致");
-// const QString WRONG_XRAY_FOLDER_MESSAGE("Wrong x-ray folder path!\nPlease check your x-ray folder name\nor correct the X-RAY FOLDER NAME in setting.");
-// const QString WRONG_IMAGE_FOLDER_MESSAGE("Wrong image folder path!\nPlease check your image folder name\nor correct the IMAGE FOLDER NAME in setting.");
-// const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE("Wrong x-ray and image folder path!\nPlease check your x-ray and image folder name\nor correct both the X-RAY FOLDER NAME\nand IMAGE FOLDER NAME in setting.");
-
 
 // Preference file
 const QStringList PREFERENCE_FILE_WARNING_LINES = QStringList()

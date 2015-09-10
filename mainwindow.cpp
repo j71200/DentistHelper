@@ -90,6 +90,8 @@ MainWindow::MainWindow(QWidget *parent) :
     else{
         ui->patientIDLabel->setText("");
         ui->noteTextEdit->setEnabled(false);
+        Preferences::setPatientFolderPath("");
+        Preferences::setPatientID("");
     }
 
 }
