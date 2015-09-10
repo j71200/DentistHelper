@@ -2,8 +2,8 @@
 Case Viewer ver.1.0
 Warning!! Don't modify this file!
 =====================================
-/Users/blue/QtWorkspace/firstQt/data
-/Users/blue/QtWorkspace/firstQt/data/01 - 江慧君
-01 - 江慧君
+/Users/blue/
+
+
 x-rays
 照片

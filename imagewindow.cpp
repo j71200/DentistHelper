@@ -44,7 +44,10 @@ ImageWindow::ImageWindow(QWidget *parent) :
     // ===================
     // Initialize TreeView
     // ===================
-    changeTreeView(Preferences::getPatientFolderPath() + QDir::separator() + Preferences::getImageFolderName());
+    if(Preferences::getPatientID().isEmpty())
+        ui->treeView->setEnabled(false);
+    else
+        changeTreeView(Preferences::getPatientFolderPath() + QDir::separator() + Preferences::getImageFolderName());
 
     // =====================
     // Connecting
@@ -121,6 +124,7 @@ void ImageWindow::changeTreeView(QString rootPath){
 void ImageWindow::on_patientChanged(QString newPatientFolderPath){
     this->setWindowTitle(IMAGE_WINDOW_TITLE + HYPHEN + Preferences::getPatientID());
 
+    ui->treeView->setEnabled(true);
     changeTreeView(newPatientFolderPath + QDir::separator() + Preferences::getImageFolderName());
 
     resetImage();
