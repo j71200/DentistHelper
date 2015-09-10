@@ -199,14 +199,16 @@ void MainWindow::on_openFolder_active(){
         refreshNote();
         ui->patientIDLabel->setText(Preferences::getPatientID());
 
-        if(xrayWindowPtr->isHidden()){
-            xrayWindowPtr->show();
-            xrayAct->setChecked(true);
-        }
-        if(imageWindowPtr->isHidden()){
-            imageWindowPtr->show();
-            imageAct->setChecked(true);
-        }
+        // if(xrayWindowPtr->isHidden()){
+        //     xrayWindowPtr->show();
+        //     xrayAct->setEnabled(true);
+        //     xrayAct->setChecked(true);
+        // }
+        // if(imageWindowPtr->isHidden()){
+        //     imageWindowPtr->show();
+        //     imageAct->setEnabled(true);
+        //     imageAct->setChecked(true);
+        // }
 
         emit patientChangedSignal(newPatientPath);
     }
@@ -322,14 +324,20 @@ void MainWindow::initOpenImageWindowAction(){
 }
 
 void MainWindow::on_image_active(){
-    if( !Preferences::getPatientID().isEmpty() && imageWindowPtr->isHidden() ){
-        imageWindowPtr->show();
-        imageAct->setChecked(true);
+    if(Preferences::getPatientID().isEmpty()){
+        return;
     }
-    else{
-        imageWindowPtr->raise();
-        imageWindowPtr->activateWindow();
-    }
+
+    imageWindowPtr->setVisible(!imageWindowPtr->isVisible());
+    
+    // if( !Preferences::getPatientID().isEmpty() && imageWindowPtr->isHidden() ){
+    //     imageWindowPtr->show();
+    //     imageAct->setChecked(true);
+    // }
+    // else{
+    //     imageWindowPtr->raise();
+    //     imageWindowPtr->activateWindow();
+    // }
 }
 
 
