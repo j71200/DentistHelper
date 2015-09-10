@@ -9,6 +9,7 @@
 #include "xraywindow.h"
 #include "imagewindow.h"
 #include "faqwindow.h"
+#include "debugwindow.h"
 
 namespace Ui {
 class MainWindow;
@@ -65,6 +66,9 @@ private:
     XRayWindow *xrayWindowPtr;
     ImageWindow *imageWindowPtr;
     FAQWindow *faqWindowPtr;
+
+    // Debug
+    DebugWindow *debugWindowPtr;
 
 };
 

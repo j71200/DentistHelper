@@ -29,8 +29,15 @@ public:
 
         QTextStream inStream(&preferencesFile);
         int i = 0;
+        while(!inStream.atEnd() && i < PREFERENCE_FILE_WARNING_LINES.size()){
+            inStream.readLine();
+            i++;
+        }
+
+        i = -1;
         QString line;
         while(!inStream.atEnd()) {
+            i++;
             line = inStream.readLine();
             if(line.isEmpty())
                 continue;
@@ -55,7 +62,6 @@ public:
                     inStreamBuffer = line;
                     break;
             }
-            i++;
         }
         preferencesFile.close();
         return true;
@@ -68,10 +74,9 @@ public:
             return;
         }
         QTextStream outStream(&preferencesFile);
-        outStream << "######################" << endl
-                  << "Case Viewer ver.1.0"    << endl
-                  << "Don't modify this file"
-                  << "######################" << endl;
+        for(int i = 0; i < PREFERENCE_FILE_WARNING_LINES.size(); i++){
+            outStream << PREFERENCE_FILE_WARNING_LINES.at(i);
+        }
         outStream << homeFolderPath << endl
                   << patientFolderPath << endl
                   << patientID << endl

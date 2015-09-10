@@ -74,5 +74,12 @@ const QString WRONG_IMAGE_FOLDER_MESSAGE("Wrong image folder path!\nPlease check
 const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE("Wrong x-ray and image folder path!\nPlease check your x-ray and image folder name\nor correct both the X-RAY FOLDER NAME\nand IMAGE FOLDER NAME in setting.");
 
 
+// Preference file
+const QStringList PREFERENCE_FILE_WARNING_LINES = QStringList()
+	<< "=====================================\n"
+	<< "Warning!!\n"
+	<< "=====================================\n";
+
+
 #endif // DEFAULT_SETTING
 
