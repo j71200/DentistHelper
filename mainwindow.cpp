@@ -380,8 +380,8 @@ void MainWindow::saveNote(){
         cout << "Open note file for writing fail" << endl;
         return;
     }
-
-    QString noteText = ui->noteTextEdit->toPlainText();
+    
+    QString noteText = ui->noteTextEdit->toHtml();
     QTextStream outStream(&noteFile);
     outStream << noteText;
     noteFile.close();
@@ -402,9 +402,11 @@ void MainWindow::refreshNote(){
     else{
         cout << "Read note file successfully" << endl;
         QTextStream inStream(&noteFile);
+        QString tempHTML = "";
         while (!inStream.atEnd()) {
-            ui->noteTextEdit->appendPlainText(inStream.readLine());
+            tempHTML += inStream.readLine();
         }
+        ui->noteTextEdit->setHtml(tempHTML);
     }
     noteFile.close();
 }
@@ -413,6 +415,11 @@ void MainWindow::refreshNote(){
 // Test Button
 // =========================================================
 void MainWindow::on_testButton_clicked(){
+
+    QColor bb = QColor(Qt::blue);
+
+    ui->noteTextEdit->setTextColor(bb);
+
 
     // QDesktopServices::openUrl(QUrl("file:///Users/blue/aaa.pdf", QUrl::TolerantMode));
     // QDesktopServices::openUrl(QUrl("file:///Users/blue/Desktop/實數的建構.pdf", QUrl::TolerantMode));

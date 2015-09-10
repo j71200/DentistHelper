@@ -23,7 +23,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QPlainTextEdit" name="noteTextEdit"/>
+     <widget class="QTextEdit" name="noteTextEdit"/>
     </item>
     <item>
      <widget class="QPushButton" name="testButton">
