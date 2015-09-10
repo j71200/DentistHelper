@@ -43,9 +43,10 @@ MainWindow::MainWindow(QWidget *parent) :
     // ==================
     initWindows();
 
-    // ==================
+    // ======================================
     // Debug window
-    // ==================
+    // Remember toe delete the debugWindowPtr
+    // ======================================
     // debugWindowPtr = new DebugWindow();
     // debugWindowPtr->move(0, SCREEN_HEIGHT * 3 / 2);
     // debugWindowPtr->show();
@@ -61,15 +62,10 @@ MainWindow::MainWindow(QWidget *parent) :
     initFAQAction();
 
 
-    // ========================
-    // Initialize patient label
-    // ========================
+    // ==================
+    // Initialize some UI
+    // ==================
     ui->patientIDLabel->setAlignment(Qt::AlignCenter);
-
-
-    // ===============
-    // Initialize note
-    // ===============
     ui->noteTextEdit->setPlaceholderText(NOTE_HINT);
 
 
@@ -108,7 +104,7 @@ MainWindow::~MainWindow(){
     delete ui;
     delete openFolderAct, settingAct, xrayAct, imageAct;
     delete xrayWindowPtr, imageWindowPtr, faqWindowPtr;
-    delete debugWindowPtr;
+    // delete debugWindowPtr;
 }
 
 
