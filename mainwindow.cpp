@@ -104,13 +104,15 @@ void MainWindow::initWindows(){
     xrayWindowPtr->resize(DEFAULT_XRAY_WINDOW_SIZE);
     // xrayWindowPtr->setFixedSize(DEFAULT_XRAY_WINDOW_SIZE);
     xrayWindowPtr->move(SCREEN_WIDTH/2 + 1, 0);
-    xrayWindowPtr->show();
+    if(!Preferences::getPatientID().isEmpty())
+        xrayWindowPtr->show();
 
     imageWindowPtr = new ImageWindow();
     imageWindowPtr->resize(DEFAULT_IMAGE_WINDOW_SIZE);
     // imageWindowPtr->setFixedSize(DEFAULT_IMAGE_WINDOW_SIZE);
     imageWindowPtr->move(SCREEN_WIDTH/2 + 1, DEFAULT_XRAY_WINDOW_SIZE.height() * 1.2);
-    imageWindowPtr->show();
+    if(!Preferences::getPatientID().isEmpty())
+        imageWindowPtr->show();
 
     // Setting titles
     this->setWindowTitle(MAIN_WINDOW_TITLE);
@@ -182,6 +184,12 @@ void MainWindow::on_openFolder_active(){
         refreshNote();
         ui->patientIDLabel->setText(Preferences::getPatientID());
 
+        if(xrayWindowPtr->isHidden())
+            xrayWindowPtr->show();
+        if(imageWindowPtr->isHidden())
+            imageWindowPtr->show();
+
+
         emit patientChangedSignal(newPatientPath);
     }
     else if(!isXRayRootPathExist && isImageRootPathExist){
@@ -236,7 +244,7 @@ void MainWindow::initOpenXRayWindowAction(){
 }
 
 void MainWindow::on_xray_active(){
-    if(xrayWindowPtr->isHidden()){
+    if( !Preferences::getPatientID().isEmpty() && xrayWindowPtr->isHidden() ){
         xrayWindowPtr->show();
     }
     else{
@@ -259,7 +267,7 @@ void MainWindow::initOpenImageWindowAction(){
 }
 
 void MainWindow::on_image_active(){
-    if(imageWindowPtr->isHidden()){
+    if( !Preferences::getPatientID().isEmpty() && imageWindowPtr->isHidden() ){
         imageWindowPtr->show();
     }
     else{
