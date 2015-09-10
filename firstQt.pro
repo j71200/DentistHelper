@@ -27,7 +27,8 @@ HEADERS  += mainwindow.h \
     imagewindow.h \
     preferences.h \
     customtreeview.h \
-    faqwindow.h
+    faqwindow.h \
+    systemstate.h
 
 FORMS    += mainwindow.ui \
     settingdialog.ui \

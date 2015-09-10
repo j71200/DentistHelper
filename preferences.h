@@ -24,7 +24,6 @@ public:
         QFile preferencesFile(PREFERENCES_FILE_PATH);
         if (!preferencesFile.open(QIODevice::ReadOnly | QIODevice::Text)){
             cout << "Read preference file failed" << endl;
-            // Set the initial value
             return false;
         }
 
@@ -127,7 +126,6 @@ public:
     static QString getImageFolderName(){
         return imageFolderName;
     }
-
 
 private:
     static QString homeFolderPath, patientFolderPath, patientID;

@@ -6,6 +6,10 @@ const QString DEFAULT_FOLDER_PATH("/Users/blue/");
 const QString APP_FOLDER_PATH("/Users/blue/QtWorkspace/firstQt/");
 const QString PREFERENCES_FILE_PATH("/Users/blue/QtWorkspace/firstQt/Output/my_preferences.txt");
 
+// Folder
+const QString DEFAULT_XRAY_FOLDER_NAME("x-rays");
+const QString DEFAULT_IMAGE_FOLDER_NAME("照片");
+
 // Icon suffix
 const QString OPEN_FOLDER_ICON_SUFFIX("icons/open_folder.png");
 const QString SETTING_ICON_SUFFIX("icons/setting.png");
