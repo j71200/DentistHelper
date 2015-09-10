@@ -50,6 +50,7 @@ MainWindow::MainWindow(QWidget *parent) :
     initOpenXRayWindowAction();
     initOpenImageWindowAction();
     initSettingAction();
+    initSwitchToolBarVisibleAction();
     initFAQAction();
 
 
@@ -314,6 +315,24 @@ void MainWindow::on_image_active(){
 
 
 // =========================================== [ Action ] ==
+// Show/Hide main toolbar
+// =========================================================
+void MainWindow::initSwitchToolBarVisibleAction(){
+    switchToolBarVisibleAct = new QAction(SWITCH_TOOLBAR_VISIBLE_TIP_TEXT, this);
+    switchToolBarVisibleAct->setStatusTip(SWITCH_TOOLBAR_VISIBLE_TIP_TEXT);
+    connect(switchToolBarVisibleAct, SIGNAL(triggered()), this, SLOT(on_switch_toolbar_active()));
+
+    switchToolBarVisibleAct->setCheckable(true);
+    switchToolBarVisibleAct->setChecked(true);
+    ui->menuWindow->addAction(switchToolBarVisibleAct);
+}
+
+void MainWindow::on_switch_toolbar_active(){
+    ui->mainToolBar->setVisible(!ui->mainToolBar->isVisible());
+}
+
+
+// =========================================== [ Action ] ==
 // Initialize FAQ/About action
 // =========================================================
 void MainWindow::initFAQAction(){
@@ -388,6 +407,8 @@ void MainWindow::refreshNote(){
 // Test Button
 // =========================================================
 void MainWindow::on_testButton_clicked(){
+
+
 
     // QDesktopServices::openUrl(QUrl("file:///Users/blue/aaa.pdf", QUrl::TolerantMode));
     // QDesktopServices::openUrl(QUrl("file:///Users/blue/Desktop/實數的建構.pdf", QUrl::TolerantMode));

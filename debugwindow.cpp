@@ -8,6 +8,8 @@ DebugWindow::DebugWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    this->setWindowTitle("Debug Window");
+
     ui->variableTextBrowser->setFocusPolicy(Qt::NoFocus);
     ui->updateButton->setAutoDefault(true);
     ui->updateButton->setFocusPolicy(Qt::StrongFocus);
@@ -39,3 +41,5 @@ void DebugWindow::updateVariables(){
 void DebugWindow::on_updateButton_clicked(){
 	updateVariables();
 }
+
+//void DebugWindow::on_openDebugWindow

@@ -34,6 +34,7 @@ private slots:
 	void on_setting_active();
     void on_xray_active();
     void on_image_active();
+    void on_switch_toolbar_active();
     void on_faq_active();
 
 	// ===========================
@@ -50,6 +51,7 @@ private:
     void initSettingAction();
     void initOpenXRayWindowAction();
     void initOpenImageWindowAction();
+    void initSwitchToolBarVisibleAction();
     void initFAQAction();
 
     // Note
@@ -57,7 +59,7 @@ private:
     void refreshNote();
 
     // Action
-    QAction *openFolderAct, *settingAct, *xrayAct, *imageAct, *faqAct;
+    QAction *openFolderAct, *settingAct, *xrayAct, *imageAct, *switchToolBarVisibleAct, *faqAct;
 
     // Folder/File system
     QFileSystemModel *model;

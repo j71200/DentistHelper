@@ -24,6 +24,7 @@ const QString OPEN_FOLDER_TIP_TEXT("開啟病人資料夾");
 const QString SETTING_TIP_TEXT("設定");
 const QString XRAY_WINDOW_TIP_TEXT("X光照片");
 const QString IMAGE_WINDOW_TIP_TEXT("一般照片");
+const QString SWITCH_TOOLBAR_VISIBLE_TIP_TEXT("顯示工具列");
 const QString FAQ_TIP_TEXT("FAQ / 關於");
 
 
