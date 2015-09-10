@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>615</width>
-    <height>302</height>
+    <height>358</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -111,6 +111,20 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="Line" name="line_3">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="autoOpenCheckBox">
+     <property name="text">
+      <string>打開病人資料夾時自動打開X光及照片視窗</string>
+     </property>
+    </widget>
    </item>
    <item>
     <spacer name="verticalSpacer">

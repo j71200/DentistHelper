@@ -199,6 +199,9 @@ void MainWindow::on_openFolder_active(){
         refreshNote();
         ui->patientIDLabel->setText(Preferences::getPatientID());
 
+        xrayAct->setEnabled(true);
+        imageAct->setEnabled(true);
+
         // if(xrayWindowPtr->isHidden()){
         //     xrayWindowPtr->show();
         //     xrayAct->setEnabled(true);
