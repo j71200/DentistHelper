@@ -29,8 +29,6 @@ QString Preferences::inStreamBuffer = "";
 QString Preferences::xrayFolderName = DEFAULT_XRAY_FOLDER_NAME;
 QString Preferences::imageFolderName = DEFAULT_IMAGE_FOLDER_NAME;
 
-//bool SystemState::isActive = false;
-
 
 using namespace std;
 

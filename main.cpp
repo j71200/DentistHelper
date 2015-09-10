@@ -8,15 +8,12 @@
 #include <QScreen>
 #include <QRect>
 #include <QDesktopWidget>
-// #include "systemstate.h"
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
 
     Preferences::load();
-    // bool isLoadSuccessful = Preferences::load();
-    // SystemState::setIsActive(isLoadSuccessful);
 
     QRect rec = QApplication::desktop()->screenGeometry();
     const int SCREEN_WIDTH = rec.width();
