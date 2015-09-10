@@ -97,14 +97,6 @@ void XRayWindow::changeTreeView(QString rootPath){
     if(rootPath.isEmpty())
         return;
     
-    // if(!QDir(rootPath).isReadable()){
-    //     MessageDialog mMessageDialog;
-    //     mMessageDialog.setWindowTitle(MESSAGE_DIALOG_TITLE);
-    //     mMessageDialog.setMessage(WRONG_XRAY_FOLDER_MESSAGE);
-    //     mMessageDialog.setFixedSize(mMessageDialog.size());
-    //     mMessageDialog.exec();
-    // }
-
     // Set file system model
     model->setRootPath(rootPath);
     model->setNameFilters(READABLE_IMAGE_LIST);

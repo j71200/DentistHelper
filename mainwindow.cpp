@@ -59,17 +59,12 @@ MainWindow::MainWindow(QWidget *parent) :
     // Initialize patient label
     // ========================
     ui->patientIDLabel->setAlignment(Qt::AlignCenter);
-    ui->patientIDLabel->setText(Preferences::getPatientID());
 
 
     // ===============
     // Initialize note
     // ===============
     ui->noteTextEdit->setPlaceholderText(NOTE_HINT);
-    if(Preferences::getPatientID().isEmpty())
-        ui->noteTextEdit->setEnabled(false);
-    else
-        refreshNote();
 
 
     // ===============
@@ -77,6 +72,25 @@ MainWindow::MainWindow(QWidget *parent) :
     // ===============
     connect(this, SIGNAL(patientChangedSignal(QString)), xrayWindowPtr, SLOT(on_patientChanged(QString)));
     connect(this, SIGNAL(patientChangedSignal(QString)), imageWindowPtr, SLOT(on_patientChanged(QString)));
+
+
+    // Load last patient data if it is readable
+    QString xrayRootPath = Preferences::getPatientFolderPath() + QDir::separator() + Preferences::getXrayFolderName();
+    QString imageRootPath = Preferences::getPatientFolderPath() + QDir::separator() + Preferences::getImageFolderName();
+    bool isXRayRootPathExist = QDir(xrayRootPath).isReadable();
+    bool isImageRootPathExist = QDir(imageRootPath).isReadable();
+    
+    if( !Preferences::getPatientID().isEmpty()
+        && isXRayRootPathExist && isImageRootPathExist){
+        ui->patientIDLabel->setText(Preferences::getPatientID());
+        refreshNote();
+        xrayWindowPtr->show();
+        imageWindowPtr->show();
+    }
+    else{
+        ui->patientIDLabel->setText("");
+        ui->noteTextEdit->setEnabled(false);
+    }
 
 }
 
@@ -104,15 +118,11 @@ void MainWindow::initWindows(){
     xrayWindowPtr->resize(DEFAULT_XRAY_WINDOW_SIZE);
     // xrayWindowPtr->setFixedSize(DEFAULT_XRAY_WINDOW_SIZE);
     xrayWindowPtr->move(SCREEN_WIDTH/2 + 1, 0);
-    if(!Preferences::getPatientID().isEmpty())
-        xrayWindowPtr->show();
 
     imageWindowPtr = new ImageWindow();
     imageWindowPtr->resize(DEFAULT_IMAGE_WINDOW_SIZE);
     // imageWindowPtr->setFixedSize(DEFAULT_IMAGE_WINDOW_SIZE);
     imageWindowPtr->move(SCREEN_WIDTH/2 + 1, DEFAULT_XRAY_WINDOW_SIZE.height() * 1.2);
-    if(!Preferences::getPatientID().isEmpty())
-        imageWindowPtr->show();
 
     // Setting titles
     this->setWindowTitle(MAIN_WINDOW_TITLE);

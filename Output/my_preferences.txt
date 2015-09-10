@@ -3,7 +3,7 @@ Case Viewer ver.1.0
 Warning!! Don't modify this file!
 =====================================
 /Users/blue/QtWorkspace/firstQt/data
-/Users/blue/QtWorkspace/firstQt/data/01 - 江慧君
-01 - 江慧君
-x-raysa
-照片a
+/Users/blue/QtWorkspace/firstQt/data/02 - 鍾文藍
+02 - 鍾文藍
+x-rays
+照片
