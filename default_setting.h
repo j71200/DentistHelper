@@ -91,6 +91,9 @@ const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE_4("」資料夾！\n請確定有�
 const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE_5("」資料夾和「");
 const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE_6("」資料夾或是修改「設定」中的資料夾名稱使它們和病人資料夾裡的名稱一致");
 
+// Preference constant
+const QString PREFERENCE_FILE_AUTO_OPEN_TEXT("auto open windows");
+const QString PREFERENCE_FILE_NOT_AUTO_OPEN_TEXT("not auto open windows");
 
 // Preference file
 const QStringList PREFERENCE_FILE_WARNING_LINES = QStringList()

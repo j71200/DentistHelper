@@ -7,3 +7,4 @@ Warning!! Don't modify this file!
 01 - 江慧君
 x-rays
 照片
+not auto open windows

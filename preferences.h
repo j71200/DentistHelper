@@ -58,6 +58,9 @@ public:
                 case 4:
                     imageFolderName = line;
                     break;
+                case 5:
+                    isAutoOpenWindows = line;
+                    break;
                 default:
                     inStreamBuffer = line;
                     break;
@@ -83,7 +86,8 @@ public:
                   << patientFolderPath << endl
                   << patientID << endl
                   << xrayFolderName << endl
-                  << imageFolderName << endl;
+                  << imageFolderName << endl
+                  << isAutoOpenWindows << endl;
         preferencesFile.setPermissions(QFileDevice::ReadOwner);
         preferencesFile.close();
     }
@@ -143,10 +147,16 @@ public:
     // Is auto-open x-ray window and image window
     // =========================================================
     static void setIsAutoOpenWindows(bool isAutoOpen){
-        isAutoOpenWindows = isAutoOpen;
+        if(isAutoOpen)
+            isAutoOpenWindows = PREFERENCE_FILE_AUTO_OPEN_TEXT;
+        else
+            isAutoOpenWindows = PREFERENCE_FILE_NOT_AUTO_OPEN_TEXT;
     }
     static bool getIsAutoOpenWindows(){
-        return isAutoOpenWindows;
+        if(isAutoOpenWindows == PREFERENCE_FILE_AUTO_OPEN_TEXT)
+            return true;
+        else
+            false;
     }
 
 
@@ -154,7 +164,7 @@ private:
     static QString homeFolderPath, patientFolderPath, patientID;
     static QString inStreamBuffer;
     static QString xrayFolderName, imageFolderName;
-    static bool isAutoOpenWindows;
+    static QString isAutoOpenWindows;
 };
 
 #endif // PREFERENCES_CPP

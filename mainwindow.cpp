@@ -28,7 +28,7 @@ QString Preferences::patientID = "";
 QString Preferences::inStreamBuffer = "";
 QString Preferences::xrayFolderName = DEFAULT_XRAY_FOLDER_NAME;
 QString Preferences::imageFolderName = DEFAULT_IMAGE_FOLDER_NAME;
-bool Preferences::isAutoOpenWindows = true;
+QString Preferences::isAutoOpenWindows = PREFERENCE_FILE_AUTO_OPEN_TEXT;
 
 using namespace std;
 
@@ -291,20 +291,10 @@ void MainWindow::initOpenXRayWindowAction(){
 }
 
 void MainWindow::on_xray_active(){
-    if(Preferences::getPatientID().isEmpty()){
+    if(Preferences::getPatientID().isEmpty())
         return;
-    }
 
     xrayWindowPtr->setVisible(!xrayWindowPtr->isVisible());
-
-    // if( !Preferences::getPatientID().isEmpty() && xrayWindowPtr->isHidden() ){
-    //     xrayWindowPtr->show();
-    //     xrayAct->setChecked(true);
-    // }
-    // else{
-    //     xrayWindowPtr->raise();
-    //     xrayWindowPtr->activateWindow();
-    // }
 }
 
 // =========================================== [ Action ] ==
@@ -323,20 +313,10 @@ void MainWindow::initOpenImageWindowAction(){
 }
 
 void MainWindow::on_image_active(){
-    if(Preferences::getPatientID().isEmpty()){
+    if(Preferences::getPatientID().isEmpty())
         return;
-    }
 
     imageWindowPtr->setVisible(!imageWindowPtr->isVisible());
-
-    // if( !Preferences::getPatientID().isEmpty() && imageWindowPtr->isHidden() ){
-    //     imageWindowPtr->show();
-    //     imageAct->setChecked(true);
-    // }
-    // else{
-    //     imageWindowPtr->raise();
-    //     imageWindowPtr->activateWindow();
-    // }
 }
 
 
@@ -433,8 +413,6 @@ void MainWindow::refreshNote(){
 // Test Button
 // =========================================================
 void MainWindow::on_testButton_clicked(){
-
-
 
     // QDesktopServices::openUrl(QUrl("file:///Users/blue/aaa.pdf", QUrl::TolerantMode));
     // QDesktopServices::openUrl(QUrl("file:///Users/blue/Desktop/實數的建構.pdf", QUrl::TolerantMode));
