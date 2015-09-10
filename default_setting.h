@@ -77,7 +77,8 @@ const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE("Wrong x-ray and image folder path
 // Preference file
 const QStringList PREFERENCE_FILE_WARNING_LINES = QStringList()
 	<< "=====================================\n"
-	<< "Warning!!\n"
+	<< "Case Viewer ver.1.0\n"
+	<< "Warning!! Don't modify this file!\n"
 	<< "=====================================\n";
 
 

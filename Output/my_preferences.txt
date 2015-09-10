@@ -1,8 +1,9 @@
 =====================================
-Warning!!
+Case Viewer ver.1.0
+Warning!! Don't modify this file!
 =====================================
 /Users/blue/
-x-rays
-照片
+
+
 x-rays
 照片
