@@ -255,7 +255,7 @@ void MainWindow::initSettingAction(){
     settingAct->setStatusTip(SETTING_TIP_TEXT);
     connect(settingAct, SIGNAL(triggered()), this, SLOT(on_setting_active()));
 
-    ui->menuFile->addAction(settingAct);
+    ui->menuHelp->addAction(settingAct);
     ui->mainToolBar->addAction(settingAct);
 }
 
@@ -276,7 +276,7 @@ void MainWindow::initOpenXRayWindowAction(){
     xrayAct->setStatusTip(XRAY_WINDOW_TIP_TEXT);
     connect(xrayAct, SIGNAL(triggered()), this, SLOT(on_xray_active()));
 
-    ui->menuFile->addAction(xrayAct);
+    ui->menuWindow->addAction(xrayAct);
     ui->mainToolBar->addAction(xrayAct);
 }
 
@@ -299,7 +299,7 @@ void MainWindow::initOpenImageWindowAction(){
     imageAct->setStatusTip(IMAGE_WINDOW_TIP_TEXT);
     connect(imageAct, SIGNAL(triggered()), this, SLOT(on_image_active()));
 
-    ui->menuFile->addAction(imageAct);
+    ui->menuWindow->addAction(imageAct);
     ui->mainToolBar->addAction(imageAct);
 }
 
@@ -323,7 +323,7 @@ void MainWindow::initFAQAction(){
     faqAct->setStatusTip(FAQ_TIP_TEXT);
     connect(faqAct, SIGNAL(triggered()), this, SLOT(on_faq_active()));
 
-    ui->menuFile->addAction(faqAct);
+    ui->menuHelp->addAction(faqAct);
     ui->mainToolBar->addAction(faqAct);
 }
 
