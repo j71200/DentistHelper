@@ -1,5 +1,4 @@
 TODO LIST
 
 1. 設定preference為唯讀。
-2. 寫一個第一次使用的說明
 
