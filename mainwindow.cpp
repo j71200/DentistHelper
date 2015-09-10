@@ -43,10 +43,10 @@ MainWindow::MainWindow(QWidget *parent) :
     // ==================
     initWindows();
 
-    // ======================================
+    // =================================================
     // Debug window
-    // Remember toe delete the debugWindowPtr
-    // ======================================
+    // Remember to declare and delete the debugWindowPtr
+    // =================================================
     // debugWindowPtr = new DebugWindow();
     // debugWindowPtr->move(0, SCREEN_HEIGHT * 3 / 2);
     // debugWindowPtr->show();
@@ -329,7 +329,7 @@ void MainWindow::on_image_active(){
     }
 
     imageWindowPtr->setVisible(!imageWindowPtr->isVisible());
-    
+
     // if( !Preferences::getPatientID().isEmpty() && imageWindowPtr->isHidden() ){
     //     imageWindowPtr->show();
     //     imageAct->setChecked(true);
