@@ -251,6 +251,7 @@ void MainWindow::initSettingAction(){
     QString iconPath(APP_FOLDER_PATH + SETTING_ICON_SUFFIX);
     settingAct = new QAction(QIcon( iconPath ), SETTING_TIP_TEXT, this);
     settingAct->setStatusTip(SETTING_TIP_TEXT);
+    settingAct->setShortcuts(QKeySequence::Preferences);
     connect(settingAct, SIGNAL(triggered()), this, SLOT(on_setting_active()));
 
     ui->menuHelp->addAction(settingAct);

@@ -20,7 +20,7 @@ const QString CHECK_ICON_SUFFIX("icons/check_icon.png");
 const QString CROSS_ICON_SUFFIX("icons/cross_icon.png");
 
 // Action tip text
-const QString OPEN_FOLDER_TIP_TEXT("打開病人資料夾");
+const QString OPEN_FOLDER_TIP_TEXT("開啟病人資料夾");
 const QString SETTING_TIP_TEXT("設定");
 const QString XRAY_WINDOW_TIP_TEXT("X光照片");
 const QString IMAGE_WINDOW_TIP_TEXT("一般照片");
