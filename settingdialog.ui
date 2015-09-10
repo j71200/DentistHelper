@@ -17,7 +17,7 @@
    <item>
     <widget class="QLabel" name="homeFolderLabel">
      <property name="text">
-      <string>Home Folder</string>
+      <string>家目錄</string>
      </property>
     </widget>
    </item>
@@ -26,7 +26,7 @@
      <item>
       <widget class="QPushButton" name="changeFolderButton">
        <property name="text">
-        <string>Change Folder</string>
+        <string>變更家目錄</string>
        </property>
       </widget>
      </item>
@@ -52,7 +52,7 @@
    <item>
     <widget class="QLabel" name="xrayFolderNameLabel">
      <property name="text">
-      <string>X-ray Folder</string>
+      <string>X光資料夾</string>
      </property>
     </widget>
    </item>
@@ -87,7 +87,7 @@
    <item>
     <widget class="QLabel" name="imageFolderNameLabel">
      <property name="text">
-      <string>Image Folder</string>
+      <string>一般照片資料夾</string>
      </property>
     </widget>
    </item>
@@ -143,14 +143,14 @@
      <item>
       <widget class="QPushButton" name="discardButton">
        <property name="text">
-        <string>Discard</string>
+        <string>取消</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="saveButton">
        <property name="text">
-        <string>Save</string>
+        <string>儲存</string>
        </property>
        <property name="default">
         <bool>true</bool>

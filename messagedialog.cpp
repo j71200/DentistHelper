@@ -9,6 +9,8 @@ MessageDialog::MessageDialog(QWidget *parent) :
     ui->setupUi(this);
     this->setFixedSize(this->size());
     this->setWindowTitle(MESSAGE_DIALOG_TITLE);
+
+    ui->messageLabel->setWordWrap(true);
 }
 
 MessageDialog::~MessageDialog(){

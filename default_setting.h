@@ -20,11 +20,11 @@ const QString CHECK_ICON_SUFFIX("icons/check_icon.png");
 const QString CROSS_ICON_SUFFIX("icons/cross_icon.png");
 
 // Action tip text
-const QString OPEN_FOLDER_TIP_TEXT("Open Folder");
-const QString SETTING_TIP_TEXT("Setting");
-const QString XRAY_WINDOW_TIP_TEXT("X-ray window");
-const QString IMAGE_WINDOW_TIP_TEXT("Image window");
-const QString FAQ_TIP_TEXT("FAQ / About");
+const QString OPEN_FOLDER_TIP_TEXT("打開病人資料夾");
+const QString SETTING_TIP_TEXT("設定");
+const QString XRAY_WINDOW_TIP_TEXT("X光照片");
+const QString IMAGE_WINDOW_TIP_TEXT("一般照片");
+const QString FAQ_TIP_TEXT("FAQ / 關於");
 
 
 // Image scale and format
@@ -33,45 +33,52 @@ const QStringList READABLE_IMAGE_LIST = QStringList() << "*.jpg" << "*.bmp" << "
 
 // Window title
 const QString MAIN_WINDOW_TITLE("Case Viewer");
-const QString XRAY_WINDOW_TITLE("X-ray Photo");
-const QString IMAGE_WINDOW_TITLE("Original Photo");
-const QString SETTING_DIALOG_TITLE("Setting");
-const QString MESSAGE_DIALOG_TITLE("Message!");
-const QString FAQ_WINDOW_TITLE("FAQ / About");
+const QString XRAY_WINDOW_TITLE("X光照片");
+const QString IMAGE_WINDOW_TITLE("一般照片");
+const QString SETTING_DIALOG_TITLE("設定");
+const QString MESSAGE_DIALOG_TITLE("訊息");
+const QString FAQ_WINDOW_TITLE("FAQ / 關於");
 const QString HYPHEN(" - ");
+
 
 // TreeView
 const int MAX_TREEVIEW_WIDTH = 300;
+
 
 // Image
 const int MIN_SCALE_RATIO = 1;
 const int MAX_SCALE_RATIO = 300;
 const int SLIDER_SINGLE_STEP = 10;
 
+
 // Icon size
 const QSize DEFAULT_ICON_SIZE(20, 20);
+
 
 // ==================
 // String
 // ==================
-const QString FIT_WINDOW_TEXT("Fit window size (space)");
+const QString FIT_WINDOW_TEXT("填滿(space)");
 
 
 // Note
 const QString NOTE_FILE_SUFFIX_NAME("_note.txt");
-const QString NOTE_HINT("How about taking some note");
+const QString NOTE_HINT("病人紀錄...");
 
 
 // FAQ/About window
 const QString FAQ_TAB_TITLE("FAQ");
-const QString ABOUT_TAB_TITLE("About");
-const QString OK_TEXT("OK");
+const QString ABOUT_TAB_TITLE("關於");
+const QString OK_TEXT("確定");
 
 
 // Message window
-const QString WRONG_XRAY_FOLDER_MESSAGE("Wrong x-ray folder path!\nPlease check your x-ray folder name\nor correct the X-RAY FOLDER NAME in setting.");
-const QString WRONG_IMAGE_FOLDER_MESSAGE("Wrong image folder path!\nPlease check your image folder name\nor correct the IMAGE FOLDER NAME in setting.");
-const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE("Wrong x-ray and image folder path!\nPlease check your x-ray and image folder name\nor correct both the X-RAY FOLDER NAME\nand IMAGE FOLDER NAME in setting.");
+const QString WRONG_XRAY_FOLDER_MESSAGE("在這個病人資料夾底下找不到X光資料夾！\n請確定有X光資料夾或是確定「設定」中的X光資料夾和病人資料夾裡面的名稱一致");
+const QString WRONG_IMAGE_FOLDER_MESSAGE("在這個病人資料夾底下找不到一般照片資料夾！\n請確定有一般照片資料夾或是確定「設定」中的一般照片資料夾和病人資料夾裡面的名稱一致");
+const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE("在這個病人資料夾底下找不到X光資料夾！\n請確定有X光資料夾或是確定「設定」中的X光資料夾和病人資料夾裡面的名稱一致");
+// const QString WRONG_XRAY_FOLDER_MESSAGE("Wrong x-ray folder path!\nPlease check your x-ray folder name\nor correct the X-RAY FOLDER NAME in setting.");
+// const QString WRONG_IMAGE_FOLDER_MESSAGE("Wrong image folder path!\nPlease check your image folder name\nor correct the IMAGE FOLDER NAME in setting.");
+// const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE("Wrong x-ray and image folder path!\nPlease check your x-ray and image folder name\nor correct both the X-RAY FOLDER NAME\nand IMAGE FOLDER NAME in setting.");
 
 
 // Preference file
