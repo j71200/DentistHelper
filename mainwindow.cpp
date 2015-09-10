@@ -194,17 +194,42 @@ void MainWindow::on_openFolder_active(){
     }
     else if(!isXRayRootPathExist && isImageRootPathExist){
         MessageDialog mMessageDialog;
-        mMessageDialog.setMessage(WRONG_XRAY_FOLDER_MESSAGE);
+        mMessageDialog.setMessage(
+            WRONG_XRAY_FOLDER_MESSAGE_1
+            + QDir(newPatientPath).dirName()
+            + WRONG_XRAY_FOLDER_MESSAGE_2
+            + Preferences::getXrayFolderName()
+            + WRONG_XRAY_FOLDER_MESSAGE_3
+            + Preferences::getXrayFolderName()
+            + WRONG_XRAY_FOLDER_MESSAGE_4);
         mMessageDialog.exec();
     }
     else if(isXRayRootPathExist && !isImageRootPathExist){
         MessageDialog mMessageDialog;
-        mMessageDialog.setMessage(WRONG_IMAGE_FOLDER_MESSAGE);
+        mMessageDialog.setMessage(
+            WRONG_IMAGE_FOLDER_MESSAGE_1
+            + QDir(newPatientPath).dirName()
+            + WRONG_IMAGE_FOLDER_MESSAGE_2
+            + Preferences::getImageFolderName()
+            + WRONG_IMAGE_FOLDER_MESSAGE_3
+            + Preferences::getImageFolderName()
+            + WRONG_IMAGE_FOLDER_MESSAGE_4);
         mMessageDialog.exec();
     }
     else{
         MessageDialog mMessageDialog;
-        mMessageDialog.setMessage(WRONG_XRAY_IMAGE_FOLDER_MESSAGE);
+        mMessageDialog.setMessage(
+            WRONG_XRAY_IMAGE_FOLDER_MESSAGE_1
+            + QDir(newPatientPath).dirName()
+            + WRONG_XRAY_IMAGE_FOLDER_MESSAGE_2
+            + Preferences::getXrayFolderName()
+            + WRONG_XRAY_IMAGE_FOLDER_MESSAGE_3
+            + Preferences::getImageFolderName()
+            + WRONG_XRAY_IMAGE_FOLDER_MESSAGE_4
+            + Preferences::getXrayFolderName()
+            + WRONG_XRAY_IMAGE_FOLDER_MESSAGE_5
+            + Preferences::getImageFolderName()
+            + WRONG_XRAY_IMAGE_FOLDER_MESSAGE_6);
         mMessageDialog.exec();
     }
 }

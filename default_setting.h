@@ -73,19 +73,22 @@ const QString OK_TEXT("確定");
 
 
 // Message window
-const QString WRONG_XRAY_FOLDER_MESSAGE_1("在這個病人資料夾底下找不到「");
-const QString WRONG_XRAY_FOLDER_MESSAGE_2("」資料夾！\n請確定有「");
-const QString WRONG_XRAY_FOLDER_MESSAGE_3("」資料夾或是修改「設定」中的X光資料夾名稱使它和病人資料夾裡的名稱一致");
+const QString WRONG_XRAY_FOLDER_MESSAGE_1("在「");
+const QString WRONG_XRAY_FOLDER_MESSAGE_2("」資料夾底下找不到「");
+const QString WRONG_XRAY_FOLDER_MESSAGE_3("」資料夾！\n請確定有「");
+const QString WRONG_XRAY_FOLDER_MESSAGE_4("」資料夾或是修改「設定」中的X光資料夾名稱使它和病人資料夾裡的名稱一致");
 
-const QString WRONG_IMAGE_FOLDER_MESSAGE_1("在這個病人資料夾底下找不到「");
-const QString WRONG_IMAGE_FOLDER_MESSAGE_2("」資料夾！\n請確定有「");
-const QString WRONG_IMAGE_FOLDER_MESSAGE_3("」資料夾或是修改「設定」中的一般照片資料夾名稱使它和病人資料夾裡的名稱一致");
+const QString WRONG_IMAGE_FOLDER_MESSAGE_1("在「");
+const QString WRONG_IMAGE_FOLDER_MESSAGE_2("」資料夾底下找不到「");
+const QString WRONG_IMAGE_FOLDER_MESSAGE_3("」資料夾！\n請確定有「");
+const QString WRONG_IMAGE_FOLDER_MESSAGE_4("」資料夾或是修改「設定」中的一般照片資料夾名稱使它和病人資料夾裡的名稱一致");
 
-const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE_1("在這個病人資料夾底下找不到「");
-const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE_2("」資料夾和「");
-const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE_3("資料夾！\n請確定有「");
-const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE_4("」資料夾和「");
-const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE_5("」資料夾或是修改「設定」中的資料夾名稱使它們和病人資料夾裡的名稱一致");
+const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE_1("在「");
+const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE_2("」資料夾底下找不到「");
+const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE_3("」資料夾和「");
+const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE_4("」資料夾！\n請確定有「");
+const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE_5("」資料夾和「");
+const QString WRONG_XRAY_IMAGE_FOLDER_MESSAGE_6("」資料夾或是修改「設定」中的資料夾名稱使它們和病人資料夾裡的名稱一致");
 
 // const QString WRONG_XRAY_FOLDER_MESSAGE("在這個病人資料夾底下找不到X光資料夾！\n請確定有X光資料夾或是確定「設定」中的X光資料夾和病人資料夾裡面的名稱一致");
 // const QString WRONG_IMAGE_FOLDER_MESSAGE("在這個病人資料夾底下找不到一般照片資料夾！\n請確定有一般照片資料夾或是確定「設定」中的一般照片資料夾和病人資料夾裡面的名稱一致");
