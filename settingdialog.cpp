@@ -38,6 +38,9 @@ SettingDialog::SettingDialog(QWidget *parent) :
     ui->imgFolderNameLineEdit->setText(Preferences::getImageFolderName());
     ui->imgCorrectMsgLabel->setText("");
 
+    // Checkbox
+    ui->autoOpenCheckBox->setChecked(Preferences::getIsAutoOpenWindows());
+
 }
 
 SettingDialog::~SettingDialog(){
@@ -153,4 +156,9 @@ void SettingDialog::on_imgFolderNameLineEdit_textChanged(const QString &newFolde
     checkImageFolderName(newFolderName);
 }
 
-
+// ============================================ [ Image ] ==
+// Update isAutoOpenWindows when it changed
+// =========================================================
+void SettingDialog::on_autoOpenCheckBox_stateChanged(int newState){
+    Preferences::setIsAutoOpenWindows(newState);
+}

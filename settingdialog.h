@@ -30,6 +30,8 @@ private slots:
 
     void on_imgFolderNameLineEdit_textChanged(const QString &newHomeFolderPath);
 
+    void on_autoOpenCheckBox_stateChanged(int newState);
+
 private:
     Ui::SettingDialog *ui;
     QPixmap legalIcon;

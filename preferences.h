@@ -139,10 +139,22 @@ public:
         return imageFolderName;
     }
 
+    // ========================================== [ Setting ] ==
+    // Is auto-open x-ray window and image window
+    // =========================================================
+    static void setIsAutoOpenWindows(bool isAutoOpen){
+        isAutoOpenWindows = isAutoOpen;
+    }
+    static bool getIsAutoOpenWindows(){
+        return isAutoOpenWindows;
+    }
+
+
 private:
     static QString homeFolderPath, patientFolderPath, patientID;
     static QString inStreamBuffer;
     static QString xrayFolderName, imageFolderName;
+    static bool isAutoOpenWindows;
 };
 
 #endif // PREFERENCES_CPP

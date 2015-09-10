@@ -28,7 +28,7 @@ QString Preferences::patientID = "";
 QString Preferences::inStreamBuffer = "";
 QString Preferences::xrayFolderName = DEFAULT_XRAY_FOLDER_NAME;
 QString Preferences::imageFolderName = DEFAULT_IMAGE_FOLDER_NAME;
-
+bool Preferences::isAutoOpenWindows = true;
 
 using namespace std;
 
@@ -202,16 +202,12 @@ void MainWindow::on_openFolder_active(){
         xrayAct->setEnabled(true);
         imageAct->setEnabled(true);
 
-        // if(xrayWindowPtr->isHidden()){
-        //     xrayWindowPtr->show();
-        //     xrayAct->setEnabled(true);
-        //     xrayAct->setChecked(true);
-        // }
-        // if(imageWindowPtr->isHidden()){
-        //     imageWindowPtr->show();
-        //     imageAct->setEnabled(true);
-        //     imageAct->setChecked(true);
-        // }
+        if(Preferences::getIsAutoOpenWindows()){
+            xrayWindowPtr->show();
+            xrayAct->setChecked(true);
+            imageWindowPtr->show();
+            imageAct->setChecked(true);
+        }
 
         emit patientChangedSignal(newPatientPath);
     }
