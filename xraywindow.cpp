@@ -69,10 +69,10 @@ XRayWindow::~XRayWindow()
 // =========================================== [ Window ] ==
 // Window Events
 // =========================================================
-// void XRayWindow::resizeEvent(QResizeEvent *event){
-//     // assignImageSize(event->size());
-//     QWidget::resizeEvent(event);
-// }
+void XRayWindow::closeEvent(QCloseEvent *event){
+    emit xrayWindowClosedSignal();
+    QWidget::closeEvent(event);
+}
 
 
 // =========================================== [ Window ] ==

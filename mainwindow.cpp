@@ -67,6 +67,11 @@ MainWindow::MainWindow(QWidget *parent) :
     // ==================
     ui->patientIDLabel->setAlignment(Qt::AlignCenter);
     ui->noteTextEdit->setPlaceholderText(NOTE_HINT);
+    ui->boldButton->setCheckable(true);
+    ui->underlineButton->setCheckable(true);
+    ui->textSizeComboBox->addItems(TEXT_SIZE_QSTRING_LIST);
+    ui->textColorComboBox->addItems(TEXT_COLOR_QSTRING_LIST);
+    ui->textBgComboBox->addItems(TEXT_BACKGROUND_QSTRING_LIST);
 
 
     // ===============
@@ -74,6 +79,8 @@ MainWindow::MainWindow(QWidget *parent) :
     // ===============
     connect(this, SIGNAL(patientChangedSignal(QString)), xrayWindowPtr, SLOT(on_patientChanged(QString)));
     connect(this, SIGNAL(patientChangedSignal(QString)), imageWindowPtr, SLOT(on_patientChanged(QString)));
+    connect(xrayWindowPtr, SIGNAL(xrayWindowClosedSignal()), this, SLOT(on_xrayWindowClosed()));
+    connect(imageWindowPtr, SIGNAL(imageWindowClosedSignal()), this, SLOT(on_imageWindowClosed()));
 
 
     // Load last patient data if it is readable
@@ -84,6 +91,7 @@ MainWindow::MainWindow(QWidget *parent) :
     
     if( !Preferences::getPatientID().isEmpty()
         && isXRayRootPathExist && isImageRootPathExist){
+
         ui->patientIDLabel->setText(Preferences::getPatientID());
         refreshNote();
         xrayWindowPtr->show();
@@ -411,14 +419,27 @@ void MainWindow::refreshNote(){
     noteFile.close();
 }
 
+
+// ====================================== [ X-ray/Image ] ==
+// X-ray window and image window close event
+// =========================================================
+void MainWindow::on_xrayWindowClosed(){
+    xrayAct->setChecked(false);
+}
+
+void MainWindow::on_imageWindowClosed(){
+    imageAct->setChecked(false);
+}
+
+
 // ====================================== [ Development ] ==
 // Test Button
 // =========================================================
 void MainWindow::on_testButton_clicked(){
 
     QColor bb = QColor(Qt::blue);
-
     ui->noteTextEdit->setTextColor(bb);
+    ui->noteTextEdit->setFontWeight(QFont::Bold);
 
 
     // QDesktopServices::openUrl(QUrl("file:///Users/blue/aaa.pdf", QUrl::TolerantMode));
@@ -433,4 +454,62 @@ void MainWindow::on_testButton_clicked(){
     //     return;
     // }
     // delete document;
+}
+
+void MainWindow::on_boldButton_clicked(){
+    if(ui->noteTextEdit->fontWeight() == QFont::Bold)
+        ui->noteTextEdit->setFontWeight(QFont::Thin);
+    else
+        ui->noteTextEdit->setFontWeight(QFont::Bold);
+}
+
+void MainWindow::on_underlineButton_clicked(){
+    ui->noteTextEdit->setFontUnderline( !ui->noteTextEdit->fontUnderline() );
+}
+
+void MainWindow::on_textSizeComboBox_currentIndexChanged(int index){
+    ui->noteTextEdit->setFontPointSize(TEXT_SIZE_LIST.at(index));
+}
+
+void MainWindow::on_textColorComboBox_currentIndexChanged(int index){
+    ui->noteTextEdit->setTextColor(TEXT_COLOR_LIST.at(index));
+}
+
+void MainWindow::on_textBgComboBox_currentIndexChanged(int index){
+    ui->noteTextEdit->setTextBackgroundColor(TEXT_BACKGROUND_LIST.at(index));
+//    ui->noteTextEdit->setTextBackgroundColor(QColor(TEXT_BACKGROUND_LIST.at(index)));
+}
+
+void MainWindow::on_resetFontButton_clicked(){
+    ui->noteTextEdit->setFontWeight(QFont::Thin);
+    ui->noteTextEdit->setFontUnderline(false);
+    ui->noteTextEdit->setFontPointSize(TEXT_SIZE_LIST.at(0));
+    ui->noteTextEdit->setTextColor(QColor(TEXT_COLOR_LIST.at(0)));
+    ui->noteTextEdit->setTextBackgroundColor(QColor(TEXT_BACKGROUND_LIST.at(1)));
+}
+
+void MainWindow::on_noteTextEdit_cursorPositionChanged(){
+   if(ui->noteTextEdit->fontWeight() == QFont::Bold)
+        ui->boldButton->setChecked(true);
+    else
+        ui->boldButton->setChecked(false);
+
+    if(ui->noteTextEdit->fontUnderline())
+        ui->underlineButton->setChecked(true);
+    else
+        ui->underlineButton->setChecked(false);
+
+    // int index;
+    // index = TEXT_SIZE_LIST.indexOf(ui->noteTextEdit->fontPointSize());
+    // if( index >= 0 )
+    //     ui->textSizeComboBox->setCurrentIndex(index);
+
+    // index = TEXT_COLOR_LIST.indexOf(ui->noteTextEdit->textColor());
+    // if( index >= 0 )
+    //     ui->textColorComboBox->setCurrentIndex(index);
+
+    // index = TEXT_BACKGROUND_LIST.indexOf(ui->noteTextEdit->textBackgroundColor());
+    // if( index >= 0)
+    //     ui->textBgComboBox->setCurrentIndex(index);
+
 }

@@ -1,6 +1,8 @@
 #ifndef DEFAULT_SETTING
 #define DEFAULT_SETTING
 
+#include <Qt>
+
 // Path
 const QString DEFAULT_FOLDER_PATH("/Users/blue/");
 const QString APP_FOLDER_PATH("/Users/blue/QtWorkspace/firstQt/");
@@ -18,6 +20,9 @@ const QString IMAGE_WINDOW_ICON_SUFFIX("icons/image_icon.png");
 const QString FAQ_ICON_SUFFIX("icons/faq_icon.png");
 const QString CHECK_ICON_SUFFIX("icons/check_icon.png");
 const QString CROSS_ICON_SUFFIX("icons/cross_icon.png");
+// const QString BOLD_BUTTON_ICON_SUFFIX("icons/bold_button_icon.png");
+// const QString UNDERLINE_BUTTON_ICON_SUFFIX("icons/underline_button_icon.png");
+
 
 // Action tip text
 const QString OPEN_FOLDER_TIP_TEXT("開啟病人資料夾");
@@ -26,6 +31,27 @@ const QString XRAY_WINDOW_TIP_TEXT("X光照片");
 const QString IMAGE_WINDOW_TIP_TEXT("一般照片");
 const QString SWITCH_TOOLBAR_VISIBLE_TIP_TEXT("顯示工具列");
 const QString FAQ_TIP_TEXT("FAQ / 關於");
+
+
+// Note
+const QStringList TEXT_SIZE_QSTRING_LIST = QStringList()
+	<< "12" << "14" << "16" << "18" << "20" << "22" << "24";
+const QList<int> TEXT_SIZE_LIST = QList<int>()
+	<< 12 << 14 << 16 << 18 << 20 << 22 << 24;
+
+const QStringList TEXT_COLOR_QSTRING_LIST = QStringList()
+	<< "黑色" << "白色" << "紅色" << "橘色" << "黃色" << "綠色" << "藍色" << "紫色";
+const QList<QColor> TEXT_COLOR_LIST = QList<QColor>()
+	<< QColor(Qt::black) << QColor(Qt::white) << QColor(Qt::red)
+	<< QColor(Qt::darkYellow) << QColor(Qt::yellow)
+	<< QColor(Qt::green) << QColor(Qt::blue) << QColor(Qt::darkBlue);
+
+const QStringList TEXT_BACKGROUND_QSTRING_LIST = QStringList()
+	<< "黑色" << "白色" << "紅色" << "橘色" << "黃色" << "綠色" << "藍色" << "紫色";
+const QList<QColor> TEXT_BACKGROUND_LIST = QList<QColor>()
+	<< QColor(Qt::black) << QColor(Qt::white) << QColor(Qt::red)
+	<< QColor(Qt::darkYellow) << QColor(Qt::yellow)
+	<< QColor(Qt::green) << QColor(Qt::blue) << QColor(Qt::darkBlue);
 
 
 // Image scale and format

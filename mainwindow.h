@@ -42,6 +42,18 @@ private slots:
 	// ===========================
     void closeEvent(QCloseEvent *event);
     void on_testButton_clicked();
+    void on_boldButton_clicked();
+    void on_underlineButton_clicked();
+    void on_textSizeComboBox_currentIndexChanged(int index);
+    void on_textColorComboBox_currentIndexChanged(int index);
+    void on_textBgComboBox_currentIndexChanged(int index);
+    void on_resetFontButton_clicked();
+    void on_noteTextEdit_cursorPositionChanged();
+
+    // X-ray window & image windows
+    void on_xrayWindowClosed();
+    void on_imageWindowClosed();
+
 
 private:
     Ui::MainWindow *ui;

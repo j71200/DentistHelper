@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>544</width>
+    <width>732</width>
     <height>541</height>
    </rect>
   </property>
@@ -21,6 +21,61 @@
        <string>TextLabel</string>
       </property>
      </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="boldButton">
+        <property name="text">
+         <string>粗體(B)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="underlineButton">
+        <property name="text">
+         <string>底線(U)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="textSizeLabel">
+        <property name="text">
+         <string>大小</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="textSizeComboBox"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="textColorLabel">
+        <property name="text">
+         <string>顏色</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="textColorComboBox"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="textBackgroundLabel">
+        <property name="text">
+         <string>背景</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="textBgComboBox"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="resetFontButton">
+        <property name="text">
+         <string>清除格式</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
     <item>
      <widget class="QTextEdit" name="noteTextEdit"/>
@@ -39,7 +94,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>544</width>
+     <width>732</width>
      <height>22</height>
     </rect>
    </property>

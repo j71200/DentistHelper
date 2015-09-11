@@ -68,10 +68,10 @@ ImageWindow::~ImageWindow()
 // =========================================== [ Window ] ==
 // Window Events
 // =========================================================
-// void ImageWindow::resizeEvent(QResizeEvent *event){
-//     loadImage(selectedFilePath);
-//     QWidget::resizeEvent(event);
-// }
+void ImageWindow::closeEvent(QCloseEvent *event){
+    emit imageWindowClosedSignal();
+    QWidget::closeEvent(event);
+}
 
 
 // =========================================== [ Window ] ==

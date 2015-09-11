@@ -25,6 +25,10 @@ private slots:
     void on_fitWindowSizeButton_clicked();
     void keyPressEvent(QKeyEvent *event);
     void on_tvSpacePressed();
+    void closeEvent(QCloseEvent *event);
+
+signals:
+    void xrayWindowClosedSignal();
 
 private:
     Ui::XRayWindow *ui;
