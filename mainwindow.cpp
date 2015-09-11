@@ -67,16 +67,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // ==================
     ui->patientIDLabel->setAlignment(Qt::AlignCenter);
     ui->noteTextEdit->setPlaceholderText(NOTE_HINT);
-    ui->boldButton->setCheckable(true);
-    ui->boldButton->setShortcut(QKeySequence::Bold);
-    ui->underlineButton->setCheckable(true);
-    ui->underlineButton->setShortcut(QKeySequence::Italic);
-    ui->textSizeComboBox->addItems(TEXT_SIZE_QSTRING_LIST);
-    ui->textSizeComboBox->setCurrentIndex(0);
-    ui->textColorComboBox->addItems(TEXT_COLOR_QSTRING_LIST);
-    ui->textColorComboBox->setCurrentIndex(0);
-    ui->textBgComboBox->addItems(TEXT_BACKGROUND_QSTRING_LIST);
-    ui->textBgComboBox->setCurrentIndex(1);
+    initNoteFontTools();
 
 
     // ===============
@@ -90,7 +81,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Load last patient data if it is readable
     loadLastPatientData();
-    
 
 }
 
@@ -148,6 +138,7 @@ void MainWindow::closeEvent(QCloseEvent *event){
     Preferences::save();
     QMainWindow::closeEvent(event);
 }
+
 
 // =========================================== [ Action ] ==
 // Initialize Open Folder Action
@@ -438,7 +429,35 @@ void MainWindow::refreshNote(){
 
 
 // ============================================= [ Note ] ==
-// Note text font
+// Initialize note font tools
+// =========================================================
+void MainWindow::initNoteFontTools(){
+    ui->boldButton->setCheckable(true);
+    ui->boldButton->setShortcut(QKeySequence::Bold);
+    ui->underlineButton->setCheckable(true);
+    ui->underlineButton->setShortcut(QKeySequence::Italic);
+    ui->textSizeComboBox->addItems(TEXT_SIZE_QSTRING_LIST);
+    ui->textSizeComboBox->setCurrentIndex(0);
+
+    // Text color combobox
+    QPixmap pixmapForIcon = QPixmap(COLOR_BLOCK_ICON_SIZE);
+    for(int i=0; i<TEXT_COLOR_QSTRING_LIST.size(); i++){
+        pixmapForIcon.fill(TEXT_COLOR_LIST.at(i));
+        ui->textColorComboBox->addItem(QIcon(pixmapForIcon), TEXT_COLOR_QSTRING_LIST.at(i));
+    }
+    ui->textColorComboBox->setCurrentIndex(0);
+
+    // Text background color combobox
+    for(int i=0; i<TEXT_BACKGROUND_QSTRING_LIST.size(); i++){
+        pixmapForIcon.fill(TEXT_BACKGROUND_LIST.at(i));
+        ui->textBgComboBox->addItem(QIcon(pixmapForIcon), TEXT_BACKGROUND_QSTRING_LIST.at(i));
+    }    
+    ui->textBgComboBox->setCurrentIndex(1);
+}
+
+
+// ============================================= [ Note ] ==
+// Note text font tool function setting
 // =========================================================
 void MainWindow::on_boldButton_clicked(){
     if(ui->noteTextEdit->fontWeight() == QFont::Bold)

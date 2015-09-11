@@ -72,6 +72,7 @@ private:
     // Note
     void saveNote();
     void refreshNote();
+    void initNoteFontTools();
 
     // Action
     QAction *openFolderAct, *settingAct, *xrayAct, *imageAct, *switchToolBarVisibleAct, *faqAct;

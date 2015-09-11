@@ -39,19 +39,23 @@ const QStringList TEXT_SIZE_QSTRING_LIST = QStringList()
 const QList<int> TEXT_SIZE_LIST = QList<int>()
 	<< 12 << 14 << 16 << 18 << 20 << 22 << 24;
 
+const QSize COLOR_BLOCK_ICON_SIZE(12, 12);
+
 const QStringList TEXT_COLOR_QSTRING_LIST = QStringList()
-	<< "黑色" << "白色" << "紅色" << "橘色" << "黃色" << "綠色" << "藍色" << "紫色";
+	<< "黑色" << "白色" << "紅色" << "桃紅" << "黃色" << "綠色" << "青色" << "藍色" << "靛色";
 const QList<QColor> TEXT_COLOR_LIST = QList<QColor>()
 	<< QColor(Qt::black) << QColor(Qt::white) << QColor(Qt::red)
-	<< QColor(Qt::darkYellow) << QColor(Qt::yellow)
-	<< QColor(Qt::green) << QColor(Qt::blue) << QColor(Qt::darkBlue);
+	<< QColor(Qt::magenta) << QColor(Qt::yellow)
+	<< QColor(Qt::green) << QColor(Qt::cyan) << QColor(Qt::blue)
+	<< QColor(Qt::darkBlue);
 
 const QStringList TEXT_BACKGROUND_QSTRING_LIST = QStringList()
-	<< "黑色" << "白色" << "紅色" << "橘色" << "黃色" << "綠色" << "藍色" << "紫色";
+	<< "黑色" << "白色" << "紅色" << "桃紅" << "黃色" << "綠色" << "青色" << "藍色" << "靛色";
 const QList<QColor> TEXT_BACKGROUND_LIST = QList<QColor>()
 	<< QColor(Qt::black) << QColor(Qt::white) << QColor(Qt::red)
-	<< QColor(Qt::darkYellow) << QColor(Qt::yellow)
-	<< QColor(Qt::green) << QColor(Qt::blue) << QColor(Qt::darkBlue);
+	<< QColor(Qt::magenta) << QColor(Qt::yellow)
+	<< QColor(Qt::green) << QColor(Qt::cyan) << QColor(Qt::blue)
+	<< QColor(Qt::darkBlue);
 
 
 // Image scale and format
