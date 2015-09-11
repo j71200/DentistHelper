@@ -420,42 +420,9 @@ void MainWindow::refreshNote(){
 }
 
 
-// ====================================== [ X-ray/Image ] ==
-// X-ray window and image window close event
+// ============================================= [ Note ] ==
+// Note text font
 // =========================================================
-void MainWindow::on_xrayWindowClosed(){
-    xrayAct->setChecked(false);
-}
-
-void MainWindow::on_imageWindowClosed(){
-    imageAct->setChecked(false);
-}
-
-
-// ====================================== [ Development ] ==
-// Test Button
-// =========================================================
-void MainWindow::on_testButton_clicked(){
-
-    QColor bb = QColor(Qt::blue);
-    ui->noteTextEdit->setTextColor(bb);
-    ui->noteTextEdit->setFontWeight(QFont::Bold);
-
-
-    // QDesktopServices::openUrl(QUrl("file:///Users/blue/aaa.pdf", QUrl::TolerantMode));
-    // QDesktopServices::openUrl(QUrl("file:///Users/blue/Desktop/實數的建構.pdf", QUrl::TolerantMode));
-
-
-    // QString filename = "/Users/blue/aaa.pdf";
-    // Poppler::Document* document = Poppler::Document::load(filename);
-    // if (!document || document->isLocked()) {
-    //     // ... error message ....
-    //     delete document;
-    //     return;
-    // }
-    // delete document;
-}
-
 void MainWindow::on_boldButton_clicked(){
     if(ui->noteTextEdit->fontWeight() == QFont::Bold)
         ui->noteTextEdit->setFontWeight(QFont::Thin);
@@ -477,7 +444,6 @@ void MainWindow::on_textColorComboBox_currentIndexChanged(int index){
 
 void MainWindow::on_textBgComboBox_currentIndexChanged(int index){
     ui->noteTextEdit->setTextBackgroundColor(TEXT_BACKGROUND_LIST.at(index));
-//    ui->noteTextEdit->setTextBackgroundColor(QColor(TEXT_BACKGROUND_LIST.at(index)));
 }
 
 void MainWindow::on_resetFontButton_clicked(){
@@ -499,17 +465,43 @@ void MainWindow::on_noteTextEdit_cursorPositionChanged(){
     else
         ui->underlineButton->setChecked(false);
 
-    // int index;
-    // index = TEXT_SIZE_LIST.indexOf(ui->noteTextEdit->fontPointSize());
-    // if( index >= 0 )
-    //     ui->textSizeComboBox->setCurrentIndex(index);
-
-    // index = TEXT_COLOR_LIST.indexOf(ui->noteTextEdit->textColor());
-    // if( index >= 0 )
-    //     ui->textColorComboBox->setCurrentIndex(index);
-
-    // index = TEXT_BACKGROUND_LIST.indexOf(ui->noteTextEdit->textBackgroundColor());
-    // if( index >= 0)
-    //     ui->textBgComboBox->setCurrentIndex(index);
-
 }
+
+
+// ====================================== [ X-ray/Image ] ==
+// X-ray window and image window close event
+// =========================================================
+void MainWindow::on_xrayWindowClosed(){
+    xrayAct->setChecked(false);
+}
+
+void MainWindow::on_imageWindowClosed(){
+    imageAct->setChecked(false);
+}
+
+
+// ====================================== [ Development ] ==
+// Test Button
+// =========================================================
+void MainWindow::on_testButton_clicked(){
+
+    // QColor bb = QColor(Qt::blue);
+    // ui->noteTextEdit->setTextColor(bb);
+    // ui->noteTextEdit->setFontWeight(QFont::Bold);
+
+
+    // QDesktopServices::openUrl(QUrl("file:///Users/blue/aaa.pdf", QUrl::TolerantMode));
+    // QDesktopServices::openUrl(QUrl("file:///Users/blue/Desktop/實數的建構.pdf", QUrl::TolerantMode));
+
+
+    // QString filename = "/Users/blue/aaa.pdf";
+    // Poppler::Document* document = Poppler::Document::load(filename);
+    // if (!document || document->isLocked()) {
+    //     // ... error message ....
+    //     delete document;
+    //     return;
+    // }
+    // delete document;
+}
+
+
