@@ -84,31 +84,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     // Load last patient data if it is readable
-    QString xrayRootPath = Preferences::getPatientFolderPath() + QDir::separator() + Preferences::getXrayFolderName();
-    QString imageRootPath = Preferences::getPatientFolderPath() + QDir::separator() + Preferences::getImageFolderName();
-    bool isXRayRootPathExist = QDir(xrayRootPath).isReadable();
-    bool isImageRootPathExist = QDir(imageRootPath).isReadable();
+    loadLastPatientData();
     
-    if( !Preferences::getPatientID().isEmpty()
-        && isXRayRootPathExist && isImageRootPathExist){
-
-        ui->patientIDLabel->setText(Preferences::getPatientID());
-        refreshNote();
-        xrayWindowPtr->show();
-        xrayAct->setEnabled(true);
-        xrayAct->setChecked(true);
-        imageWindowPtr->show();
-        imageAct->setEnabled(true);
-        imageAct->setChecked(true);
-    }
-    else{
-        ui->patientIDLabel->setText("");
-        ui->noteTextEdit->setEnabled(false);
-        Preferences::setPatientFolderPath("");
-        Preferences::setPatientID("");
-        xrayAct->setEnabled(false);
-        imageAct->setEnabled(false);
-    }
 
 }
 
@@ -373,6 +350,40 @@ void MainWindow::on_faq_active(){
             faqWindowPtr->raise();
             faqWindowPtr->activateWindow();
         }
+    }
+}
+
+
+// ====================================== [ Preferences ] ==
+// Load last patient's data
+// =========================================================
+bool MainWindow::loadLastPatientData(){
+    QString xrayRootPath = Preferences::getPatientFolderPath() + QDir::separator() + Preferences::getXrayFolderName();
+    QString imageRootPath = Preferences::getPatientFolderPath() + QDir::separator() + Preferences::getImageFolderName();
+    bool isXRayRootPathExist = QDir(xrayRootPath).isReadable();
+    bool isImageRootPathExist = QDir(imageRootPath).isReadable();
+    
+    if( !Preferences::getPatientID().isEmpty()
+        && isXRayRootPathExist && isImageRootPathExist){
+
+        ui->patientIDLabel->setText(Preferences::getPatientID());
+        refreshNote();
+        xrayWindowPtr->show();
+        xrayAct->setEnabled(true);
+        xrayAct->setChecked(true);
+        imageWindowPtr->show();
+        imageAct->setEnabled(true);
+        imageAct->setChecked(true);
+        return true;
+    }
+    else{
+        ui->patientIDLabel->setText("");
+        ui->noteTextEdit->setEnabled(false);
+        Preferences::setPatientFolderPath("");
+        Preferences::setPatientID("");
+        xrayAct->setEnabled(false);
+        imageAct->setEnabled(false);
+        return false;
     }
 }
 

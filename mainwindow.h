@@ -66,6 +66,9 @@ private:
     void initSwitchToolBarVisibleAction();
     void initFAQAction();
 
+    // Preferences
+    bool loadLastPatientData();
+
     // Note
     void saveNote();
     void refreshNote();
