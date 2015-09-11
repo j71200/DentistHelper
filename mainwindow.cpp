@@ -68,10 +68,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->patientIDLabel->setAlignment(Qt::AlignCenter);
     ui->noteTextEdit->setPlaceholderText(NOTE_HINT);
     ui->boldButton->setCheckable(true);
+    ui->boldButton->setShortcut(QKeySequence::Bold);
     ui->underlineButton->setCheckable(true);
+    ui->underlineButton->setShortcut(QKeySequence::Italic);
     ui->textSizeComboBox->addItems(TEXT_SIZE_QSTRING_LIST);
+    ui->textSizeComboBox->setCurrentIndex(0);
     ui->textColorComboBox->addItems(TEXT_COLOR_QSTRING_LIST);
+    ui->textColorComboBox->setCurrentIndex(0);
     ui->textBgComboBox->addItems(TEXT_BACKGROUND_QSTRING_LIST);
+    ui->textBgComboBox->setCurrentIndex(1);
 
 
     // ===============
@@ -330,6 +335,7 @@ void MainWindow::initFAQAction(){
     QString iconPath(APP_FOLDER_PATH + FAQ_ICON_SUFFIX);
     faqAct = new QAction(QIcon( iconPath ), FAQ_TIP_TEXT, this);
     faqAct->setStatusTip(FAQ_TIP_TEXT);
+    faqAct->setShortcut(QKeySequence::HelpContents);
     connect(faqAct, SIGNAL(triggered()), this, SLOT(on_faq_active()));
 
     ui->menuHelp->addAction(faqAct);
@@ -495,6 +501,9 @@ void MainWindow::on_imageWindowClosed(){
 // Test Button
 // =========================================================
 void MainWindow::on_testButton_clicked(){
+
+
+
 
     // QColor bb = QColor(Qt::blue);
     // ui->noteTextEdit->setTextColor(bb);
