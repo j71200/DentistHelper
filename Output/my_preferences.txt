@@ -3,8 +3,8 @@ Case Viewer ver.1.0
 Warning!! Don't modify this file!
 =====================================
 /Users/blue/Desktop/病人資料
-/Users/blue/Desktop/病人資料/02-3558156江亭儀
-02-3558156江亭儀
-x-rays
+/Users/blue/QtWorkspace/firstQt/data/01 - 江慧君
+01 - 江慧君
+照片
 照片
 not auto open windows

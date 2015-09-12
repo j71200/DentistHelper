@@ -135,6 +135,13 @@ void XRayWindow::loadImage(QString imagePath){
         return;
     }
 
+
+    QFile file(imagePath);
+    cout << "name: " << file.fileName().toStdString() << endl;
+    cout << "origin file size: " << (file.size()/100000) / 10.0 << "MB" << endl;
+    cout << "origin image size: " << xrayImage.width() << " x " << xrayImage.height() << " x " << xrayImage.depth() << endl;
+
+
     int fitScaleRatio = calculateFitScaleRatio();
     if(ui->scaleSlider->value() == fitScaleRatio){  // If you don't need to set the scale slider
         QSize newScaledSize = xrayImageSize * (fitScaleRatio / 100.0);

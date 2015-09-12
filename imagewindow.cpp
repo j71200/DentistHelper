@@ -135,11 +135,22 @@ void ImageWindow::loadImage(QString imagePath){
     }
 
 
-
     QFile file(imagePath);
     cout << "name: " << file.fileName().toStdString() << endl;
-    cout << "file size: " << (file.size()/100000) / 10.0 << "MB" << endl;
-    cout << "image size: " << image.width() << "x" << image.height() << endl;
+    cout << "origin file size: " << (file.size()/100000) / 10.0 << "MB" << endl;
+    cout << "origin image size: " << image.width() << " x " << image.height() << " x " << image.depth() << endl;
+
+    qreal compressionRatio = 0.5;
+    int fileSizeInMB = file.size()/1000000;
+    if(fileSizeInMB < 1)
+        compressionRatio = 1;
+    else if(fileSizeInMB >= 1 && fileSizeInMB < 5)
+        compressionRatio = 0.5;
+    else
+        compressionRatio = 0.3;
+    cout << "compressionRatio: " << compressionRatio << endl;
+    image = image.scaled(image.size()*compressionRatio, Qt::KeepAspectRatio, Qt::FastTransformation);
+
 
 
 
