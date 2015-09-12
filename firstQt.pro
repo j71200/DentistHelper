@@ -29,7 +29,8 @@ HEADERS  += mainwindow.h \
     preferences.h \
     customtreeview.h \
     faqwindow.h \
-    debugwindow.h
+    debugwindow.h \
+    customscrollarea.h
 
 FORMS    += mainwindow.ui \
     settingdialog.ui \

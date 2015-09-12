@@ -47,9 +47,9 @@ MainWindow::MainWindow(QWidget *parent) :
     // Debug window
     // Remember to declare and delete the debugWindowPtr
     // =================================================
-    // debugWindowPtr = new DebugWindow();
-    // debugWindowPtr->move(0, SCREEN_HEIGHT * 3 / 2);
-    // debugWindowPtr->show();
+    debugWindowPtr = new DebugWindow();
+    debugWindowPtr->move(0, 400);
+    debugWindowPtr->show();
 
     // ==================
     // Initialize actions
@@ -88,7 +88,7 @@ MainWindow::~MainWindow(){
     delete ui;
     delete openFolderAct, settingAct, xrayAct, imageAct;
     delete xrayWindowPtr, imageWindowPtr, faqWindowPtr;
-    // delete debugWindowPtr;
+    delete debugWindowPtr;
 }
 
 

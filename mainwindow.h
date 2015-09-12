@@ -86,7 +86,7 @@ private:
     FAQWindow *faqWindowPtr;
 
     // Debug
-    // DebugWindow *debugWindowPtr;
+    DebugWindow *debugWindowPtr;
 
 };
 

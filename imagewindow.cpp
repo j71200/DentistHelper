@@ -54,6 +54,7 @@ ImageWindow::ImageWindow(QWidget *parent) :
     // =====================
     connect(ui->treeView, SIGNAL(fileChangedSignal(QString)), this, SLOT(on_fileChanged(QString)));
     connect(ui->treeView, SIGNAL(tvSpacePressedSignal()), this, SLOT(on_tvSpacePressed()));
+    connect(ui->scrollArea, SIGNAL(doubleClickeScrollAreaSignal()), this, SLOT(on_scrollAreaDoubleClicked()));
 
 }
 
@@ -238,4 +239,15 @@ void ImageWindow::on_fitWindowSizeButton_clicked(){
     loadImage(selectedFilePath);
 }
 
+// ============================================ [ Image ] ==
+// Fit windows size tool when user double click scroll area
+// =========================================================
+void ImageWindow::on_scrollAreaDoubleClicked(){
+    if(this->windowState() == Qt::WindowMaximized)
+        this->setWindowState(Qt::WindowNoState);
+    else
+        this->setWindowState(Qt::WindowMaximized);
+    
+    loadImage(selectedFilePath);
+}
 

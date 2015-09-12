@@ -26,6 +26,7 @@ private slots:
     void keyPressEvent(QKeyEvent *event);
     void on_tvSpacePressed();
     void closeEvent(QCloseEvent *event);
+    void on_scrollAreaDoubleClicked();
 
 signals:
     void xrayWindowClosedSignal();
