@@ -16,7 +16,7 @@ XRayWindow::XRayWindow(QWidget *parent) :
     // Initialize parameters
     // =====================
     model = new QFileSystemModel;
-    xrayLabel = new QLabel;
+    xrayLabel = new CustomImageLabel;
 
 
     // =================
@@ -146,7 +146,7 @@ void XRayWindow::loadImage(QString imagePath){
     if(ui->scaleSlider->value() == fitScaleRatio){  // If you don't need to set the scale slider
         QSize newScaledSize = xrayImageSize * (fitScaleRatio / 100.0);
         QPixmap newScaledPixmap = xrayImage.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::FastTransformation);
-        xrayLabel->setPixmap(newScaledPixmap);
+        xrayLabel->setOriginalPixmap(newScaledPixmap);
     }
     else{
         setScaleTools(fitScaleRatio);
@@ -207,7 +207,7 @@ void XRayWindow::on_scaleSlider_valueChanged(int value){
     QSize newScaledSize = xrayImageSize * (value / 100.0);
     QPixmap newScaledPixmap;
     newScaledPixmap = xrayImage.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::FastTransformation);
-    xrayLabel->setPixmap(newScaledPixmap);
+    xrayLabel->setOriginalPixmap(newScaledPixmap);
 }
 
 

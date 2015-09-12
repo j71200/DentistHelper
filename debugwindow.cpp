@@ -14,6 +14,13 @@ DebugWindow::DebugWindow(QWidget *parent) :
     ui->updateButton->setAutoDefault(true);
     ui->updateButton->setFocusPolicy(Qt::StrongFocus);
 
+
+
+    QPixmap pp = QPixmap(APP_FOLDER_PATH + OPEN_FOLDER_ICON_SUFFIX);
+    ui->label->setOriginalPixmap(pp);
+
+
+
     updateVariables();
 }
 

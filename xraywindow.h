@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QFileSystemModel>
-#include <QLabel>
+#include "customimagelabel.h"
 #include <QPixmap>
 
 namespace Ui {
@@ -35,7 +35,7 @@ private:
     Ui::XRayWindow *ui;
 
     // Image
-    QLabel *xrayLabel;
+    CustomImageLabel *xrayLabel;
     QSize xrayImageSize;
     QPixmap xrayImage;
     void loadImage(QString imagePath);

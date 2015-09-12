@@ -30,7 +30,8 @@ HEADERS  += mainwindow.h \
     customtreeview.h \
     faqwindow.h \
     debugwindow.h \
-    customscrollarea.h
+    customscrollarea.h \
+    customimagelabel.h
 
 FORMS    += mainwindow.ui \
     settingdialog.ui \
