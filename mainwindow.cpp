@@ -170,6 +170,7 @@ void MainWindow::on_openFolder_active(){
 
     if(isXRayRootPathExist && isImageRootPathExist){
         saveNote();
+        resetFont();
 
         QDir newPatientQDir(newPatientPath);
         Preferences::setPatientID(newPatientQDir.dirName());
@@ -483,11 +484,12 @@ void MainWindow::on_textBgComboBox_currentIndexChanged(int index){
 }
 
 void MainWindow::on_resetFontButton_clicked(){
-    ui->noteTextEdit->setFontWeight(QFont::Thin);
-    ui->noteTextEdit->setFontUnderline(false);
-    ui->noteTextEdit->setFontPointSize(TEXT_SIZE_LIST.at(0));
-    ui->noteTextEdit->setTextColor(QColor(TEXT_COLOR_LIST.at(0)));
-    ui->noteTextEdit->setTextBackgroundColor(QColor(TEXT_BACKGROUND_LIST.at(1)));
+    MainWindow::resetFont();
+    // ui->noteTextEdit->setFontWeight(QFont::Thin);
+    // ui->noteTextEdit->setFontUnderline(false);
+    // ui->noteTextEdit->setFontPointSize(TEXT_SIZE_LIST.at(0));
+    // ui->noteTextEdit->setTextColor(QColor(TEXT_COLOR_LIST.at(0)));
+    // ui->noteTextEdit->setTextBackgroundColor(QColor(TEXT_BACKGROUND_LIST.at(1)));
 }
 
 void MainWindow::on_noteTextEdit_cursorPositionChanged(){
@@ -501,6 +503,14 @@ void MainWindow::on_noteTextEdit_cursorPositionChanged(){
     else
         ui->underlineButton->setChecked(false);
 
+}
+
+void MainWindow::resetFont(){
+    ui->noteTextEdit->setFontWeight(QFont::Thin);
+    ui->noteTextEdit->setFontUnderline(false);
+    ui->noteTextEdit->setFontPointSize(TEXT_SIZE_LIST.at(0));
+    ui->noteTextEdit->setTextColor(QColor(TEXT_COLOR_LIST.at(0)));
+    ui->noteTextEdit->setTextBackgroundColor(QColor(TEXT_BACKGROUND_LIST.at(1)));
 }
 
 
