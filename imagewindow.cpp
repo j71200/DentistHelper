@@ -134,6 +134,15 @@ void ImageWindow::loadImage(QString imagePath){
         return;
     }
 
+
+
+    QFile file(imagePath);
+    cout << "name: " << file.fileName().toStdString() << endl;
+    cout << "file size: " << (file.size()/100000) / 10.0 << "MB" << endl;
+    cout << "image size: " << image.width() << "x" << image.height() << endl;
+
+
+
     int fitScaleRatio = calculateFitScaleRatio();
     if(ui->scaleSlider->value() == fitScaleRatio){  // If you don't need to set the scale slider
         QSize newScaledSize = imageSize * (fitScaleRatio / 100.0);

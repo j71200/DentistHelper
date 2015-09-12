@@ -2,9 +2,9 @@
 Case Viewer ver.1.0
 Warning!! Don't modify this file!
 =====================================
-/Users/blue/QtWorkspace/firstQt/data
-/Users/blue/QtWorkspace/firstQt/data/02 - 鍾文藍
-02 - 鍾文藍
+/Users/blue/Desktop/病人資料
+/Users/blue/Desktop/病人資料/02-3558156江亭儀
+02-3558156江亭儀
 x-rays
 照片
 not auto open windows
