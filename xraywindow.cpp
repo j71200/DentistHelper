@@ -17,6 +17,7 @@ XRayWindow::XRayWindow(QWidget *parent) :
     // =====================
     model = new QFileSystemModel;
     xrayLabel = new CustomImageLabel;
+    scaleImageWhenSliding = true;
 
 
     // =================
@@ -135,22 +136,31 @@ void XRayWindow::loadImage(QString imagePath){
         return;
     }
 
+    xrayLabel->setOriginalPixmap(xrayImage);
+
 
     QFile file(imagePath);
     cout << "name: " << file.fileName().toStdString() << endl;
     cout << "origin file size: " << (file.size()/100000) / 10.0 << "MB" << endl;
     cout << "origin image size: " << xrayImage.width() << " x " << xrayImage.height() << " x " << xrayImage.depth() << endl;
 
+    int fitScalePercentage = calculateFitScaleRatio();
+    xrayLabel->scaleImage(fitScalePercentage);
+    
+    // scaleImageWhenSliding = false;
+    // setScaleTools(fitScalePercentage);
+    // scaleImageWhenSliding = true;
 
-    int fitScaleRatio = calculateFitScaleRatio();
-    if(ui->scaleSlider->value() == fitScaleRatio){  // If you don't need to set the scale slider
-        QSize newScaledSize = xrayImageSize * (fitScaleRatio / 100.0);
-        QPixmap newScaledPixmap = xrayImage.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::FastTransformation);
-        xrayLabel->setOriginalPixmap(newScaledPixmap);
-    }
-    else{
-        setScaleTools(fitScaleRatio);
-    }
+
+    // if(ui->scaleSlider->value() == fitScaleRatio){  // If you don't need to set the scale slider
+    //     // QSize newScaledSize = xrayImageSize * (fitScaleRatio / 100.0);
+    //     // QPixmap newScaledPixmap = xrayImage.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::FastTransformation);
+    //     // xrayLabel->setOriginalPixmap(newScaledPixmap);
+    //     xrayLabel->scaleImage(fitScaleRatio);
+    // }
+    // else{
+    //     setScaleTools(fitScaleRatio);
+    // }
 }
 
 
@@ -204,10 +214,14 @@ void XRayWindow::on_scaleSlider_valueChanged(int value){
     QString newRatioText = QString::number(value) + "%";
     ui->scaleLabel->setText(newRatioText);
 
-    QSize newScaledSize = xrayImageSize * (value / 100.0);
-    QPixmap newScaledPixmap;
-    newScaledPixmap = xrayImage.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::FastTransformation);
-    xrayLabel->setOriginalPixmap(newScaledPixmap);
+    if(scaleImageWhenSliding)
+        xrayLabel->scaleImage(value / 100.0);
+    
+
+    // QSize newScaledSize = xrayImageSize * (value / 100.0);
+    // QPixmap newScaledPixmap;
+    // newScaledPixmap = xrayImage.scaled(newScaledSize, Qt::KeepAspectRatio, Qt::FastTransformation);
+    // xrayLabel->setOriginalPixmap(newScaledPixmap);
 }
 
 

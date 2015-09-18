@@ -32,6 +32,12 @@ public:
         this->setPixmap(originalPixmap);
     }
 
+    void scaleImage(int newRatioPercentage){
+        QSize ss = originalPixmap.size() * newRatioPercentage;
+        QPixmap pp = originalPixmap.scaled(ss, Qt::KeepAspectRatio, Qt::FastTransformation);
+        this->setPixmap( pp );
+    }
+
 
 protected:
     bool event(QEvent *event)
@@ -69,12 +75,12 @@ private:
             && (ss.width() >= 1000 || ss.height() >= 1000) )
             return;
 
-        qreal adjustmentFactor = 0.8; // In the intervial (0, 1)
+        qreal adjustmentFactor = 0.1; // In the intervial (0, 1)
         qreal myScaleFactor;
         myScaleFactor = adjustmentFactor * (gesture->scaleFactor() - 1) + 1;
 
         QPixmap pp = originalPixmap.scaled(ss*myScaleFactor, Qt::KeepAspectRatio, Qt::FastTransformation);
-        this->setPixmap( pp );
+        this->setPixmap(pp);
         
 
 
